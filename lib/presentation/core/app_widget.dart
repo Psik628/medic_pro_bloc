@@ -6,6 +6,8 @@ import '../../application/sign_in/sign_in_bloc.dart';
 import '../../injection.dart';
 import '../routes/app_router.dart';
 
+final theme1 = ThemeData();
+
 class AppWidget extends StatelessWidget {
 
   final _appRouter = AppRouter();
@@ -22,6 +24,7 @@ class AppWidget extends StatelessWidget {
           BlocProvider(create: (context) => getIt<SignInBloc>())
         ],
         child: MaterialApp.router(
+          theme: ThemeData.dark(),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
