@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1047285584970",
+    "project_id": "medicpro-9ff69",
+    "storage_bucket": "medicpro-9ff69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047285584970:android:2d99a9e11d796bac0502b3",
+        "android_client_info": {
+          "package_name": "com.cahliksoftwaresolutions.medic_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047285584970-ssm5qo74k1lea5kooa4nc2b1ji8m0bu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbiGKzDXGXMXgGRVNAsfHXnigaZFpAPlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047285584970-ssm5qo74k1lea5kooa4nc2b1ji8m0bu8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047285584970-viteoddend6443tek0sq04fbhevurie0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cahliksoftwaresolutions.medicPro"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047285584970:android:31e602d9059cd4c60502b3",
+        "android_client_info": {
+          "package_name": "com.cahliksoftwaresolutions.medic_pro_bloc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047285584970-ssm5qo74k1lea5kooa4nc2b1ji8m0bu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbiGKzDXGXMXgGRVNAsfHXnigaZFpAPlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047285584970-ssm5qo74k1lea5kooa4nc2b1ji8m0bu8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047285584970-viteoddend6443tek0sq04fbhevurie0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cahliksoftwaresolutions.medicPro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
