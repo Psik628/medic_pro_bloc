@@ -11,5 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:medic_pro_bloc/main.dart';
 
 void main() {
-  test('dummyTest', () => expect(1 + 1 == 2, true));
+  group('dummyGroup', () {
+    test('dummyTest', () => expect(1 + 1 == 2, true));
+  });
 }
