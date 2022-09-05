@@ -962,13 +962,14 @@ class __$$_SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignInState implements _SignInState {
+class _$_SignInState extends _SignInState {
   const _$_SignInState(
       {required this.emailAddress,
       required this.password,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.authFailure});
+      required this.authFailure})
+      : super._();
 
   @override
   final EmailAddress emailAddress;
@@ -981,49 +982,20 @@ class _$_SignInState implements _SignInState {
   @override
   final AuthFailure? authFailure;
 
-  @override
-  String toString() {
-    return 'SignInState(emailAddress: $emailAddress, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailure: $authFailure)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SignInState &&
-            const DeepCollectionEquality()
-                .equals(other.emailAddress, emailAddress) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.showErrorMessages, showErrorMessages) &&
-            const DeepCollectionEquality()
-                .equals(other.isSubmitting, isSubmitting) &&
-            const DeepCollectionEquality()
-                .equals(other.authFailure, authFailure));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(emailAddress),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(showErrorMessages),
-      const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(authFailure));
-
   @JsonKey(ignore: true)
   @override
   _$$_SignInStateCopyWith<_$_SignInState> get copyWith =>
       __$$_SignInStateCopyWithImpl<_$_SignInState>(this, _$identity);
 }
 
-abstract class _SignInState implements SignInState {
+abstract class _SignInState extends SignInState {
   const factory _SignInState(
       {required final EmailAddress emailAddress,
       required final Password password,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final AuthFailure? authFailure}) = _$_SignInState;
+  const _SignInState._() : super._();
 
   @override
   EmailAddress get emailAddress;

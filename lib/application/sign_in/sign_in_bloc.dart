@@ -7,6 +7,8 @@ import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/value_objects.dart';
 
+import 'package:equatable/equatable.dart';
+
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
@@ -19,7 +21,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   SignInBloc(this._authFacade) : super(SignInState.initial()) {
     on<EmailChanged>((EmailChanged event, emit) {
-      return emit(
+
+      print('email chages');
+
+      emit(
           state.copyWith(
               showErrorMessages: false,
               emailAddress: EmailAddress(event.emailStr),
@@ -28,7 +33,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       );
     });
     on<PasswordChanged>((event, emit){
-      return emit(
+      emit(
           state.copyWith(
               showErrorMessages: false,
               password: Password(event.passwordStr),
@@ -72,8 +77,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final emailAndPasswordAuthFailure = await forwardedAuthFacadeCall(emailAddress: state.emailAddress, password: state.password);
       return emit(
           state.copyWith(
-              isSubmitting: false,
-              authFailure: emailAndPasswordAuthFailure
+            showErrorMessages: true,
+            isSubmitting: false,
+            authFailure: emailAndPasswordAuthFailure
           )
       );
     }

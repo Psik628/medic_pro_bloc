@@ -1,7 +1,7 @@
 part of 'sign_in_bloc.dart';
 
 @freezed
-class SignInState with _$SignInState {
+class SignInState extends Equatable with _$SignInState {
   const factory SignInState({
     required EmailAddress emailAddress,
     required Password password,
@@ -17,4 +17,10 @@ class SignInState with _$SignInState {
     isSubmitting: false,
     authFailure: null,
   );
+
+  const SignInState._();
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [this.emailAddress, this.password, this.showErrorMessages, this.isSubmitting, this.authFailure];
 }

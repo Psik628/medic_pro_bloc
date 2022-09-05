@@ -19,5 +19,8 @@
       "enabled": true,
       "port": 1111
     }
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
