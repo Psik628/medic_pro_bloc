@@ -21,9 +21,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   SignInBloc(this._authFacade) : super(SignInState.initial()) {
     on<EmailChanged>((EmailChanged event, emit) {
-
-      print('email chages');
-
       emit(
           state.copyWith(
               showErrorMessages: false,

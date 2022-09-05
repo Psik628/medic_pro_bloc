@@ -77,9 +77,9 @@ class SignInPage extends StatelessWidget {
                             // todo implement maybe map
                             validator: (_){
                               // todo access state properly
-                              // if(!context.watch<SignInBloc>().state.showErrorMessages){
-                              print(state.showErrorMessages);
-                              if(!state.showErrorMessages){
+                              if(!context.watch<SignInBloc>().state.showErrorMessages){
+                              // print(state.showErrorMessages);
+                              // if(!state.showErrorMessages){
                                 return null;
                               }
                               return state.emailAddress.value.fold((l) => Labels.emailError, (r) => null);
