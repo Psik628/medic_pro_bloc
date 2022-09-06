@@ -13,7 +13,7 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NavigationBloc, NavigationState>(
       listener: (context, state) {
-        if(state is Questions){
+        if(state is Home){
           AutoRouter.of(context).push(const HomePageRoute());
         }else if(state is Profile){
           AutoRouter.of(context).push(const ProfilePageRoute());
@@ -25,7 +25,17 @@ class BottomNavigation extends StatelessWidget {
         return BottomNavigationBar(
           // currentIndex: index,
           onTap: (index) {
-            // context.read<NavigationBloc>().add(const AuthEvent.authCheckRequested());
+            switch(index){
+              case 0:
+                context.read<NavigationBloc>().add(const NavigateTo(destination: Destination.home));
+                break;
+              case 1:
+                context.read<NavigationBloc>().add(const NavigateTo(destination: Destination.profile));
+                break;
+              case 2:
+                context.read<NavigationBloc>().add(const NavigateTo(destination: Destination.settings));
+                break;
+            }
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

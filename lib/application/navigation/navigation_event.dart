@@ -1,6 +1,6 @@
 part of 'navigation_bloc.dart';
 
-enum NavigationDestination{
+enum Destination{
   home,
   profile,
   settings
@@ -8,5 +8,5 @@ enum NavigationDestination{
 
 @freezed
 class NavigationEvent with _$NavigationEvent{
-  const factory NavigationEvent.navigateTo({required NavigationDestination destination}) = NavigateTo;
+  const factory NavigationEvent.navigateTo({required Destination destination}) = NavigateTo;
 }

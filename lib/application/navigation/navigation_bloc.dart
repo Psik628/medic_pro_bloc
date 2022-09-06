@@ -8,16 +8,16 @@ part 'navigation_bloc.freezed.dart';
 
 @injectable
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
-  NavigationBloc() : super(const NavigationState.questions()) {
+  NavigationBloc() : super(const NavigationState.home()) {
     on<NavigateTo>((NavigationEvent event, emit) {
       switch(event.destination){
-        case NavigationDestination.home:
-          emit(const Questions());
+        case Destination.home:
+          emit(const Home());
           break;
-        case NavigationDestination.profile:
+        case Destination.profile:
           emit(const Profile());
           break;
-        case NavigationDestination.settings:
+        case Destination.settings:
           emit(const Settings());
           break;
         default:
