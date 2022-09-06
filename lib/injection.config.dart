@@ -11,13 +11,15 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_bloc.dart' as _i10;
-import 'application/navigation/navigation_bloc.dart' as _i8;
-import 'application/sign_in/sign_in_bloc.dart' as _i9;
+import 'application/auth/auth_bloc.dart' as _i12;
+import 'application/navigation/navigation_bloc.dart' as _i10;
+import 'application/sign_in/sign_in_bloc.dart' as _i11;
 import 'domain/auth/i_auth_facade.dart' as _i6;
+import 'domain/subject/i_subject_repository.dart' as _i8;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i7;
-import 'infrastructure/core/firebase_injectable_module.dart'
-    as _i11; // ignore_for_file: unnecessary_lambdas
+import 'infrastructure/core/firebase_injectable_module.dart' as _i13;
+import 'infrastructure/subject/subject_repository.dart'
+    as _i9; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -33,10 +35,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => firebaseInjectableModule.googleSignIn);
   gh.factory<_i6.IAuthFacade>(() =>
       _i7.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
-  gh.factory<_i8.NavigationBloc>(() => _i8.NavigationBloc());
-  gh.factory<_i9.SignInBloc>(() => _i9.SignInBloc(get<_i6.IAuthFacade>()));
-  gh.factory<_i10.AuthBloc>(() => _i10.AuthBloc(get<_i6.IAuthFacade>()));
+  gh.lazySingleton<_i8.ISubjectRepository>(
+      () => _i9.SubjectRepository(get<_i4.FirebaseFirestore>()));
+  gh.factory<_i10.NavigationBloc>(() => _i10.NavigationBloc());
+  gh.factory<_i11.SignInBloc>(() => _i11.SignInBloc(get<_i6.IAuthFacade>()));
+  gh.factory<_i12.AuthBloc>(() => _i12.AuthBloc(get<_i6.IAuthFacade>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i11.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i13.FirebaseInjectableModule {}

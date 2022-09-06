@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:medic_pro_bloc/presentation/pages/home_page.dart';
+import 'package:medic_pro_bloc/presentation/pages/home/home_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/profile_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/sign_up_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/settings_page.dart';
