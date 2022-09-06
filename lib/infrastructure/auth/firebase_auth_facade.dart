@@ -29,9 +29,24 @@ class FirebaseAuthFacade extends IAuthFacade{
   }
 
   @override
-  Future<AuthFailure?> signInWithEmailAndPassword({required EmailAddress emailAddress, required Password password}) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  Future<AuthFailure?> signInWithEmailAndPassword({required EmailAddress emailAddress, required Password password}) async {
+    final emailRawValue = emailAddress.getOrCrash();
+    final passwordRawValue = password.getOrCrash();
+
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: emailRawValue,
+        password: passwordRawValue,
+      );
+      return null;
+    } on FirebaseAuthException catch (e) {
+      // todo makes codes constants
+      if (e.code == 'ERROR_WRONG_PASSWORD' || e.code == 'ERROR_USER_NOT_FOUND') {
+        return const AuthFailure.invalidEmailAndPasswordCombination();
+      } else {
+        return const AuthFailure.serverError();
+      }
+    }
   }
 
   @override

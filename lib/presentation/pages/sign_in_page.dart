@@ -32,7 +32,7 @@ class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super (key: key);
 
   @override
-  Widget build(BuildContext contextorig) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: Bar.returnAppBar(),
       body: SafeArea(
@@ -78,8 +78,6 @@ class SignInPage extends StatelessWidget {
                             validator: (_){
                               // todo access state properly
                               if(!context.watch<SignInBloc>().state.showErrorMessages){
-                              // print(state.showErrorMessages);
-                              // if(!state.showErrorMessages){
                                 return null;
                               }
                               return state.emailAddress.value.fold((l) => Labels.emailError, (r) => null);
@@ -92,7 +90,14 @@ class SignInPage extends StatelessWidget {
                             ),
                             onChanged: (String passwordRawValue) => context.read<SignInBloc>().add(SignInEvent.passwordChanged(passwordRawValue)),
                             // todo implement maybe map
-                            validator: (_) => state.password.value.fold((l) => Labels.password, (r) => null),
+                            validator: (_){
+                              // todo access state properly
+                              if(!context.watch<SignInBloc>().state.showErrorMessages){
+                                return null;
+                              }
+
+                              return state.password.value.fold((l) => Labels.passwordError, (r) => null);
+                            }
                           ),
                           GFButton(
                             onPressed: () {
