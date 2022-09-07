@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:medic_pro_bloc/domain/subject/subject.dart';
 import 'package:medic_pro_bloc/domain/subject/subject_failure.dart';
 import 'package:rxdart/rxdart.dart' as rx_dart;
@@ -31,9 +30,10 @@ class SubjectRepository implements ISubjectRepository{
           return right<SubjectFailure, List<Subject>>(
               snapshot.docs.map<Subject>((SubjectQueryDocumentSnapshot subjectQueryDocumentSnapshot){
                 CategoryCollectionReference categoryCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories;
-                var categories = categoryCollectionReference
+
+                Stream<List<Category>> categories = categoryCollectionReference
                     .snapshots()
-                    .map((snapshot){
+                    .map((CategoryQuerySnapshot snapshot){
                       return snapshot.docs.map<Category>((CategoryQueryDocumentSnapshot categoryQueryDocumentSnapshot){
                         return categoryQueryDocumentSnapshot.data;
                       }).toList();

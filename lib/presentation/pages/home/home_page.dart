@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartdoc/dartdoc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
             builder: (context, SubjectState state) {
 
                 return state.map(
-                  initial: (_) => Container(),
+                  initial: (_) => const GFLoader(type: GFLoaderType.square),
                   loadInProgress: (_) => const GFLoader(),
                   loadFailure: (LoadFailure value) {
                     print(value);
@@ -61,20 +62,30 @@ class HomePage extends StatelessWidget {
                         // }
                         return ExpansionTile(
                             title: Text(subject.title),
-                            // children: [
-                            //   ListView.builder(
-                            //     shrinkWrap: true,
-                            //     // itemCount: subject.categories.length,
-                            //     itemBuilder: (context, categoryIndex){
-                            //       return ListTile(
-                            //         title: Text('ahoj'),
-                            //       );
-                            //     }
-                            //   )
-                            // ],
+                            children: [
+                              StreamBuilder(
+                                  stream: subject.categories,
+                                  builder: (BuildContext context, AsyncSnapshot snapshot){
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+
+                                      return ListView.builder(
+                                          itemCount: snapshot.data.length,
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, categoryIndex){
+                                            return ListTile(
+                                              title: Text(snapshot.data[categoryIndex].title),
+                                            );
+                                          }
+                                      );
+                                    }
+                                    return const GFLoader();
+                                  }
+                              )
+                            ],
                         );
                       },
-                      // itemCount: state.notes.length,
                     );
                   },
                 );
