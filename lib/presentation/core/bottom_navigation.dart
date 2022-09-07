@@ -7,7 +7,10 @@ import 'package:medic_pro_bloc/application/navigation/navigation_bloc.dart';
 import '../routes/app_router.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+
+  final int currentIndex;
+
+  const BottomNavigation({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,9 @@ class BottomNavigation extends StatelessWidget {
         }
       },
       builder: (context, state) {
+
         return BottomNavigationBar(
-          // currentIndex: index,
+          currentIndex: currentIndex,
           onTap: (index) {
             switch(index){
               case 0:

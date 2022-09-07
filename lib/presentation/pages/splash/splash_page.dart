@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/presentation/routes/app_router.dart';
 
-import '../../application/auth/auth_bloc.dart';
+import '../../../application/auth/auth_bloc.dart';
 
 /// used to check whether user is authenticated
 class SplashPage extends StatelessWidget {

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pro_bloc/presentation/pages/home/home_page.dart';
-import 'package:medic_pro_bloc/presentation/pages/profile_page.dart';
-import 'package:medic_pro_bloc/presentation/pages/sign_up_page.dart';
-import 'package:medic_pro_bloc/presentation/pages/settings_page.dart';
+import 'package:medic_pro_bloc/presentation/pages/profile/profile_page.dart';
+import 'package:medic_pro_bloc/presentation/pages/sign_up/sign_up_page.dart';
+import 'package:medic_pro_bloc/presentation/pages/settings/settings_page.dart';
 
 import '../pages/sign_in/sign_in_page.dart';
-import '../pages/splash_page.dart';
+import '../pages/splash/splash_page.dart';
 
 
 part 'app_router.gr.dart';
