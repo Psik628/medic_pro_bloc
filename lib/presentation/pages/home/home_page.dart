@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                                   stream: subject.categories,
                                   builder: (BuildContext context, AsyncSnapshot snapshot){
                                     if (snapshot.connectionState == ConnectionState.waiting) {
-                                      return const CircularProgressIndicator();
+                                      return const GFLoader();
                                     }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
 
                                       return ListView.builder(
