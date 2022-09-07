@@ -19,99 +19,132 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) =>
-          getIt<AuthBloc>()
-            ..add(const AuthEvent.authCheckRequested()),
-        ),
-        BlocProvider<SubjectBloc>(
+    return Scaffold(
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(
             create: (context) =>
-            getIt<SubjectBloc>()
-              ..add(const SubjectEvent.watchAll())
-        ),
-      ],
-      child: BlocListener<SubjectBloc, SubjectState>(
-        listener: (context, state) {
-          BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if(state is Unauthenticated) AutoRouter.of(context).replace(const SignInPageRoute());
-            },
-          );
-        },
-        child: BlocBuilder<SubjectBloc, SubjectState>(
-          builder: (context, state) {
-            if (state is SubjectBlocProvider.Initial) {
-              return const GFLoader(type: GFLoaderType.android);
-            } else if (state is SubjectBlocProvider.LoadInProgress) {
-              return const GFLoader(type: GFLoaderType.ios);
-            } else if (state is SubjectBlocProvider.LoadFailure) {
-              const GFLoader();
-            } else {
-              return Scaffold(
-                appBar: Bar.returnAppBar(),
-                bottomNavigationBar: BlocProvider(
-                  create: (context) => NavigationBloc(),
-                  child: const BottomNavigation(),
-                ),
-                body: SafeArea(
-                    minimum: EdgeInsets.symmetric(
-                        vertical: UIConstants.safeAreaPaddingVertical,
-                        horizontal: UIConstants.safeAreaPaddingHorizontal
-                    ),
-                    child: ListView(
-                      padding: const EdgeInsets.all(8),
-                      children: [
-                        ExpansionTile(
-                          leading: SizedBox(
-                              child: Image.asset('assets/acoustics.png')
-                          ),
-                          title: const Text('Biology'),
-                          children: [
-                            ListTile(
-                                leading: SizedBox(
-                                    child: Image.asset('assets/acoustics.png')
-                                ),
-                                title: Text('This is tile number 1')
-                            ),
-                          ],
-                        ),
-                        ExpansionTile(
-                          leading: SizedBox(
-                              child: Image.asset('assets/acoustics.png')
-                          ),
-                          title: const Text('Chemistry'),
-                          children: [
-                            ListTile(
-                                leading: SizedBox(
-                                    child: Image.asset('assets/acoustics.png')
-                                ),
-                                title: Text('This is tile number 1')
-                            ),
-                          ],
-                        ),
-                        ExpansionTile(
-                          leading: SizedBox(
-                              child: Image.asset('assets/acoustics.png')
-                          ),
-                          title: const Text('Physics'),
-                          children: [
-                            ListTile(
-                                leading: SizedBox(
-                                    child: Image.asset('assets/acoustics.png')
-                                ),
-                                title: Text('This is tile number 1')
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                ),
-              );
-            } // todo fix this nonsense
-            return const Offstage();
+            getIt<AuthBloc>()
+              ..add(const AuthEvent.authCheckRequested()),
+          ),
+          BlocProvider<SubjectBloc>(
+              create: (context) =>
+              getIt<SubjectBloc>()
+                ..add(const SubjectEvent.watchAll())
+          ),
+        ],
+        child: BlocListener<SubjectBloc, SubjectState>(
+          listener: (context, state) {
+            BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if(state is Unauthenticated) AutoRouter.of(context).replace(const SignInPageRoute());
+              },
+            );
           },
+          child: BlocBuilder<SubjectBloc, SubjectState>(
+            builder: (context, SubjectState state) {
+              
+              return state.map(
+                initial: (_) => Container(),
+                loadInProgress: (_) => const GFLoader(),
+                loadFailure: (LoadFailure value) {
+                  return const GFLoader(type: GFLoaderType.square);
+                },
+                loadSuccess: (LoadSuccess state) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      final subject = state.notes[index];
+                      // if (note.failureOption.isSome()) {
+                      //   return ErrorNoteCard(note: note);
+                      // } else {
+                      //   return NoteCard(note: note);
+                      // }
+                      return ExpansionTile(title: Text(subject.title));
+
+                    },
+                    itemCount: state.notes.length,
+                  );
+                },
+              );
+              
+              
+              if (state is SubjectBlocProvider.Initial) {
+                return const GFLoader(type: GFLoaderType.android);
+              } else if (state is SubjectBlocProvider.LoadInProgress) {
+                return const GFLoader(type: GFLoaderType.ios);
+              } else if (state is SubjectBlocProvider.LoadFailure) {
+                const GFLoader();
+              } else {
+                return Scaffold(
+                  appBar: Bar.returnAppBar(),
+                  bottomNavigationBar: BlocProvider(
+                    create: (context) => NavigationBloc(),
+                    child: const BottomNavigation(),
+                  ),
+                  body: SafeArea(
+                      minimum: EdgeInsets.symmetric(
+                          vertical: UIConstants.safeAreaPaddingVertical,
+                          horizontal: UIConstants.safeAreaPaddingHorizontal
+                      ),
+                      child: ListView.builder(
+
+                          itemBuilder: (context, index){
+                            return ExpansionTile(title: Text('ahoj'));
+                          }
+                      )
+                      // child: ListView(
+                      //   padding: const EdgeInsets.all(8),
+                      //   children: [
+                      //     ExpansionTile(
+                      //       leading: SizedBox(
+                      //           child: Image.asset('assets/acoustics.png')
+                      //       ),
+                      //       title: const Text('Biology'),
+                      //       children: [
+                      //         ListTile(
+                      //             leading: SizedBox(
+                      //                 child: Image.asset('assets/acoustics.png')
+                      //             ),
+                      //             title: Text('This is tile number 1')
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     ExpansionTile(
+                      //       leading: SizedBox(
+                      //           child: Image.asset('assets/acoustics.png')
+                      //       ),
+                      //       title: const Text('Chemistry'),
+                      //       children: [
+                      //         ListTile(
+                      //             leading: SizedBox(
+                      //                 child: Image.asset('assets/acoustics.png')
+                      //             ),
+                      //             title: Text('This is tile number 1')
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     ExpansionTile(
+                      //       leading: SizedBox(
+                      //           child: Image.asset('assets/acoustics.png')
+                      //       ),
+                      //       title: const Text('Physics'),
+                      //       children: [
+                      //         ListTile(
+                      //             leading: SizedBox(
+                      //                 child: Image.asset('assets/acoustics.png')
+                      //             ),
+                      //             title: Text('This is tile number 1')
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // )
+                  ),
+                );
+              } // todo fix this nonsense
+              return const Offstage();
+            },
+          ),
         ),
       ),
     );

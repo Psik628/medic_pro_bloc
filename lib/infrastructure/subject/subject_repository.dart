@@ -16,34 +16,29 @@ class SubjectRepository implements ISubjectRepository{
 
   SubjectRepository(this._firestore);
 
+  /// this generator returns plain Subject object
+  /// to access its categories we need to call SubcategoryCollectionReference subcategoriesRef = subjectsRef.doc('myDocumentID').subcategories;
   @override
   Stream<Either<SubjectFailure, List<Subject>>> watchAll() async* {
-    // final userDoc = await _firestore.userDocument();
-    // this generator returns plain Subject object
-    // to access its categories we need to call SubcategoryCollectionReference subcategoriesRef = subjectsRef.doc('myDocumentID').subcategories;
 
-    yield*  subjectsRef
+    yield*  _firestore
+        .collection('MSubjects')
         //snapshots() returns a stream of QuerySnapshot
         .snapshots()
         //list
         .map((snapshot){
-          print('snapshot $snapshot');
           // to domain
           return right<SubjectFailure, List<Subject>>(
-              snapshot.docs.map<Subject>((SubjectQueryDocumentSnapshot doc){
+              snapshot.docs.map<Subject>((QueryDocumentSnapshot doc){
                 // casting probably wrong
-                return doc.data;
+                return Subject.fromJson(doc.data() as Map<String, dynamic>);
             }).toList()
           );
         }).onErrorReturnWith((error, stackTrace) {
             // todo implement onError functionality and null check !
-            print('error');
-            print(error);
-            print(stackTrace);
             if (error is FirebaseException && error.message!.contains('PERMISSION_DENIED')) {
                 return left(const SubjectFailure.insufficientPermission());
             } else {
-            // log.error(e.toString());
             return left(const SubjectFailure.unexpected());
             }
         });
