@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartdoc/dartdoc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
@@ -7,8 +6,10 @@ import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:medic_pro_bloc/application/auth/auth_bloc.dart';
 import 'package:medic_pro_bloc/presentation/routes/app_router.dart';
 import '../../../application/database/subject/subject_bloc.dart';
+import '../../../application/navigation/navigation_bloc.dart';
 import '../../../injection.dart';
 import '../../core/app_bar.dart';
+import '../../core/bottom_navigation.dart';
 import '../../ui_constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,6 +19,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Bar.returnAppBar(),
+      bottomNavigationBar: BlocProvider<NavigationBloc>(
+        create: (context) => NavigationBloc(),
+        child: const BottomNavigation(),
+      ),
       body: SafeArea(
         minimum: EdgeInsets.symmetric(
             vertical: UIConstants.safeAreaPaddingVertical,
