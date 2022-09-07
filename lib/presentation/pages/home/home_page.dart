@@ -50,8 +50,9 @@ class HomePage extends StatelessWidget {
                   },
                   loadSuccess: (LoadSuccess state) {
                     return ListView.builder(
-                      itemBuilder: (context, index) {
-                        final subject = state.notes[index];
+                      itemCount: state.subjects.length,
+                      itemBuilder: (context, subjectIndex) {
+                        final subject = state.subjects[subjectIndex];
                         // todo check the code below
                         // if (note.failureOption.isSome()) {
                         //   return ErrorNoteCard(note: note);
@@ -60,12 +61,20 @@ class HomePage extends StatelessWidget {
                         // }
                         return ExpansionTile(
                             title: Text(subject.title),
-                            children: [
-
-                            ],
+                            // children: [
+                            //   ListView.builder(
+                            //     shrinkWrap: true,
+                            //     // itemCount: subject.categories.length,
+                            //     itemBuilder: (context, categoryIndex){
+                            //       return ListTile(
+                            //         title: Text('ahoj'),
+                            //       );
+                            //     }
+                            //   )
+                            // ],
                         );
                       },
-                      itemCount: state.notes.length,
+                      // itemCount: state.notes.length,
                     );
                   },
                 );

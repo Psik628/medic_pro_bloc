@@ -40,6 +40,7 @@ class Subject{
   final String titleUI;
 
   // added later
+  @JsonKey(ignore: true)
   late Stream<List<Category>> categories;
 
   // final IconData icon;

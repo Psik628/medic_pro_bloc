@@ -12,9 +12,9 @@ import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/auth_bloc.dart' as _i13;
+import 'application/database/subject/subject_bloc.dart' as _i12;
 import 'application/navigation/navigation_bloc.dart' as _i10;
 import 'application/sign_in/sign_in_bloc.dart' as _i11;
-import 'application/database/subject/subject_bloc.dart' as _i12;
 import 'domain/auth/i_auth_facade.dart' as _i6;
 import 'domain/subject/i_subject_repository.dart' as _i8;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i7;
