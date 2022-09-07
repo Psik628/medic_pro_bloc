@@ -1,1 +1,1 @@
-[![Codemagic build status](https://api.codemagic.io/apps/6314fb882923d8c627b1cbce/6314fb882923d8c627b1cbcd/status_badge.svg)](https://codemagic.io/apps/6314fb882923d8c627b1cbce/6314fb882923d8c627b1cbcd/latest_build)
+
