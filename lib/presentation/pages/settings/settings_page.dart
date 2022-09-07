@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 
 import '../../../application/navigation/navigation_bloc.dart';
 import '../../core/app_bar.dart';
@@ -16,7 +17,27 @@ class SettingsPage extends StatelessWidget {
           create: (context) => NavigationBloc(),
           child: BottomNavigation(currentIndex: 2),
         ),
-        body: Container()
+        body: Column(
+          children: [
+            ListTile(
+              title: Text("change name")
+            ),
+            ListTile(
+                title: Text("change email")
+            ),
+            ListTile(
+                title: Text("change password")
+            ),
+            Spacer(),
+            ListTile(
+                title: GFButton(
+                  fullWidthButton: true,
+                  onPressed: () {  },
+                  child: Text("sign out"),
+                )
+            )
+          ],
+        )
     );
   }
 }
