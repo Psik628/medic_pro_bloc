@@ -4,7 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/subject.dart';
 import 'package:medic_pro_bloc/domain/subject/subject_failure.dart';
 import 'package:medic_pro_bloc/infrastructure/core/firebase_helpers.dart';
-import 'package:medic_pro_bloc/infrastructure/subject/subject.dart';
+import 'package:rxdart/rxdart.dart' as rx_dart;
+
 
 import '../../domain/subject/i_subject_repository.dart';
 
@@ -17,42 +18,34 @@ class SubjectRepository implements ISubjectRepository{
 
   @override
   Stream<Either<SubjectFailure, List<Subject>>> watchAll() async* {
-    final userDoc = await _firestore.userDocument();
-    // yield* userDoc.subjectCollection
-    //     .snapshots((QuerySnapshot snapshot){
-    //       right<SubjectFailure, List<Subject>>(snapshot.docs.map((doc){
-    //         Subject.fromJson(doc)
-    //       }).toImmut
-    //     });
+    // final userDoc = await _firestore.userDocument();
+    // this generator returns plain Subject object
+    // to access its categories we need to call SubcategoryCollectionReference subcategoriesRef = subjectsRef.doc('myDocumentID').subcategories;
 
-    yield*  userDoc
-        .subjectCollection
+    yield*  subjectsRef
+        //snapshots() returns a stream of QuerySnapshot
         .snapshots()
         //list
         .map((snapshot){
+          print('snapshot $snapshot');
           // to domain
           return right<SubjectFailure, List<Subject>>(
-              snapshot.docs.map<Subject>((QueryDocumentSnapshot doc){
+              snapshot.docs.map<Subject>((SubjectQueryDocumentSnapshot doc){
                 // casting probably wrong
-                return Subject.fromJson(doc.data() as Map<String, Object?>);
+                return doc.data;
             }).toList()
           );
+        }).onErrorReturnWith((error, stackTrace) {
+            // todo implement onError functionality and null check !
+            print('error');
+            print(error);
+            print(stackTrace);
+            if (error is FirebaseException && error.message!.contains('PERMISSION_DENIED')) {
+                return left(const SubjectFailure.insufficientPermission());
+            } else {
+            // log.error(e.toString());
+            return left(const SubjectFailure.unexpected());
+            }
         });
-    // todo implement onError functionality
-
-
-
-
-
-
-
-    //     .onErrorReturnWith((e) {
-    //   if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-    //     return left(const NoteFailure.insufficientPermission());
-    //   } else {
-    //     // log.error(e.toString());
-    //     return left(const NoteFailure.unexpected());
-    //   }
-    // });
   }
 }

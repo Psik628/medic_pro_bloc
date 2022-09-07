@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../dbentities/option.dart';
-import 'option.dart';
+import '../../domain/subject/option.dart';
+// import '../../infrastructure/subject/option.dart';
 
 // manual import of generated file
 part 'question.g.dart';

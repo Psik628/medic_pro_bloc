@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import '../constants/dbconstants.dart';
+// import '../../infrastructure/constants/dbconstants.dart';
 
 // manual import of generated file
 part 'subcategory.g.dart';

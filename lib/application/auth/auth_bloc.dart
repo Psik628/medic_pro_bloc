@@ -16,7 +16,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc(this._authFacade) : super(const AuthState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
+      print('checking user login');
       final Auth.User? authenticatedUser = _authFacade.getCurrentUser();
+      print(authenticatedUser);
       if(authenticatedUser == null){
         return emit(
             const AuthState.unAuthenticated()

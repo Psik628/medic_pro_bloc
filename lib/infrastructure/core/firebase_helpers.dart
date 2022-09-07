@@ -16,5 +16,5 @@ extension FirestoreX on FirebaseFirestore {
 }
 
 extension DocumentReferenceX on DocumentReference {
-  CollectionReference get subjectCollection => collection('subjects'); // todo extract to constant
+  CollectionReference get subjectCollection => collection('MSubjects'); // todo extract to constant
 }

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:medic_pro/dbentities/question.dart';
+// import 'package:medic_pro/dbentities/question.dart';
 
 // manual import of generated file
 part 'questionsection.g.dart';
