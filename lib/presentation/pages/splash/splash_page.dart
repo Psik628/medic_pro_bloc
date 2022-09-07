@@ -5,7 +5,6 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/presentation/routes/app_router.dart';
 
 import '../../../application/auth/auth_bloc.dart';
-import '../../../environment/test_environment_api.dart';
 
 /// used to check whether user is authenticated
 class SplashPage extends StatefulWidget {
@@ -20,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     // INITIALIZING DEVELOPMENT ENVIRONMENT
-    TestEnvironmentAPI.setUpTestEnvironment();
+    // TestEnvironmentAPI.setUpTestEnvironment();
     super.initState();
   }
 

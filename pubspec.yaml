@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   firebase_core: ^1.21.1
   firebase_auth: ^3.7.0
+  sizer: ^2.0.15
   firebase_storage: ^10.3.7
   firebase_messaging: ^13.0.0
   firebase_app_check: ^0.0.7
