@@ -39,6 +39,9 @@ class Subject{
 
   final String titleUI;
 
+  // added later
+  late Stream<List<Category>> categories;
+
   // final IconData icon;
 
   factory Subject.fromJson(Map<String, Object?> json) => _$SubjectFromJson(json);
