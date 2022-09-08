@@ -40,6 +40,10 @@ class _$AppRouter extends RootStackRouter {
     SettingsPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SettingsPage());
+    },
+    CategoryPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CategoryPage());
     }
   };
 
@@ -50,7 +54,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SignUpPageRoute.name, path: '/sign-up-page'),
         RouteConfig(HomePageRoute.name, path: '/home-page'),
         RouteConfig(ProfilePageRoute.name, path: '/profile-page'),
-        RouteConfig(SettingsPageRoute.name, path: '/settings-page')
+        RouteConfig(SettingsPageRoute.name, path: '/settings-page'),
+        RouteConfig(CategoryPageRoute.name, path: '/category-page')
       ];
 }
 
@@ -102,4 +107,13 @@ class SettingsPageRoute extends PageRouteInfo<void> {
       : super(SettingsPageRoute.name, path: '/settings-page');
 
   static const String name = 'SettingsPageRoute';
+}
+
+/// generated route for
+/// [CategoryPage]
+class CategoryPageRoute extends PageRouteInfo<void> {
+  const CategoryPageRoute()
+      : super(CategoryPageRoute.name, path: '/category-page');
+
+  static const String name = 'CategoryPageRoute';
 }
