@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/animation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:medic_pro_bloc/domain/subject/subject.dart';
 import 'package:medic_pro_bloc/domain/subject/subject_failure.dart';
 import 'package:rxdart/rxdart.dart' as rx_dart;
 
 
+import '../../domain/subject/article.dart';
 import '../../domain/subject/category.dart';
 import '../../domain/subject/i_subject_repository.dart';
 
@@ -47,8 +50,35 @@ class SubjectRepository implements ISubjectRepository{
                           .map((SubcategoryQuerySnapshot subcategoryQuerySnapshot){
                             return subcategoryQuerySnapshot.docs.map<Subcategory>((SubcategoryQueryDocumentSnapshot subcategoryQueryDocumentSnapshot){
 
-                              // todo return completed subcategory
-                              return subcategoryQueryDocumentSnapshot.data;
+                              ArticleCollectionReference articleCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).articles;
+
+                              // fill subcategory with articles
+                              Stream<List<Article>> articles = articleCollectionReference
+                                .snapshots()
+                                .map((ArticleQuerySnapshot articleQuerySnapshot){
+                                  return articleQuerySnapshot.docs.map<Article>((ArticleQueryDocumentSnapshot articleQueryDocumentSnapshot){
+                                    return articleQueryDocumentSnapshot.data;
+                                  }).toList();
+                                });
+
+                              QuestionSectionCollectionReference questionSectionCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).questionsections;
+
+                              // fill subcategory with question sections
+                              Stream<List<QuestionSection>> questionSections = questionSectionCollectionReference
+                                  .snapshots()
+                                  .map((QuestionSectionQuerySnapshot questionSectionQuerySnapshot){
+                                    return questionSectionQuerySnapshot.docs.map<QuestionSection>((QuestionSectionQueryDocumentSnapshot questionSectionQueryDocumentSnapshot){
+                                  return questionSectionQueryDocumentSnapshot.data;
+                                }).toList();
+                              });
+
+                              // assign uncompleted Subcategory
+                              Subcategory completedSubcategory = subcategoryQueryDocumentSnapshot.data;
+                              // assign fields to complete Subcategory
+                              completedSubcategory.articles = articles;
+                              completedSubcategory.questionSections = questionSections;
+
+                              return completedSubcategory;
                             }).toList();
                           });
 
