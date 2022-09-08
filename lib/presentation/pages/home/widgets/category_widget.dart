@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/subject/category.dart';
@@ -15,9 +16,7 @@ class CategoryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  currentCategory.titleUI,
-                ),
+                child: Text(currentCategory.title).tr(),
               ),
               const Icon(Icons.arrow_right_alt_outlined)
             ],

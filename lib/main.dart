@@ -6,14 +6,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:medic_pro_bloc/presentation/core/app_widget.dart';
 import 'injection.dart';
 import 'firebase_options.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   configureDependencies(); // dependency injections
-  runApp(AppWidget());
+  runApp(
+      EasyLocalization(
+          supportedLocales: const [
+            Locale('en', 'US'),
+            Locale('cs', 'CZ')
+          ],
+          fallbackLocale: const Locale('cs', 'CZ'),
+          path: 'assets/lang',
+          child: AppWidget()
+      )
+  );
 }
 
 // class EnvironmentInitializationService{

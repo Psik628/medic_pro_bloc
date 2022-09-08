@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/presentation/pages/home/widgets/category_widget.dart';import '../../../../domain/subject/category.dart';
@@ -14,7 +15,7 @@ class SubjectWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text(currentSubject.title),
+      title: Text(currentSubject.title).tr(),
       children: [
         StreamBuilder(
             stream: currentSubject.categories,

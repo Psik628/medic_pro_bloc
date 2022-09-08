@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore_odm: ^1.0.0-dev.28
   json_annotation: ^4.6.0
   rxdart: ^0.27.5
+  easy_localization: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -59,3 +60,4 @@ flutter:
   assets:
     - config/
     - assets/
+    - lang/

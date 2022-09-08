@@ -7,4 +7,9 @@ abstract class Labels{
   static const emailError = 'This is not a valid email address';
   static const passwordError = 'This is not a valid password';
   static const createAccount = 'Create account';
+
+  // db labels
+  static const biology = 'biology';
+  static const chemistry = 'chemistry';
+  static const physics = 'physics';
 }
