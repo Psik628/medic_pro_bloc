@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,13 @@ class CategoryPage extends StatelessWidget {
         ),
         child: Column(
           children: [
+            Text(
+              currentCategory.title,
+              // todo this
+              // style: TextStyle(
+              //   fontSize: 20
+              // ),
+            ).tr(),
             StreamBuilder(
                 stream: currentCategory.subcategories,
                 builder: (BuildContext context, AsyncSnapshot snapshot){

@@ -5,8 +5,10 @@ import 'package:medic_pro_bloc/presentation/pages/home/home_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/profile/profile_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/settings/settings_page.dart';
+import 'package:medic_pro_bloc/presentation/pages/subcategory/subcategory_page.dart';
 
 import '../../domain/subject/category.dart';
+import '../../domain/subject/subcategory.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../pages/splash/splash_page.dart';
 
@@ -22,6 +24,7 @@ part 'app_router.gr.dart';
     MaterialRoute(page: ProfilePage),
     MaterialRoute(page: SettingsPage),
     MaterialRoute(page: CategoryPage),
+    MaterialRoute(page: SubcategoryPage),
     // MaterialRoute(page: NoteFormPage, fullscreenDialog: true)
   ],
 )

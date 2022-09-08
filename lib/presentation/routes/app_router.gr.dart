@@ -47,6 +47,13 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: CategoryPage(
               key: args.key, currentCategory: args.currentCategory));
+    },
+    SubcategoryPageRoute.name: (routeData) {
+      final args = routeData.argsAs<SubcategoryPageRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: SubcategoryPage(
+              key: args.key, currentSubcategory: args.currentSubcategory));
     }
   };
 
@@ -58,7 +65,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(HomePageRoute.name, path: '/home-page'),
         RouteConfig(ProfilePageRoute.name, path: '/profile-page'),
         RouteConfig(SettingsPageRoute.name, path: '/settings-page'),
-        RouteConfig(CategoryPageRoute.name, path: '/category-page')
+        RouteConfig(CategoryPageRoute.name, path: '/category-page'),
+        RouteConfig(SubcategoryPageRoute.name, path: '/subcategory-page')
       ];
 }
 
@@ -134,5 +142,30 @@ class CategoryPageRouteArgs {
   @override
   String toString() {
     return 'CategoryPageRouteArgs{key: $key, currentCategory: $currentCategory}';
+  }
+}
+
+/// generated route for
+/// [SubcategoryPage]
+class SubcategoryPageRoute extends PageRouteInfo<SubcategoryPageRouteArgs> {
+  SubcategoryPageRoute({Key? key, required Subcategory currentSubcategory})
+      : super(SubcategoryPageRoute.name,
+            path: '/subcategory-page',
+            args: SubcategoryPageRouteArgs(
+                key: key, currentSubcategory: currentSubcategory));
+
+  static const String name = 'SubcategoryPageRoute';
+}
+
+class SubcategoryPageRouteArgs {
+  const SubcategoryPageRouteArgs({this.key, required this.currentSubcategory});
+
+  final Key? key;
+
+  final Subcategory currentSubcategory;
+
+  @override
+  String toString() {
+    return 'SubcategoryPageRouteArgs{key: $key, currentSubcategory: $currentSubcategory}';
   }
 }

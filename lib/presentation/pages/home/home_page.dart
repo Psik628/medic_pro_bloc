@@ -64,8 +64,7 @@ class HomePage extends StatelessWidget {
                         return ListView.builder(
                           itemCount: state.subjects.length,
                           itemBuilder: (context, subjectIndex) {
-                            final Subject subject = state
-                                .subjects[subjectIndex];
+                            final Subject subject = state.subjects[subjectIndex];
                             // todo check the code below
                             // if (note.failureOption.isSome()) {
                             //   return ErrorNoteCard(note: note);
