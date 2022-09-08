@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
@@ -19,7 +20,7 @@ class SubcategoryWidget extends StatelessWidget {
             width: 20,
             child: Image.asset('assets/${currentSubcategory.title}.png'),
           ),
-          title: Text(currentSubcategory.titleUI),
+          title: Text(currentSubcategory.title).tr(),
 
           onTap: (){
             AutoRouter.of(context).push(SubcategoryPageRoute(currentSubcategory: currentSubcategory));

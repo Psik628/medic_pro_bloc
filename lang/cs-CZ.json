@@ -2,9 +2,6 @@
   "biology": "Biologie",
   "chemistry": "Chemie",
   "physics": "Fyzika",
-
-  
-
   "botanics": "Botanika",
   "cell": "Buňka ",
   "ecology": "Ekologie ",
@@ -13,19 +10,22 @@
   "inventions": "Významné objevy ",
   "somatology": "Somatologie ",
   "zoology": "Zoologie ",
-
   "biochemistry": "Biochemie",
   "chemicalcalculations": "Chemické výpočty",
   "generalchemistry": "Obecná chemie",
   "inorganicchemistry": "Anorganická chemi",
   "organicchemistry": "Organická chemie",
-
   "electricityandmagnetism": "Elektřina a magnetismus",
   "mechanics": "Mechanika",
   "microcosmphysicsandspecialrelativity": "Fyzika mikrosvěta a speciální teorie relativity",
   "molecularphysicsandthermodynamics": "Molekulární fyzika a termodynamika",
   "optics": "Optika",
   "physicalunits": "Fyzikální jednotky",
-  "structureandpropertiesofsubstances": "Struktura a vlastnosti látek"
-  
+  "structureandpropertiesofsubstances": "Struktura a vlastnosti látek",
+
+  "cellmetabolism": "Buněčný metabolismus",
+  "eukaryotes": "Eukaryota",
+  "livingsystem": "Živá soustava",
+  "prokaryotes": "Prokaryota",
+  "virusesandprions": "Viry a priony"
 }
