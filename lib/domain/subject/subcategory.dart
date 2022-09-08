@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:medic_pro_bloc/domain/subject/article.dart';
+import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 
 // import '../../infrastructure/constants/dbconstants.dart';
 
@@ -46,6 +48,13 @@ class Subcategory{
   final String title;
 
   final String titleUI;
+
+  // added later
+  @JsonKey(ignore: true)
+  late Stream<List<Article>> articles;
+  // added later
+  @JsonKey(ignore: true)
+  late Stream<List<QuestionSection>> questionSections;
 
   Subcategory({required this.title, required this.titleUI});
 
