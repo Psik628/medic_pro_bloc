@@ -6,6 +6,7 @@ import 'package:medic_pro_bloc/presentation/pages/profile/profile_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:medic_pro_bloc/presentation/pages/settings/settings_page.dart';
 
+import '../../domain/subject/category.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../pages/splash/splash_page.dart';
 

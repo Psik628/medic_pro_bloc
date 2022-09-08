@@ -15,7 +15,7 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: (){
-        AutoRouter.of(context).replace(const CategoryPageRoute());
+        AutoRouter.of(context).replace(CategoryPageRoute(currentCategory: currentCategory));
       } ,
       title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

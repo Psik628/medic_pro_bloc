@@ -42,8 +42,11 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: const SettingsPage());
     },
     CategoryPageRoute.name: (routeData) {
+      final args = routeData.argsAs<CategoryPageRouteArgs>();
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const CategoryPage());
+          routeData: routeData,
+          child: CategoryPage(
+              key: args.key, currentCategory: args.currentCategory));
     }
   };
 
@@ -111,9 +114,25 @@ class SettingsPageRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CategoryPage]
-class CategoryPageRoute extends PageRouteInfo<void> {
-  const CategoryPageRoute()
-      : super(CategoryPageRoute.name, path: '/category-page');
+class CategoryPageRoute extends PageRouteInfo<CategoryPageRouteArgs> {
+  CategoryPageRoute({Key? key, required Category currentCategory})
+      : super(CategoryPageRoute.name,
+            path: '/category-page',
+            args: CategoryPageRouteArgs(
+                key: key, currentCategory: currentCategory));
 
   static const String name = 'CategoryPageRoute';
+}
+
+class CategoryPageRouteArgs {
+  const CategoryPageRouteArgs({this.key, required this.currentCategory});
+
+  final Key? key;
+
+  final Category currentCategory;
+
+  @override
+  String toString() {
+    return 'CategoryPageRouteArgs{key: $key, currentCategory: $currentCategory}';
+  }
 }
