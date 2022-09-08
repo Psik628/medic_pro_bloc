@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 
 // manual import of generated file
 part 'category.g.dart';
@@ -7,8 +9,8 @@ part 'category.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Category{
 
-  factory Category(String title, String titleUI){
-    IconData icon;
+  // factory Category(String title, String titleUI){
+  //   IconData icon;
 
     // // set icon in factory constructor
     // switch(title){
@@ -77,19 +79,23 @@ class Category{
     //     icon = Icons.ac_unit; // error
     // }
 
-    // todo tmp fix
-    icon = Icons.add;
+    // // todo tmp fix
+    // icon = Icons.add;
 
-    return Category._internal(title, titleUI, icon);
-  }
+    // return Category._internal(title, titleUI, icon);
+  // }
 
-  Category._internal(this.title, this.titleUI ,this.icon);
+  // Category._internal(this.title, this.titleUI ,this.icon);
+
+  Category({required this.title, required this.titleUI});
 
   final String title;
 
   final String titleUI;
 
-  final IconData icon;
+  // added later
+  @JsonKey(ignore: true)
+  late Stream<List<Subcategory>> subcategories;
 
   factory Category.fromJson(Map<String, Object?> json) => _$CategoryFromJson(json);
 

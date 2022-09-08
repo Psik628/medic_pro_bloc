@@ -10,8 +10,8 @@ part 'subcategory.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Subcategory{
 
-  factory Subcategory(title, titleUI){
-    IconData icon;
+  // factory Subcategory(title, titleUI){
+  //   IconData icon;
     // set icon in factory constructor
     // switch(title){
     // // BIOLOGY
@@ -36,18 +36,20 @@ class Subcategory{
     // }
 
     // todo tmp fix
-    icon = Icons.add;
+  //   icon = Icons.add;
+  //
+  //   return Subcategory._internal(title, titleUI, icon);
+  // }
 
-    return Subcategory._internal(title, titleUI, icon);
-  }
-
-  Subcategory._internal(this.title, this.titleUI, this.icon);
+  // Subcategory._internal(this.title, this.titleUI, this.icon);
 
   final String title;
 
   final String titleUI;
 
-  final IconData icon;
+  Subcategory({required this.title, required this.titleUI});
+
+  // final IconData icon;
 
   factory Subcategory.fromJson(Map<String, Object?> json) => _$SubcategoryFromJson(json);
 

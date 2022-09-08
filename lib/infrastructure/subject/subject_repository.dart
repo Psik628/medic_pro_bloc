@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:medic_pro_bloc/domain/subject/subject.dart';
 import 'package:medic_pro_bloc/domain/subject/subject_failure.dart';
 import 'package:rxdart/rxdart.dart' as rx_dart;
@@ -31,16 +32,34 @@ class SubjectRepository implements ISubjectRepository{
               snapshot.docs.map<Subject>((SubjectQueryDocumentSnapshot subjectQueryDocumentSnapshot){
                 CategoryCollectionReference categoryCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories;
 
+                // fill subject with category
                 Stream<List<Category>> categories = categoryCollectionReference
                     .snapshots()
-                    .map((CategoryQuerySnapshot snapshot){
-                      return snapshot.docs.map<Category>((CategoryQueryDocumentSnapshot categoryQueryDocumentSnapshot){
-                        return categoryQueryDocumentSnapshot.data;
+                    .map((CategoryQuerySnapshot categoryQuerySnapshot){
+
+                      return categoryQuerySnapshot.docs.map<Category>((CategoryQueryDocumentSnapshot categoryQueryDocumentSnapshot){
+
+                        SubcategoryCollectionReference subcategoryCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories;
+
+                        // fill category with subcategories
+                        Stream<List<Subcategory>> subcategories = subcategoryCollectionReference
+                          .snapshots()
+                          .map((SubcategoryQuerySnapshot subcategoryQuerySnapshot){
+                            return subcategoryQuerySnapshot.docs.map<Subcategory>((SubcategoryQueryDocumentSnapshot subcategoryQueryDocumentSnapshot){
+
+                              // todo return completed subcategory
+                              return subcategoryQueryDocumentSnapshot.data;
+                            }).toList();
+                          });
+
+                        // return completed category
+                        var completedCategory = categoryQueryDocumentSnapshot.data;
+                        completedCategory.subcategories = subcategories;
+                        return completedCategory;
                       }).toList();
                     });
 
                 Subject completedSubject = subjectQueryDocumentSnapshot.data;
-                // todo expecting big problem here
                 completedSubject.categories = categories;
 
                 return completedSubject;
