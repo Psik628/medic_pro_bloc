@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:medic_pro_bloc/presentation/routes/app_router.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../domain/subject/article.dart';
@@ -25,7 +27,7 @@ class SubcategoryPage extends StatelessWidget {
           vertical: UIConstants.safeAreaPaddingVertical,
           horizontal: UIConstants.safeAreaPaddingHorizontal
         ),
-        child: Container(
+        child: SizedBox(
           // todo fix ui
           height: 50.h,
           child: Column(
@@ -56,10 +58,7 @@ class SubcategoryPage extends StatelessWidget {
                                       title: Text(currentArticle.titleUI),
   
                                       onTap: (){
-                                        // // on widget tap set the current subject subcategory to provider
-                                        // context.read<QuestionSectionProvider>().setCurrentSubjectSubcategory(subjectSubcategory);
-                                        //
-                                        // Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const SubjectSubcategoryScreen()));
+                                        AutoRouter.of(context).push(ArticlePageRoute(currentArticle: currentArticle));
                                       },
                                     )
                                 );

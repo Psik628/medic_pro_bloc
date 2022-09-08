@@ -54,6 +54,13 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: SubcategoryPage(
               key: args.key, currentSubcategory: args.currentSubcategory));
+    },
+    ArticlePageRoute.name: (routeData) {
+      final args = routeData.argsAs<ArticlePageRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child:
+              ArticlePage(key: args.key, currentArticle: args.currentArticle));
     }
   };
 
@@ -66,7 +73,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(ProfilePageRoute.name, path: '/profile-page'),
         RouteConfig(SettingsPageRoute.name, path: '/settings-page'),
         RouteConfig(CategoryPageRoute.name, path: '/category-page'),
-        RouteConfig(SubcategoryPageRoute.name, path: '/subcategory-page')
+        RouteConfig(SubcategoryPageRoute.name, path: '/subcategory-page'),
+        RouteConfig(ArticlePageRoute.name, path: '/article-page')
       ];
 }
 
@@ -167,5 +175,30 @@ class SubcategoryPageRouteArgs {
   @override
   String toString() {
     return 'SubcategoryPageRouteArgs{key: $key, currentSubcategory: $currentSubcategory}';
+  }
+}
+
+/// generated route for
+/// [ArticlePage]
+class ArticlePageRoute extends PageRouteInfo<ArticlePageRouteArgs> {
+  ArticlePageRoute({Key? key, required Article currentArticle})
+      : super(ArticlePageRoute.name,
+            path: '/article-page',
+            args:
+                ArticlePageRouteArgs(key: key, currentArticle: currentArticle));
+
+  static const String name = 'ArticlePageRoute';
+}
+
+class ArticlePageRouteArgs {
+  const ArticlePageRouteArgs({this.key, required this.currentArticle});
+
+  final Key? key;
+
+  final Article currentArticle;
+
+  @override
+  String toString() {
+    return 'ArticlePageRouteArgs{key: $key, currentArticle: $currentArticle}';
   }
 }
