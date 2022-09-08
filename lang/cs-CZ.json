@@ -1,88 +1,59 @@
 {
-  "biology": "Biologie",
-  "chemistry": "Chemie",
-  "physics": "Fyzika",
-
   "botanics": "Botanika",
   "overviewplantsandmushrooms": "Struktura rostlin a hub",
   "physiologyplantsmushrooms": "Fyziologie rostlin a hub",
   "structureplantsmushrooms": "Přehled rostlin a hub",
 
-  "cell": "Buňka ",
-  "cellmetabolism": "Buněčný metabolismus",
-  "eukaryotes": "Eukaryota",
-  "livingsystem": "Živá soustava",
-  "prokaryotes": "Prokaryota",
-  "virusesandprions": "Viry a priony",
+  "biology": "Biologie",
+    "cell": "Buňka ",
+      "cellmetabolism": "Buněčný metabolismus",
+      "eukaryotes": "Eukaryota",
+      "livingsystem": "Živá soustava",
+      "biogenicelements": "Biogenní prvky",
+      "elementarybiologicsciences": "Základní biologické vědy",
+      "prokaryotes": "Prokaryota",
+      "virusesandprions": "Viry a priony",
+    "ecology": "Ekologie",
+    "evolution": "Evoluce",
+    "genetics": "Genetika",
+      "classicalgenetics": "Klasická genetika",
+      "clinicalpopulationgenetics": "Klinická a populační genetika",
+      "geneticsbasics": "Základy genetiky",
+      "moleculargenetics": "Molekulární genetika",
+    "inventions": "Významné objevy",
+      "czechinventions": "České osobnosti",
+      "inventionstill19thcentury": "Objevy do konce 19. století",
+      "moderninventions": "Moderní objevy",
+    "somatology": "Somatologie",
+      "circulatoryandrespiratorysystem": "Oběhová a dýchací soustava",
+      "digestivesystem": "Trávicí soustava",
+      "endocrinologyandimmunology": "Endokrinologie a imunologie",
+      "excretorysystem": "Vylučovací soustava",
+      "nervoussystem": "Nervová soustava",
+      "reproductivesystem": "Rozmnožovací soustava",
+      "sensorysystem": "Smyslová soustava",
+      "skinsystem": "Kožní soustava",
+      "supportandmovementsystem": "Opěrná a pohybová soustava",
+      "tissues": "Tkáně lidského těla",
+    "zoology": "Zoologie ",
+      "generalzoology": "Obecná zoologie",
+      "invertebrates": "Bezobratlí",
+      "vertebrates": "Obratlovci",
+
+  "chemistry": "Chemie",
+    "biochemistry": "Biochemie",
+    "chemicalcalculations": "Chemické výpočty",
+    "generalchemistry": "Obecná chemie",
+    "inorganicchemistry": "Anorganická chemie",
+    "organicchemistry": "Organická chemie",
 
 
-  "ecology": "Ekologie",
-
-  "evolution": "Evoluce",
-
-  "genetics": "Genetika",
-  "classicalgenetics": "Klasická genetika",
-  "clinicalpopulationgenetics": "Klinická a populační genetika",
-  "geneticsbasics": "Základy genetiky",
-  "moleculargenetics": "Molekulární genetika",
-
-  "inventions": "Významné objevy",
-  "czechinventions": "České osobnosti",
-  "inventionstill19thcentury": "Objevy do konce 19. století",
-  "moderninventions": "Moderní objevy",
-
-  "somatology": "Somatologie",
-  "circulatoryandrespiratorysystem": "Oběhová a dýchací soustava",
-  "digestivesystem": "Trávicí soustava",
-  "endocrinologyandimmunology": "Endokrinologie a imunologie",
-  "excretorysystem": "Vylučovací soustava",
-  "nervoussystem": "Nervová soustava",
-  "reproductivesystem": "Rozmnožovací soustava",
-  "sensorysystem": "Smyslová soustava",
-  "skinsystem": "Kožní soustava",
-  "supportandmovementsystem": "Opěrná a pohybová soustava",
-  "tissues": "Tkáně lidského těla",
-
-  "zoology": "Zoologie ",
-  "generalzoology": "Obecná zoologie",
-  "invertebrates": "Bezobratlí",
-  "vertebrates": "Obratlovci",
-
-  "biochemistry": "Biochemie",
-
-  "chemicalcalculations": "Chemické výpočty",
-
-  "generalchemistry": "Obecná chemie",
-
-  "inorganicchemistry": "Anorganická chemie",
-
-  "organicchemistry": "Organická chemie",
-
-  "electricityandmagnetism": "Elektřina a magnetismus",
-
-  "mechanics": "Mechanika",
-
-  "microcosmphysicsandspecialrelativity": "Fyzika mikrosvěta a speciální teorie relativity",
-
-  "molecularphysicsandthermodynamics": "Molekulární fyzika a termodynamika",
-
-  "optics": "Optika",
-
-  "physicalunits": "Fyzikální jednotky",
-
-  "structureandpropertiesofsubstances": "Struktura a vlastnosti látek",
-
-  "cellmetabolism": "Buněčný metabolismus",
-
-  "eukaryotes": "Eukaryota",
-
-  "livingsystem": "Živá soustava",
-
-  "prokaryotes": "Prokaryota",
-
-  "virusesandprions": "Viry a priony",
-
-  "biogenicelements": "Biogenní prvky",
-
-  "elementarybiologicsciences": "Základní biologické vědy"
+  "physics": "Fyzika",
+    "electricityandmagnetism": "Elektřina a magnetismus",
+    "mechanics": "Mechanika",
+    "microcosmphysicsandspecialrelativity": "Fyzika mikrosvěta a speciální teorie relativity",
+    "molecularphysicsandthermodynamics": "Molekulární fyzika a termodynamika",
+    "optics": "Optika",
+    "physicalunits": "Fyzikální jednotky",
+    "structureandpropertiesofsubstances": "Struktura a vlastnosti látek"
 }
