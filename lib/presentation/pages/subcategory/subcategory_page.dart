@@ -52,6 +52,7 @@ class SubcategoryPage extends StatelessWidget {
                                 return Card(
                                     child: ListTile(
                                       leading: SizedBox(
+                                        // extract this
                                         height: 3.h,
                                         width: 3.h,
                                         child: Image.asset(FilesPath.articleIconFilePath),
@@ -95,12 +96,8 @@ class SubcategoryPage extends StatelessWidget {
                                           child: Image.asset(FilesPath.questionSectionFilePath),
                                         ),
                                         title: Text(currentQuestionSection.titleUI),
-
                                         onTap: (){
-                                          // // on widget tap set the current subject subcategory to provider
-                                          // context.read<QuestionSectionProvider>().setCurrentSubjectSubcategory(subjectSubcategory);
-                                          //
-                                          // Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const SubjectSubcategoryScreen()));
+                                          AutoRouter.of(context).push(QuestionSectionPageRoute(currentQuestionSection: currentQuestionSection));
                                         },
                                       )
                                   );

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/animation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medic_pro_bloc/domain/subject/question.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:medic_pro_bloc/domain/subject/subject.dart';
@@ -68,7 +69,21 @@ class SubjectRepository implements ISubjectRepository{
                                   .snapshots()
                                   .map((QuestionSectionQuerySnapshot questionSectionQuerySnapshot){
                                     return questionSectionQuerySnapshot.docs.map<QuestionSection>((QuestionSectionQueryDocumentSnapshot questionSectionQueryDocumentSnapshot){
-                                  return questionSectionQueryDocumentSnapshot.data;
+                                    // fill question section with questions
+                                    QuestionCollectionReference questionCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).questionsections.doc(questionSectionQueryDocumentSnapshot.id).questions;
+                                    Stream<List<Question>> questions = questionCollectionReference
+                                      .snapshots()
+                                      .map((QuestionQuerySnapshot questionQuerySnapshot){
+                                        return questionQuerySnapshot.docs.map<Question>((QuestionQueryDocumentSnapshot questionQueryDocumentSnapshot){
+                                          return questionQueryDocumentSnapshot.data;
+                                        }).toList();
+                                      });
+
+                                    QuestionSection completedQuestionSection = questionSectionQueryDocumentSnapshot.data;
+
+                                    completedQuestionSection.questions = questions;
+
+                                    return completedQuestionSection;
                                 }).toList();
                               });
 

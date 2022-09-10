@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-// import 'package:medic_pro/dbentities/question.dart';
+import 'package:medic_pro_bloc/domain/subject/question.dart';
 
 // manual import of generated file
 part 'questionsection.g.dart';
@@ -12,6 +12,10 @@ class QuestionSection{
   final String title;
 
   final String titleUI;
+
+  // added later
+  @JsonKey(ignore: true)
+  late Stream<List<Question>> questions;
 
   factory QuestionSection.fromJson(Map<String, Object?> json) => _$QuestionSectionFromJson(json);
 

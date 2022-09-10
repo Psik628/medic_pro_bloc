@@ -10,7 +10,9 @@ import 'package:medic_pro_bloc/presentation/pages/subcategory/subcategory_page.d
 
 import '../../domain/subject/article.dart';
 import '../../domain/subject/category.dart';
+import '../../domain/subject/questionsection.dart';
 import '../../domain/subject/subcategory.dart';
+import '../pages/question_section/question_section_page.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../pages/splash/splash_page.dart';
 
@@ -28,6 +30,7 @@ part 'app_router.gr.dart';
     MaterialRoute(page: CategoryPage),
     MaterialRoute(page: SubcategoryPage),
     MaterialRoute(page: ArticlePage),
+    MaterialRoute(page: QuestionSectionPage),
     // MaterialRoute(page: NoteFormPage, fullscreenDialog: true)
   ],
 )

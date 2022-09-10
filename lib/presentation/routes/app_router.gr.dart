@@ -61,6 +61,14 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child:
               ArticlePage(key: args.key, currentArticle: args.currentArticle));
+    },
+    QuestionSectionPageRoute.name: (routeData) {
+      final args = routeData.argsAs<QuestionSectionPageRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: QuestionSectionPage(
+              key: args.key,
+              currentQuestionSection: args.currentQuestionSection));
     }
   };
 
@@ -74,7 +82,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SettingsPageRoute.name, path: '/settings-page'),
         RouteConfig(CategoryPageRoute.name, path: '/category-page'),
         RouteConfig(SubcategoryPageRoute.name, path: '/subcategory-page'),
-        RouteConfig(ArticlePageRoute.name, path: '/article-page')
+        RouteConfig(ArticlePageRoute.name, path: '/article-page'),
+        RouteConfig(QuestionSectionPageRoute.name,
+            path: '/question-section-page')
       ];
 }
 
@@ -200,5 +210,33 @@ class ArticlePageRouteArgs {
   @override
   String toString() {
     return 'ArticlePageRouteArgs{key: $key, currentArticle: $currentArticle}';
+  }
+}
+
+/// generated route for
+/// [QuestionSectionPage]
+class QuestionSectionPageRoute
+    extends PageRouteInfo<QuestionSectionPageRouteArgs> {
+  QuestionSectionPageRoute(
+      {Key? key, required QuestionSection currentQuestionSection})
+      : super(QuestionSectionPageRoute.name,
+            path: '/question-section-page',
+            args: QuestionSectionPageRouteArgs(
+                key: key, currentQuestionSection: currentQuestionSection));
+
+  static const String name = 'QuestionSectionPageRoute';
+}
+
+class QuestionSectionPageRouteArgs {
+  const QuestionSectionPageRouteArgs(
+      {this.key, required this.currentQuestionSection});
+
+  final Key? key;
+
+  final QuestionSection currentQuestionSection;
+
+  @override
+  String toString() {
+    return 'QuestionSectionPageRouteArgs{key: $key, currentQuestionSection: $currentQuestionSection}';
   }
 }
