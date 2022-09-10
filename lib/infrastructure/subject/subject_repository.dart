@@ -12,8 +12,6 @@ import 'package:rxdart/rxdart.dart';
 import '../../domain/subject/article.dart';
 import '../../domain/subject/category.dart';
 import '../../domain/subject/i_subject_repository.dart';
-import '../../domain/subject/option.dart';
-import '../../domain/subject/subject.dart';
 import '../../domain/subject/subject.dart';
 
 @LazySingleton(as: ISubjectRepository)

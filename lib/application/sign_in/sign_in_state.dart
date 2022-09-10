@@ -18,6 +18,7 @@ class SignInState extends Equatable with _$SignInState {
     authFailure: null,
   );
 
+  // this is required to implement equatable
   const SignInState._();
 
   @override
