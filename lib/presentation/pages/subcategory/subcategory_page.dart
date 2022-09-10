@@ -5,6 +5,7 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:medic_pro_bloc/presentation/files_path.dart';
 import 'package:medic_pro_bloc/presentation/routes/app_router.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,13 +51,12 @@ class SubcategoryPage extends StatelessWidget {
                               final Article currentArticle = snapshot.data[categoryIndex];
                                 return Card(
                                     child: ListTile(
-                                      // leading: SizedBox(
-                                      //   height: 20,
-                                      //   width: 20,
-                                      //   child: Image.asset('assets/${subjectSubcategory.title}.png'),
-                                      // ),
+                                      leading: SizedBox(
+                                        height: 3.h,
+                                        width: 3.h,
+                                        child: Image.asset(FilesPath.articleIconFilePath),
+                                      ),
                                       title: Text(currentArticle.titleUI),
-  
                                       onTap: (){
                                         AutoRouter.of(context).push(ArticlePageRoute(currentArticle: currentArticle));
                                       },
@@ -89,11 +89,11 @@ class SubcategoryPage extends StatelessWidget {
                                   final QuestionSection currentQuestionSection = snapshot.data[categoryIndex];
                                   return Card(
                                       child: ListTile(
-                                        // leading: SizedBox(
-                                        //   height: 20,
-                                        //   width: 20,
-                                        //   child: Image.asset('assets/${subjectSubcategory.title}.png'),
-                                        // ),
+                                        leading: SizedBox(
+                                          height: 3.h,
+                                          width: 3.h,
+                                          child: Image.asset(FilesPath.questionSectionFilePath),
+                                        ),
                                         title: Text(currentQuestionSection.titleUI),
 
                                         onTap: (){
