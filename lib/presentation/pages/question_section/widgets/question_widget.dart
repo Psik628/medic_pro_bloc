@@ -42,7 +42,6 @@ class QuestionWidget extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const GFLoader();
             }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
-
               return Column(
                 children: [
                   SizedBox(

@@ -15,13 +15,23 @@ part 'question_section_bloc.freezed.dart';
 class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionState> {
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
     on<AnswerQuestion>((AnswerQuestion event, emit) {
-      // TODO: implement event handler
+      emit(
+        state.copyWith(
+          answeredQuestions: state.answeredQuestions..add(event.question)
+        )
+      );
     });
     on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
       // TODO: implement event handler
     });
     on<SelectOption>((SelectOption event, emit) {
-      // TODO: implement event handler
+      event.question.selectedOptions.add(event.option);
+
+      emit(
+        state.copyWith(
+          // todo tomorrow :D
+        )
+      );
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       // TODO: implement event handler
