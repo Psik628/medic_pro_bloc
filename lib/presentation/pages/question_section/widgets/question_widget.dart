@@ -36,34 +36,31 @@ class QuestionWidget extends StatelessWidget {
             )
           ],
         ),
-        Container(
-          height: 20.h,
-          child: StreamBuilder(
-              stream: currentQuestion.options,
-              builder: (BuildContext context, AsyncSnapshot snapshot){
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const GFLoader();
-                }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+        StreamBuilder(
+          stream: currentQuestion.options,
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const GFLoader();
+            }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
 
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                        child: ListView.builder(
-                            itemCount: snapshot.data.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, optionIndex){
-                              final Option currentOption = snapshot.data[optionIndex];
-                              return OptionWidget(currentOption: currentOption);
-                            }
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return const GFLoader();
-              }
-          ),
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 50.h,
+                    child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, optionIndex){
+                          final Option currentOption = snapshot.data[optionIndex];
+                          return OptionWidget(currentOption: currentOption);
+                        }
+                    ),
+                  ),
+                ],
+              );
+            }
+            return const GFLoader();
+          }
         ),
       ],
     );
