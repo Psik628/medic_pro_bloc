@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
+import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/option_widget.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../../domain/subject/option.dart';
 
 class QuestionWidget extends StatelessWidget {
 
@@ -22,7 +26,7 @@ class QuestionWidget extends StatelessWidget {
                 child: Card(
                   child: Padding(
                       // todo extract this
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Center(
                           child: Text(currentQuestion.content)
                       )
@@ -31,7 +35,33 @@ class QuestionWidget extends StatelessWidget {
               ),
             )
           ],
-        )
+        ),
+        StreamBuilder(
+            stream: currentQuestion.options,
+            builder: (BuildContext context, AsyncSnapshot snapshot){
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const GFLoader();
+              }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 10.h,
+                      child: ListView.builder(
+                          itemCount: snapshot.data.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, optionIndex){
+                            final Option currentOption = snapshot.data[optionIndex];
+                            return OptionWidget(currentOption: currentOption);
+                          }
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return const GFLoader();
+            }
+        ),
       ],
     );
   }
