@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 
 import '../../../../domain/subject/option.dart';
 
@@ -10,6 +11,16 @@ class OptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(currentOption.content);
+    return Row(
+      children: [
+        Expanded(
+            child: GFButton(
+              fullWidthButton: true,
+              onPressed: () {  },
+              child: Text(currentOption.content),
+            )
+        ),
+      ],
+    );
   }
 }
