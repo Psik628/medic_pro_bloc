@@ -15,17 +15,21 @@ class Question{
 
   final String content;
 
+  // added later
+  @JsonKey(ignore: true)
+  late final Stream<List<Option>> options;
+
   // this field is not pulled from database
-  List<Option> _options = [];
+  // List<Option> _options = [];
   // this field is not pulled from database and items to this field should be added when user selects option
   List<Option> _selectedOptions = [];
 
-  List<Option> get options => _options;
+  // List<Option> get options => _options;
   List<Option> get selectedOptions => _selectedOptions;
 
-  void setOptions(List<Option> options){
-    _options = options;
-  }
+  // void setOptions(List<Option> options){
+  //   _options = options;
+  // }
 
   // todo: should be renamed to addToSelectedOptions, but DOM does not work at the moment
   void addToSelectedQuestions(Option selectedOption){

@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/animation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
-import 'package:medic_pro_bloc/domain/subject/subject.dart';
+import 'package:medic_pro_bloc/domain/subject/subject.dart' as Subject;
+import 'package:medic_pro_bloc/domain/subject/option.dart' as Option;
 import 'package:medic_pro_bloc/domain/subject/subject_failure.dart';
-import 'package:rxdart/rxdart.dart' as rx_dart;
-
+import 'package:rxdart/rxdart.dart';
 
 import '../../domain/subject/article.dart';
 import '../../domain/subject/category.dart';
 import '../../domain/subject/i_subject_repository.dart';
+import '../../domain/subject/option.dart';
+import '../../domain/subject/subject.dart';
+import '../../domain/subject/subject.dart';
 
 @LazySingleton(as: ISubjectRepository)
 class SubjectRepository implements ISubjectRepository{
@@ -24,7 +26,7 @@ class SubjectRepository implements ISubjectRepository{
   /// this generator returns plain Subject object
   /// to access its categories we need to call SubcategoryCollectionReference subcategoriesRef = subjectsRef.doc('myDocumentID').subcategories;
   @override
-  Stream<Either<SubjectFailure, List<Subject>>> watchAll() async* {
+  Stream<Either<SubjectFailure, List<Subject.Subject>>> watchAll() async* {
 
     yield*  subjectsRef
         //snapshots() returns a stream of QuerySnapshot
@@ -32,8 +34,8 @@ class SubjectRepository implements ISubjectRepository{
         //list
         .map((snapshot){
           // to domain
-          return right<SubjectFailure, List<Subject>>(
-              snapshot.docs.map<Subject>((SubjectQueryDocumentSnapshot subjectQueryDocumentSnapshot){
+          return right<SubjectFailure, List<Subject.Subject>>(
+              snapshot.docs.map<Subject.Subject>((SubjectQueryDocumentSnapshot subjectQueryDocumentSnapshot){
                 CategoryCollectionReference categoryCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories;
 
                 // fill subject with category
@@ -75,7 +77,22 @@ class SubjectRepository implements ISubjectRepository{
                                       .snapshots()
                                       .map((QuestionQuerySnapshot questionQuerySnapshot){
                                         return questionQuerySnapshot.docs.map<Question>((QuestionQueryDocumentSnapshot questionQueryDocumentSnapshot){
-                                          return questionQueryDocumentSnapshot.data;
+                                          // fill question with options
+                                          OptionCollectionReference optionCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).questionsections.doc(questionSectionQueryDocumentSnapshot.id).questions.doc(questionQueryDocumentSnapshot.id).options;
+                                          Stream<List<Option.Option>> options = optionCollectionReference
+                                            .snapshots()
+                                            .map((OptionQuerySnapshot optionQuerySnapshot){
+                                              return optionQuerySnapshot.docs.map<Option.Option>((OptionQueryDocumentSnapshot optionQueryDocumentSnapshot){
+                                                return optionQueryDocumentSnapshot.data;
+                                              }).toList();
+                                            });
+
+                                          Question completedQuestion = questionQueryDocumentSnapshot.data;
+
+                                          completedQuestion.options = options;
+
+                                          return completedQuestion;
+
                                         }).toList();
                                       });
 
@@ -104,7 +121,7 @@ class SubjectRepository implements ISubjectRepository{
                       }).toList();
                     });
 
-                Subject completedSubject = subjectQueryDocumentSnapshot.data;
+                Subject.Subject completedSubject = subjectQueryDocumentSnapshot.data;
                 completedSubject.categories = categories;
 
                 return completedSubject;
