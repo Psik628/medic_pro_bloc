@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medic_pro_bloc/domain/answered_question_section/user.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/domain/subject/subcategory.dart';
