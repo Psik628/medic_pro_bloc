@@ -21,8 +21,6 @@ class SubjectRepository implements ISubjectRepository{
 
   SubjectRepository(this._firestore);
 
-  /// this generator returns plain Subject object
-  /// to access its categories we need to call SubcategoryCollectionReference subcategoriesRef = subjectsRef.doc('myDocumentID').subcategories;
   @override
   Stream<Either<SubjectFailure, List<Subject.Subject>>> watchAll() async* {
 

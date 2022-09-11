@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:medic_pro_bloc/domain/auth/user.dart' as Entity;
+import 'package:medic_pro_bloc/domain/user/user.dart' as Entity;
+import 'package:medic_pro_bloc/domain/user/user.dart';
 
 import '../../domain/user/i_user_repository.dart';
 import '../../domain/user/user_failure.dart';
@@ -20,10 +20,16 @@ class UserRepository implements IUserRepository{
   UserRepository(this._firestore);
 
   @override
-  Stream<Either<UserFailure, List<Entity.User>>> watchProfile() {
-    // TODO: implement watchProfile
-    throw UnimplementedError();
+  Stream<Either<UserFailure, List<Entity.User>>> watchProfile() async* {
+
+    yield* usersRef
+        .snapshots()
+        .map((snapshot){
+          return right<UserFailure, List<Entity.User>>(
+              snapshot.docs.map<Entity.User>((UserQueryDocumentSnapshot userQueryDocumentSnapshot){
+                return userQueryDocumentSnapshot.data;
+              }).toList()
+          );
+        });
   }
-
-
 }
