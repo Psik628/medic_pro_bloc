@@ -16,15 +16,13 @@ import 'application/database/subject/subject_bloc.dart' as _i15;
 import 'application/navigation/navigation_bloc.dart' as _i12;
 import 'application/question_section/question_section_bloc.dart' as _i13;
 import 'application/sign_in/sign_in_bloc.dart' as _i14;
-import 'domain/answered_question_section/i_answered_question_section_repository.dart'
-    as _i6;
-import 'domain/auth/i_auth_facade.dart' as _i8;
-import 'domain/subject/i_subject_repository.dart' as _i10;
-import 'infrastructure/answered_question_section/answered_question_section_repository.dart'
-    as _i7;
-import 'infrastructure/auth/firebase_auth_facade.dart' as _i9;
+import 'domain/auth/i_auth_facade.dart' as _i6;
+import 'domain/subject/i_subject_repository.dart' as _i8;
+import 'domain/user/i_user_repository.dart' as _i10;
+import 'infrastructure/auth/firebase_auth_facade.dart' as _i7;
 import 'infrastructure/core/firebase_injectable_module.dart' as _i17;
-import 'infrastructure/subject/subject_repository.dart'
+import 'infrastructure/subject/subject_repository.dart' as _i9;
+import 'infrastructure/user/user_repository.dart'
     as _i11; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -39,18 +37,18 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => firebaseInjectableModule.firebaseFirestore);
   gh.lazySingleton<_i5.GoogleSignIn>(
       () => firebaseInjectableModule.googleSignIn);
-  gh.lazySingleton<_i6.IAnsweredQuestionSectionRepository>(() =>
-      _i7.AnsweredQuestionSectionRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i8.IAuthFacade>(() =>
-      _i9.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
-  gh.lazySingleton<_i10.ISubjectRepository>(
-      () => _i11.SubjectRepository(get<_i4.FirebaseFirestore>()));
+  gh.factory<_i6.IAuthFacade>(() =>
+      _i7.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
+  gh.lazySingleton<_i8.ISubjectRepository>(
+      () => _i9.SubjectRepository(get<_i4.FirebaseFirestore>()));
+  gh.lazySingleton<_i10.IUserRepository>(
+      () => _i11.UserRepository(get<_i4.FirebaseFirestore>()));
   gh.factory<_i12.NavigationBloc>(() => _i12.NavigationBloc());
   gh.factory<_i13.QuestionSectionBloc>(() => _i13.QuestionSectionBloc());
-  gh.factory<_i14.SignInBloc>(() => _i14.SignInBloc(get<_i8.IAuthFacade>()));
+  gh.factory<_i14.SignInBloc>(() => _i14.SignInBloc(get<_i6.IAuthFacade>()));
   gh.factory<_i15.SubjectBloc>(
-      () => _i15.SubjectBloc(get<_i10.ISubjectRepository>()));
-  gh.factory<_i16.AuthBloc>(() => _i16.AuthBloc(get<_i8.IAuthFacade>()));
+      () => _i15.SubjectBloc(get<_i8.ISubjectRepository>()));
+  gh.factory<_i16.AuthBloc>(() => _i16.AuthBloc(get<_i6.IAuthFacade>()));
   return get;
 }
 

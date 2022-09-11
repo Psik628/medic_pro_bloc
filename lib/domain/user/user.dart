@@ -5,6 +5,7 @@ import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../subject/answeredquestionsectionreference.dart';
+import 'answered_question_section.dart';
 
 part 'user.g.dart';
 
@@ -15,6 +16,11 @@ class User{
 
   final String email;
   final String nickname;
+
+
+  // added later
+  @JsonKey(ignore: true)
+  late Stream<List<AnsweredQuestionSection>> answeredQuestionSections;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
