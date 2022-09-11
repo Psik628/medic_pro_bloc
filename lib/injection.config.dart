@@ -11,16 +11,17 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_bloc.dart' as _i16;
-import 'application/database/subject/subject_bloc.dart' as _i15;
+import 'application/auth/auth_bloc.dart' as _i17;
+import 'application/database/profile/profile_bloc.dart' as _i13;
+import 'application/database/subject/subject_bloc.dart' as _i16;
 import 'application/navigation/navigation_bloc.dart' as _i12;
-import 'application/question_section/question_section_bloc.dart' as _i13;
-import 'application/sign_in/sign_in_bloc.dart' as _i14;
+import 'application/question_section/question_section_bloc.dart' as _i14;
+import 'application/sign_in/sign_in_bloc.dart' as _i15;
 import 'domain/auth/i_auth_facade.dart' as _i6;
 import 'domain/subject/i_subject_repository.dart' as _i8;
 import 'domain/user/i_user_repository.dart' as _i10;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i7;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i17;
+import 'infrastructure/core/firebase_injectable_module.dart' as _i18;
 import 'infrastructure/subject/subject_repository.dart' as _i9;
 import 'infrastructure/user/user_repository.dart'
     as _i11; // ignore_for_file: unnecessary_lambdas
@@ -44,12 +45,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i10.IUserRepository>(
       () => _i11.UserRepository(get<_i4.FirebaseFirestore>()));
   gh.factory<_i12.NavigationBloc>(() => _i12.NavigationBloc());
-  gh.factory<_i13.QuestionSectionBloc>(() => _i13.QuestionSectionBloc());
-  gh.factory<_i14.SignInBloc>(() => _i14.SignInBloc(get<_i6.IAuthFacade>()));
-  gh.factory<_i15.SubjectBloc>(
-      () => _i15.SubjectBloc(get<_i8.ISubjectRepository>()));
-  gh.factory<_i16.AuthBloc>(() => _i16.AuthBloc(get<_i6.IAuthFacade>()));
+  gh.factory<_i13.ProfileBloc>(
+      () => _i13.ProfileBloc(get<_i10.IUserRepository>()));
+  gh.factory<_i14.QuestionSectionBloc>(() => _i14.QuestionSectionBloc());
+  gh.factory<_i15.SignInBloc>(() => _i15.SignInBloc(get<_i6.IAuthFacade>()));
+  gh.factory<_i16.SubjectBloc>(
+      () => _i16.SubjectBloc(get<_i8.ISubjectRepository>()));
+  gh.factory<_i17.AuthBloc>(() => _i17.AuthBloc(get<_i6.IAuthFacade>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i17.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i18.FirebaseInjectableModule {}

@@ -4,7 +4,6 @@ import 'package:cloud_firestore_odm/annotation.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../subject/answeredquestionsectionreference.dart';
 import 'answered_question_section.dart';
 
 part 'user.g.dart';
