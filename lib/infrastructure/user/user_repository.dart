@@ -20,6 +20,8 @@ class UserRepository implements IUserRepository{
 
   UserRepository(this._firestore);
 
+
+  // todo return only user not user list
   @override
   Stream<Either<UserFailure, List<Entity.User>>> watchProfile() async* {
 
