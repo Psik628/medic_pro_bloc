@@ -28,5 +28,5 @@ class User{
 }
 
 @Collection<User>('Users')
-@Collection<AnsweredQuestionSectionReference>('Users/*/answeredquestionsections')
+@Collection<AnsweredQuestionSection>('Users/*/answeredquestionsections')
 final usersRef = UserCollectionReference();

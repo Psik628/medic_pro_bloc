@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:medic_pro_bloc/domain/user/answered_question_section.dart';
 import 'package:medic_pro_bloc/domain/user/user.dart' as Entity;
 import 'package:medic_pro_bloc/domain/user/user.dart';
 
@@ -27,6 +28,22 @@ class UserRepository implements IUserRepository{
         .map((snapshot){
           return right<UserFailure, List<Entity.User>>(
               snapshot.docs.map<Entity.User>((UserQueryDocumentSnapshot userQueryDocumentSnapshot){
+
+                AnsweredQuestionSectionCollectionReference answeredQuestionSectionReferenceCollectionReference = usersRef.doc(userQueryDocumentSnapshot.id).answeredquestionsections;
+
+                // fill user with answered question sections
+                Stream<List<AnsweredQuestionSection>> answeredQuestionSectionReferences = answeredQuestionSectionReferenceCollectionReference
+                  .snapshots()
+                  .map((AnsweredQuestionSectionQuerySnapshot answeredQuestionSectionReferenceQuerySnapshot){
+                    return answeredQuestionSectionReferenceQuerySnapshot.docs.map<AnsweredQuestionSection>((AnsweredQuestionSectionQueryDocumentSnapshot answeredQuestionSectionReferenceQueryDocumentSnapshot){
+                      return answeredQuestionSectionReferenceQueryDocumentSnapshot.data;
+                    }).toList();
+                  });
+
+                User completedUser = userQueryDocumentSnapshot.data;
+
+                completedUser.answeredQuestionSections = answeredQuestionSectionReferences;
+
                 return userQueryDocumentSnapshot.data;
               }).toList()
           );

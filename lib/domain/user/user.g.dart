@@ -113,9 +113,8 @@ abstract class UserDocumentReference
     return _$UserCollectionReference(reference.firestore);
   }
 
-  late final AnsweredQuestionSectionReferenceCollectionReference
-      answeredquestionsections =
-      _$AnsweredQuestionSectionReferenceCollectionReference(
+  late final AnsweredQuestionSectionCollectionReference
+      answeredquestionsections = _$AnsweredQuestionSectionCollectionReference(
     reference,
   );
 
@@ -149,9 +148,8 @@ class _$UserDocumentReference
     return _$UserCollectionReference(reference.firestore);
   }
 
-  late final AnsweredQuestionSectionReferenceCollectionReference
-      answeredquestionsections =
-      _$AnsweredQuestionSectionReferenceCollectionReference(
+  late final AnsweredQuestionSectionCollectionReference
+      answeredquestionsections = _$AnsweredQuestionSectionCollectionReference(
     reference,
   );
 
@@ -767,64 +765,63 @@ class UserQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<User>
 /// A collection reference object can be used for adding documents,
 /// getting document references, and querying for documents
 /// (using the methods inherited from Query).
-abstract class AnsweredQuestionSectionReferenceCollectionReference
+abstract class AnsweredQuestionSectionCollectionReference
     implements
-        AnsweredQuestionSectionReferenceQuery,
-        FirestoreCollectionReference<AnsweredQuestionSectionReference,
-            AnsweredQuestionSectionReferenceQuerySnapshot> {
-  factory AnsweredQuestionSectionReferenceCollectionReference(
+        AnsweredQuestionSectionQuery,
+        FirestoreCollectionReference<AnsweredQuestionSection,
+            AnsweredQuestionSectionQuerySnapshot> {
+  factory AnsweredQuestionSectionCollectionReference(
     DocumentReference<User> parent,
-  ) = _$AnsweredQuestionSectionReferenceCollectionReference;
+  ) = _$AnsweredQuestionSectionCollectionReference;
 
-  static AnsweredQuestionSectionReference fromFirestore(
+  static AnsweredQuestionSection fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return AnsweredQuestionSectionReference.fromJson(snapshot.data()!);
+    return AnsweredQuestionSection.fromJson(snapshot.data()!);
   }
 
   static Map<String, Object?> toFirestore(
-    AnsweredQuestionSectionReference value,
+    AnsweredQuestionSection value,
     SetOptions? options,
   ) {
     return value.toJson();
   }
 
   @override
-  CollectionReference<AnsweredQuestionSectionReference> get reference;
+  CollectionReference<AnsweredQuestionSection> get reference;
 
   /// A reference to the containing [UserDocumentReference] if this is a subcollection.
   UserDocumentReference get parent;
 
   @override
-  AnsweredQuestionSectionReferenceDocumentReference doc([String? id]);
+  AnsweredQuestionSectionDocumentReference doc([String? id]);
 
   /// Add a new document to this collection with the specified data,
   /// assigning it a document ID automatically.
-  Future<AnsweredQuestionSectionReferenceDocumentReference> add(
-      AnsweredQuestionSectionReference value);
+  Future<AnsweredQuestionSectionDocumentReference> add(
+      AnsweredQuestionSection value);
 }
 
-class _$AnsweredQuestionSectionReferenceCollectionReference
-    extends _$AnsweredQuestionSectionReferenceQuery
-    implements AnsweredQuestionSectionReferenceCollectionReference {
-  factory _$AnsweredQuestionSectionReferenceCollectionReference(
+class _$AnsweredQuestionSectionCollectionReference
+    extends _$AnsweredQuestionSectionQuery
+    implements AnsweredQuestionSectionCollectionReference {
+  factory _$AnsweredQuestionSectionCollectionReference(
     DocumentReference<User> parent,
   ) {
-    return _$AnsweredQuestionSectionReferenceCollectionReference._(
+    return _$AnsweredQuestionSectionCollectionReference._(
       UserDocumentReference(parent),
       parent.collection('answeredquestionsections').withConverter(
-            fromFirestore: AnsweredQuestionSectionReferenceCollectionReference
-                .fromFirestore,
-            toFirestore:
-                AnsweredQuestionSectionReferenceCollectionReference.toFirestore,
+            fromFirestore:
+                AnsweredQuestionSectionCollectionReference.fromFirestore,
+            toFirestore: AnsweredQuestionSectionCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$AnsweredQuestionSectionReferenceCollectionReference._(
+  _$AnsweredQuestionSectionCollectionReference._(
     this.parent,
-    CollectionReference<AnsweredQuestionSectionReference> reference,
+    CollectionReference<AnsweredQuestionSection> reference,
   ) : super(reference, reference);
 
   @override
@@ -833,31 +830,31 @@ class _$AnsweredQuestionSectionReferenceCollectionReference
   String get path => reference.path;
 
   @override
-  CollectionReference<AnsweredQuestionSectionReference> get reference =>
-      super.reference as CollectionReference<AnsweredQuestionSectionReference>;
+  CollectionReference<AnsweredQuestionSection> get reference =>
+      super.reference as CollectionReference<AnsweredQuestionSection>;
 
   @override
-  AnsweredQuestionSectionReferenceDocumentReference doc([String? id]) {
+  AnsweredQuestionSectionDocumentReference doc([String? id]) {
     assert(
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return AnsweredQuestionSectionReferenceDocumentReference(
+    return AnsweredQuestionSectionDocumentReference(
       reference.doc(id),
     );
   }
 
   @override
-  Future<AnsweredQuestionSectionReferenceDocumentReference> add(
-      AnsweredQuestionSectionReference value) {
+  Future<AnsweredQuestionSectionDocumentReference> add(
+      AnsweredQuestionSection value) {
     return reference
         .add(value)
-        .then((ref) => AnsweredQuestionSectionReferenceDocumentReference(ref));
+        .then((ref) => AnsweredQuestionSectionDocumentReference(ref));
   }
 
   @override
   bool operator ==(Object other) {
-    return other is _$AnsweredQuestionSectionReferenceCollectionReference &&
+    return other is _$AnsweredQuestionSectionCollectionReference &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -866,18 +863,18 @@ class _$AnsweredQuestionSectionReferenceCollectionReference
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-abstract class AnsweredQuestionSectionReferenceDocumentReference
-    extends FirestoreDocumentReference<AnsweredQuestionSectionReference,
-        AnsweredQuestionSectionReferenceDocumentSnapshot> {
-  factory AnsweredQuestionSectionReferenceDocumentReference(
-          DocumentReference<AnsweredQuestionSectionReference> reference) =
-      _$AnsweredQuestionSectionReferenceDocumentReference;
+abstract class AnsweredQuestionSectionDocumentReference
+    extends FirestoreDocumentReference<AnsweredQuestionSection,
+        AnsweredQuestionSectionDocumentSnapshot> {
+  factory AnsweredQuestionSectionDocumentReference(
+          DocumentReference<AnsweredQuestionSection> reference) =
+      _$AnsweredQuestionSectionDocumentReference;
 
-  DocumentReference<AnsweredQuestionSectionReference> get reference;
+  DocumentReference<AnsweredQuestionSection> get reference;
 
-  /// A reference to the [AnsweredQuestionSectionReferenceCollectionReference] containing this document.
-  AnsweredQuestionSectionReferenceCollectionReference get parent {
-    return _$AnsweredQuestionSectionReferenceCollectionReference(
+  /// A reference to the [AnsweredQuestionSectionCollectionReference] containing this document.
+  AnsweredQuestionSectionCollectionReference get parent {
+    return _$AnsweredQuestionSectionCollectionReference(
       reference.parent.parent!.withConverter<User>(
         fromFirestore: UserCollectionReference.fromFirestore,
         toFirestore: UserCollectionReference.toFirestore,
@@ -886,35 +883,34 @@ abstract class AnsweredQuestionSectionReferenceDocumentReference
   }
 
   @override
-  Stream<AnsweredQuestionSectionReferenceDocumentSnapshot> snapshots();
+  Stream<AnsweredQuestionSectionDocumentSnapshot> snapshots();
 
   @override
-  Future<AnsweredQuestionSectionReferenceDocumentSnapshot> get(
-      [GetOptions? options]);
+  Future<AnsweredQuestionSectionDocumentSnapshot> get([GetOptions? options]);
 
   @override
   Future<void> delete();
 
   Future<void> update({
-    String questionsectionreference,
-    bool answeredcorrectly,
+    bool answeredCorrectly,
+    String questionSectionReference,
   });
 
-  Future<void> set(AnsweredQuestionSectionReference value);
+  Future<void> set(AnsweredQuestionSection value);
 }
 
-class _$AnsweredQuestionSectionReferenceDocumentReference
-    extends FirestoreDocumentReference<AnsweredQuestionSectionReference,
-        AnsweredQuestionSectionReferenceDocumentSnapshot>
-    implements AnsweredQuestionSectionReferenceDocumentReference {
-  _$AnsweredQuestionSectionReferenceDocumentReference(this.reference);
+class _$AnsweredQuestionSectionDocumentReference
+    extends FirestoreDocumentReference<AnsweredQuestionSection,
+        AnsweredQuestionSectionDocumentSnapshot>
+    implements AnsweredQuestionSectionDocumentReference {
+  _$AnsweredQuestionSectionDocumentReference(this.reference);
 
   @override
-  final DocumentReference<AnsweredQuestionSectionReference> reference;
+  final DocumentReference<AnsweredQuestionSection> reference;
 
-  /// A reference to the [AnsweredQuestionSectionReferenceCollectionReference] containing this document.
-  AnsweredQuestionSectionReferenceCollectionReference get parent {
-    return _$AnsweredQuestionSectionReferenceCollectionReference(
+  /// A reference to the [AnsweredQuestionSectionCollectionReference] containing this document.
+  AnsweredQuestionSectionCollectionReference get parent {
+    return _$AnsweredQuestionSectionCollectionReference(
       reference.parent.parent!.withConverter<User>(
         fromFirestore: UserCollectionReference.fromFirestore,
         toFirestore: UserCollectionReference.toFirestore,
@@ -923,9 +919,9 @@ class _$AnsweredQuestionSectionReferenceDocumentReference
   }
 
   @override
-  Stream<AnsweredQuestionSectionReferenceDocumentSnapshot> snapshots() {
+  Stream<AnsweredQuestionSectionDocumentSnapshot> snapshots() {
     return reference.snapshots().map((snapshot) {
-      return AnsweredQuestionSectionReferenceDocumentSnapshot._(
+      return AnsweredQuestionSectionDocumentSnapshot._(
         snapshot,
         snapshot.data(),
       );
@@ -933,10 +929,9 @@ class _$AnsweredQuestionSectionReferenceDocumentReference
   }
 
   @override
-  Future<AnsweredQuestionSectionReferenceDocumentSnapshot> get(
-      [GetOptions? options]) {
+  Future<AnsweredQuestionSectionDocumentSnapshot> get([GetOptions? options]) {
     return reference.get(options).then((snapshot) {
-      return AnsweredQuestionSectionReferenceDocumentSnapshot._(
+      return AnsweredQuestionSectionDocumentSnapshot._(
         snapshot,
         snapshot.data(),
       );
@@ -949,26 +944,26 @@ class _$AnsweredQuestionSectionReferenceDocumentReference
   }
 
   Future<void> update({
-    Object? questionsectionreference = _sentinel,
-    Object? answeredcorrectly = _sentinel,
+    Object? answeredCorrectly = _sentinel,
+    Object? questionSectionReference = _sentinel,
   }) async {
     final json = {
-      if (questionsectionreference != _sentinel)
-        "questionsectionreference": questionsectionreference as String,
-      if (answeredcorrectly != _sentinel)
-        "answeredcorrectly": answeredcorrectly as bool,
+      if (answeredCorrectly != _sentinel)
+        "answeredCorrectly": answeredCorrectly as bool,
+      if (questionSectionReference != _sentinel)
+        "questionSectionReference": questionSectionReference as String,
     };
 
     return reference.update(json);
   }
 
-  Future<void> set(AnsweredQuestionSectionReference value) {
+  Future<void> set(AnsweredQuestionSection value) {
     return reference.set(value);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is AnsweredQuestionSectionReferenceDocumentReference &&
+    return other is AnsweredQuestionSectionDocumentReference &&
         other.runtimeType == runtimeType &&
         other.parent == parent &&
         other.id == id;
@@ -978,36 +973,36 @@ class _$AnsweredQuestionSectionReferenceDocumentReference
   int get hashCode => Object.hash(runtimeType, parent, id);
 }
 
-class AnsweredQuestionSectionReferenceDocumentSnapshot
-    extends FirestoreDocumentSnapshot<AnsweredQuestionSectionReference> {
-  AnsweredQuestionSectionReferenceDocumentSnapshot._(
+class AnsweredQuestionSectionDocumentSnapshot
+    extends FirestoreDocumentSnapshot<AnsweredQuestionSection> {
+  AnsweredQuestionSectionDocumentSnapshot._(
     this.snapshot,
     this.data,
   );
 
   @override
-  final DocumentSnapshot<AnsweredQuestionSectionReference> snapshot;
+  final DocumentSnapshot<AnsweredQuestionSection> snapshot;
 
   @override
-  AnsweredQuestionSectionReferenceDocumentReference get reference {
-    return AnsweredQuestionSectionReferenceDocumentReference(
+  AnsweredQuestionSectionDocumentReference get reference {
+    return AnsweredQuestionSectionDocumentReference(
       snapshot.reference,
     );
   }
 
   @override
-  final AnsweredQuestionSectionReference? data;
+  final AnsweredQuestionSection? data;
 }
 
-abstract class AnsweredQuestionSectionReferenceQuery
+abstract class AnsweredQuestionSectionQuery
     implements
-        QueryReference<AnsweredQuestionSectionReference,
-            AnsweredQuestionSectionReferenceQuerySnapshot> {
+        QueryReference<AnsweredQuestionSection,
+            AnsweredQuestionSectionQuerySnapshot> {
   @override
-  AnsweredQuestionSectionReferenceQuery limit(int limit);
+  AnsweredQuestionSectionQuery limit(int limit);
 
   @override
-  AnsweredQuestionSectionReferenceQuery limitToLast(int limit);
+  AnsweredQuestionSectionQuery limitToLast(int limit);
 
   /// Perform an order query based on a [FieldPath].
   ///
@@ -1029,17 +1024,17 @@ abstract class AnsweredQuestionSectionReferenceQuery
   /// ```dart
   /// collection.orderByTitle(startAt: 'title');
   /// ```
-  AnsweredQuestionSectionReferenceQuery orderByFieldPath(
+  AnsweredQuestionSectionQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt,
     Object? startAfter,
     Object? endAt,
     Object? endBefore,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   });
 
   /// Perform a where query based on a [FieldPath].
@@ -1059,7 +1054,7 @@ abstract class AnsweredQuestionSectionReferenceQuery
   /// ```dart
   /// collection.whereTitle(isEqualTo: 'title');
   /// ```
-  AnsweredQuestionSectionReferenceQuery whereFieldPath(
+  AnsweredQuestionSectionQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -1074,7 +1069,7 @@ abstract class AnsweredQuestionSectionReferenceQuery
     bool? isNull,
   });
 
-  AnsweredQuestionSectionReferenceQuery whereDocumentId({
+  AnsweredQuestionSectionQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -1085,18 +1080,7 @@ abstract class AnsweredQuestionSectionReferenceQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  AnsweredQuestionSectionReferenceQuery whereQuestionsectionreference({
-    String? isEqualTo,
-    String? isNotEqualTo,
-    String? isLessThan,
-    String? isLessThanOrEqualTo,
-    String? isGreaterThan,
-    String? isGreaterThanOrEqualTo,
-    bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
-  });
-  AnsweredQuestionSectionReferenceQuery whereAnsweredcorrectly({
+  AnsweredQuestionSectionQuery whereAnsweredCorrectly({
     bool? isEqualTo,
     bool? isNotEqualTo,
     bool? isLessThan,
@@ -1107,49 +1091,59 @@ abstract class AnsweredQuestionSectionReferenceQuery
     List<bool>? whereIn,
     List<bool>? whereNotIn,
   });
+  AnsweredQuestionSectionQuery whereQuestionSectionReference({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  });
 
-  AnsweredQuestionSectionReferenceQuery orderByDocumentId({
+  AnsweredQuestionSectionQuery orderByDocumentId({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   });
 
-  AnsweredQuestionSectionReferenceQuery orderByQuestionsectionreference({
-    bool descending = false,
-    String startAt,
-    String startAfter,
-    String endAt,
-    String endBefore,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
-  });
-
-  AnsweredQuestionSectionReferenceQuery orderByAnsweredcorrectly({
+  AnsweredQuestionSectionQuery orderByAnsweredCorrectly({
     bool descending = false,
     bool startAt,
     bool startAfter,
     bool endAt,
     bool endBefore,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
+  });
+
+  AnsweredQuestionSectionQuery orderByQuestionSectionReference({
+    bool descending = false,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   });
 }
 
-class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
-        AnsweredQuestionSectionReference,
-        AnsweredQuestionSectionReferenceQuerySnapshot>
-    implements AnsweredQuestionSectionReferenceQuery {
-  _$AnsweredQuestionSectionReferenceQuery(
+class _$AnsweredQuestionSectionQuery extends QueryReference<
+        AnsweredQuestionSection, AnsweredQuestionSectionQuerySnapshot>
+    implements AnsweredQuestionSectionQuery {
+  _$AnsweredQuestionSectionQuery(
     this.reference,
     this._collection,
   );
@@ -1157,28 +1151,26 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
   final CollectionReference<Object?> _collection;
 
   @override
-  final Query<AnsweredQuestionSectionReference> reference;
+  final Query<AnsweredQuestionSection> reference;
 
-  AnsweredQuestionSectionReferenceQuerySnapshot _decodeSnapshot(
-    QuerySnapshot<AnsweredQuestionSectionReference> snapshot,
+  AnsweredQuestionSectionQuerySnapshot _decodeSnapshot(
+    QuerySnapshot<AnsweredQuestionSection> snapshot,
   ) {
     final docs = snapshot.docs.map((e) {
-      return AnsweredQuestionSectionReferenceQueryDocumentSnapshot._(
-          e, e.data());
+      return AnsweredQuestionSectionQueryDocumentSnapshot._(e, e.data());
     }).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return FirestoreDocumentChange<
-          AnsweredQuestionSectionReferenceDocumentSnapshot>(
+      return FirestoreDocumentChange<AnsweredQuestionSectionDocumentSnapshot>(
         type: change.type,
         oldIndex: change.oldIndex,
         newIndex: change.newIndex,
-        doc: AnsweredQuestionSectionReferenceDocumentSnapshot._(
+        doc: AnsweredQuestionSectionDocumentSnapshot._(
             change.doc, change.doc.data()),
       );
     }).toList();
 
-    return AnsweredQuestionSectionReferenceQuerySnapshot._(
+    return AnsweredQuestionSectionQuerySnapshot._(
       snapshot,
       docs,
       docChanges,
@@ -1186,44 +1178,43 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
   }
 
   @override
-  Stream<AnsweredQuestionSectionReferenceQuerySnapshot> snapshots(
+  Stream<AnsweredQuestionSectionQuerySnapshot> snapshots(
       [SnapshotOptions? options]) {
     return reference.snapshots().map(_decodeSnapshot);
   }
 
   @override
-  Future<AnsweredQuestionSectionReferenceQuerySnapshot> get(
-      [GetOptions? options]) {
+  Future<AnsweredQuestionSectionQuerySnapshot> get([GetOptions? options]) {
     return reference.get(options).then(_decodeSnapshot);
   }
 
   @override
-  AnsweredQuestionSectionReferenceQuery limit(int limit) {
-    return _$AnsweredQuestionSectionReferenceQuery(
+  AnsweredQuestionSectionQuery limit(int limit) {
+    return _$AnsweredQuestionSectionQuery(
       reference.limit(limit),
       _collection,
     );
   }
 
   @override
-  AnsweredQuestionSectionReferenceQuery limitToLast(int limit) {
-    return _$AnsweredQuestionSectionReferenceQuery(
+  AnsweredQuestionSectionQuery limitToLast(int limit) {
+    return _$AnsweredQuestionSectionQuery(
       reference.limitToLast(limit),
       _collection,
     );
   }
 
-  AnsweredQuestionSectionReferenceQuery orderByFieldPath(
+  AnsweredQuestionSectionQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(fieldPath, descending: descending);
 
@@ -1253,10 +1244,10 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
       query = query.endBefore([endBefore]);
     }
 
-    return _$AnsweredQuestionSectionReferenceQuery(query, _collection);
+    return _$AnsweredQuestionSectionQuery(query, _collection);
   }
 
-  AnsweredQuestionSectionReferenceQuery whereFieldPath(
+  AnsweredQuestionSectionQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -1270,7 +1261,7 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     List<Object?>? whereNotIn,
     bool? isNull,
   }) {
-    return _$AnsweredQuestionSectionReferenceQuery(
+    return _$AnsweredQuestionSectionQuery(
       reference.where(
         fieldPath,
         isEqualTo: isEqualTo,
@@ -1289,7 +1280,7 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     );
   }
 
-  AnsweredQuestionSectionReferenceQuery whereDocumentId({
+  AnsweredQuestionSectionQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -1300,7 +1291,7 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$AnsweredQuestionSectionReferenceQuery(
+    return _$AnsweredQuestionSectionQuery(
       reference.where(
         FieldPath.documentId,
         isEqualTo: isEqualTo,
@@ -1317,35 +1308,7 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     );
   }
 
-  AnsweredQuestionSectionReferenceQuery whereQuestionsectionreference({
-    String? isEqualTo,
-    String? isNotEqualTo,
-    String? isLessThan,
-    String? isLessThanOrEqualTo,
-    String? isGreaterThan,
-    String? isGreaterThanOrEqualTo,
-    bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
-  }) {
-    return _$AnsweredQuestionSectionReferenceQuery(
-      reference.where(
-        "questionsectionreference",
-        isEqualTo: isEqualTo,
-        isNotEqualTo: isNotEqualTo,
-        isLessThan: isLessThan,
-        isLessThanOrEqualTo: isLessThanOrEqualTo,
-        isGreaterThan: isGreaterThan,
-        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
-        isNull: isNull,
-        whereIn: whereIn,
-        whereNotIn: whereNotIn,
-      ),
-      _collection,
-    );
-  }
-
-  AnsweredQuestionSectionReferenceQuery whereAnsweredcorrectly({
+  AnsweredQuestionSectionQuery whereAnsweredCorrectly({
     bool? isEqualTo,
     bool? isNotEqualTo,
     bool? isLessThan,
@@ -1356,9 +1319,9 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     List<bool>? whereIn,
     List<bool>? whereNotIn,
   }) {
-    return _$AnsweredQuestionSectionReferenceQuery(
+    return _$AnsweredQuestionSectionQuery(
       reference.where(
-        "answeredcorrectly",
+        "answeredCorrectly",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1373,16 +1336,44 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
     );
   }
 
-  AnsweredQuestionSectionReferenceQuery orderByDocumentId({
+  AnsweredQuestionSectionQuery whereQuestionSectionReference({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  }) {
+    return _$AnsweredQuestionSectionQuery(
+      reference.where(
+        "questionSectionReference",
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
+  AnsweredQuestionSectionQuery orderByDocumentId({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(FieldPath.documentId, descending: descending);
 
@@ -1412,22 +1403,22 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
       query = query.endBefore([endBefore]);
     }
 
-    return _$AnsweredQuestionSectionReferenceQuery(query, _collection);
+    return _$AnsweredQuestionSectionQuery(query, _collection);
   }
 
-  AnsweredQuestionSectionReferenceQuery orderByQuestionsectionreference({
+  AnsweredQuestionSectionQuery orderByAnsweredCorrectly({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(
-        "questionsectionreference",
+        "answeredCorrectly",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -1456,22 +1447,22 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
       query = query.endBefore([endBefore]);
     }
 
-    return _$AnsweredQuestionSectionReferenceQuery(query, _collection);
+    return _$AnsweredQuestionSectionQuery(query, _collection);
   }
 
-  AnsweredQuestionSectionReferenceQuery orderByAnsweredcorrectly({
+  AnsweredQuestionSectionQuery orderByQuestionSectionReference({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endAtDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? endBeforeDocument,
-    AnsweredQuestionSectionReferenceDocumentSnapshot? startAfterDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endAtDocument,
+    AnsweredQuestionSectionDocumentSnapshot? endBeforeDocument,
+    AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(
-        "answeredcorrectly",
+        "questionSectionReference",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -1500,12 +1491,12 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
       query = query.endBefore([endBefore]);
     }
 
-    return _$AnsweredQuestionSectionReferenceQuery(query, _collection);
+    return _$AnsweredQuestionSectionQuery(query, _collection);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is _$AnsweredQuestionSectionReferenceQuery &&
+    return other is _$AnsweredQuestionSectionQuery &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -1514,43 +1505,39 @@ class _$AnsweredQuestionSectionReferenceQuery extends QueryReference<
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-class AnsweredQuestionSectionReferenceQuerySnapshot
-    extends FirestoreQuerySnapshot<AnsweredQuestionSectionReference,
-        AnsweredQuestionSectionReferenceQueryDocumentSnapshot> {
-  AnsweredQuestionSectionReferenceQuerySnapshot._(
+class AnsweredQuestionSectionQuerySnapshot extends FirestoreQuerySnapshot<
+    AnsweredQuestionSection, AnsweredQuestionSectionQueryDocumentSnapshot> {
+  AnsweredQuestionSectionQuerySnapshot._(
     this.snapshot,
     this.docs,
     this.docChanges,
   );
 
-  final QuerySnapshot<AnsweredQuestionSectionReference> snapshot;
+  final QuerySnapshot<AnsweredQuestionSection> snapshot;
 
   @override
-  final List<AnsweredQuestionSectionReferenceQueryDocumentSnapshot> docs;
+  final List<AnsweredQuestionSectionQueryDocumentSnapshot> docs;
 
   @override
-  final List<
-      FirestoreDocumentChange<
-          AnsweredQuestionSectionReferenceDocumentSnapshot>> docChanges;
+  final List<FirestoreDocumentChange<AnsweredQuestionSectionDocumentSnapshot>>
+      docChanges;
 }
 
-class AnsweredQuestionSectionReferenceQueryDocumentSnapshot
-    extends FirestoreQueryDocumentSnapshot<AnsweredQuestionSectionReference>
-    implements AnsweredQuestionSectionReferenceDocumentSnapshot {
-  AnsweredQuestionSectionReferenceQueryDocumentSnapshot._(
-      this.snapshot, this.data);
+class AnsweredQuestionSectionQueryDocumentSnapshot
+    extends FirestoreQueryDocumentSnapshot<AnsweredQuestionSection>
+    implements AnsweredQuestionSectionDocumentSnapshot {
+  AnsweredQuestionSectionQueryDocumentSnapshot._(this.snapshot, this.data);
 
   @override
-  final QueryDocumentSnapshot<AnsweredQuestionSectionReference> snapshot;
+  final QueryDocumentSnapshot<AnsweredQuestionSection> snapshot;
 
   @override
-  AnsweredQuestionSectionReferenceDocumentReference get reference {
-    return AnsweredQuestionSectionReferenceDocumentReference(
-        snapshot.reference);
+  AnsweredQuestionSectionDocumentReference get reference {
+    return AnsweredQuestionSectionDocumentReference(snapshot.reference);
   }
 
   @override
-  final AnsweredQuestionSectionReference data;
+  final AnsweredQuestionSection data;
 }
 
 // **************************************************************************
