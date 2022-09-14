@@ -25,7 +25,7 @@ class ScoreboardWidget extends StatelessWidget {
   }
 
   List<int> _getAnsweredQuestionSectionsIndexes(List<AnsweredQuestionSection> answeredQuestionSections){
-
+    return AnsweredQuestionSectionService.getAnsweredQuestionSectionsIndexes(answeredQuestionSections);
   }
 
 
@@ -88,21 +88,22 @@ class ScoreboardWidget extends StatelessWidget {
                         // startDegreeOffset: kScoreboardWStartDegreeOffset,
                         sections: [
                           PieChartSectionData(
-                            value: biologyIndex.toDouble(),
+                            // todo extract this
+                            value: _getAnsweredQuestionSectionsIndexes(answeredQuestionSections)[0].toDouble(),
                             color: Colors.green,
-                            title: BIOLOGY_LABEL,
+                            title: 'biology',
                             titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                           ),
                           PieChartSectionData(
-                            value: chemistryIndex.toDouble(),
+                            value: _getAnsweredQuestionSectionsIndexes(answeredQuestionSections)[1].toDouble(),
                             color: Colors.orange,
-                            title: CHEMISTRY_LABEL,
+                            title: 'chemistry',
                             titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                           ),
                           PieChartSectionData(
-                            value: physicsIndex.toDouble(),
+                            value: _getAnsweredQuestionSectionsIndexes(answeredQuestionSections)[2].toDouble(),
                             color: Colors.red,
-                            title: PHYSICS_LABEL,
+                            title: 'physics',
                             titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                           ),
                         ]

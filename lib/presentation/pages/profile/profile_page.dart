@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class ProfilePage extends StatelessWidget {
                   horizontal: UIConstants.safeAreaPaddingHorizontal
               ),
               child: BlocProvider<ProfileBloc>(
-                create: (context) => getIt<ProfileBloc>(),
+                create: (context) => getIt<ProfileBloc>()..add(const ProfileEvent.watchProfile('jan@jan.com')),
                 child: BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (context, ProfileState state){
 
