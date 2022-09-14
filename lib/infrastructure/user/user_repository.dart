@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:medic_pro_bloc/domain/user/answered_question_section.dart';
 import 'package:medic_pro_bloc/domain/user/user.dart' as Entity;
-import 'package:medic_pro_bloc/domain/user/user.dart';
 
+import '../../domain/user/answered_question_section.dart';
 import '../../domain/user/i_user_repository.dart';
+import '../../domain/user/user.dart';
 import '../../domain/user/user_failure.dart';
 
 /*
@@ -20,34 +20,32 @@ class UserRepository implements IUserRepository{
 
   UserRepository(this._firestore);
 
-
   // todo return only user not user list
   @override
-  Stream<Either<UserFailure, List<Entity.User>>> watchProfile() async* {
-
+  Stream<Either<UserFailure, Entity.User>> watchProfileById(String id) async* {
+    // todo pass email above
     yield* usersRef
+        .doc(id)
         .snapshots()
-        .map((snapshot){
-          return right<UserFailure, List<Entity.User>>(
-              snapshot.docs.map<Entity.User>((UserQueryDocumentSnapshot userQueryDocumentSnapshot){
+        .map((UserDocumentSnapshot userDocumentSnapshot){
 
-                AnsweredQuestionSectionCollectionReference answeredQuestionSectionReferenceCollectionReference = usersRef.doc(userQueryDocumentSnapshot.id).answeredquestionsections;
+          AnsweredQuestionSectionCollectionReference answeredQuestionSectionReferenceCollectionReference = usersRef.doc(id).answeredquestionsections;
 
-                // fill user with answered question sections
-                Stream<List<AnsweredQuestionSection>> answeredQuestionSectionReferences = answeredQuestionSectionReferenceCollectionReference
-                  .snapshots()
-                  .map((AnsweredQuestionSectionQuerySnapshot answeredQuestionSectionReferenceQuerySnapshot){
-                    return answeredQuestionSectionReferenceQuerySnapshot.docs.map<AnsweredQuestionSection>((AnsweredQuestionSectionQueryDocumentSnapshot answeredQuestionSectionReferenceQueryDocumentSnapshot){
-                      return answeredQuestionSectionReferenceQueryDocumentSnapshot.data;
-                    }).toList();
-                  });
+          Stream<List<AnsweredQuestionSection>> answeredQuestionSectionReferences = answeredQuestionSectionReferenceCollectionReference
+            .snapshots()
+            .map((AnsweredQuestionSectionQuerySnapshot answeredQuestionSectionQuerySnapshot){
+              return answeredQuestionSectionQuerySnapshot.docs.map<AnsweredQuestionSection>((AnsweredQuestionSectionQueryDocumentSnapshot answeredQuestionSectionReferenceQueryDocumentSnapshot){
+                return answeredQuestionSectionReferenceQueryDocumentSnapshot.data;
+              }).toList();
+          });
 
-                User completedUser = userQueryDocumentSnapshot.data;
+          // todo solve null value
+          User userToBeCompleted = userDocumentSnapshot.data!;
 
-                completedUser.answeredQuestionSections = answeredQuestionSectionReferences;
-
-                return userQueryDocumentSnapshot.data;
-              }).toList()
+          userToBeCompleted.answeredQuestionSections = answeredQuestionSectionReferences;
+          // return completed user
+          return right<UserFailure, Entity.User>(
+              userToBeCompleted
           );
         });
   }

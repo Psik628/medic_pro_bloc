@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,12 +16,21 @@ part 'profile_bloc.freezed.dart';
 
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-
   final IUserRepository _userRepository;
 
-  ProfileBloc(this._userRepository) : super(ProfileInitial()) {
-    on<ProfileEvent>((event, emit) {
-      // TODO: implement event handler
+  StreamSubscription<Either<UserFailure, User>>? _userStreamSubscription;
+
+  ProfileBloc(this._userRepository) : super(const ProfileState.initial()) {
+    on<WatchProfileStarted>((WatchProfileStarted event, emit) async {
+      emit(const ProfileState.loadInProgress());
+      await _userStreamSubscription?.cancel();
+      // listen to repository
+      _userStreamSubscription = _userRepository.watchProfileById(event.id).listen(
+        (failureOrUser) {
+          // emitting another event
+          add(ProfileEvent.profileDataReceived(failureOrUser));
+        },
+      );
     });
   }
 }
