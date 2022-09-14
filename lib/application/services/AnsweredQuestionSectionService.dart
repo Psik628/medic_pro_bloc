@@ -33,4 +33,18 @@ class AnsweredQuestionSectionService{
       return answeredQuestionSection.answeredCorrectly;
     }).toList();
   }
+
+  static List<int> getAnsweredQuestionSectionsIndexes(List<AnsweredQuestionSection> questionSections){
+    int biologyIndex = 0;
+    int chemistryIndex = 0;
+    int physicsIndex = 0;
+
+    questionSections.forEach((AnsweredQuestionSection answeredQuestionSection) {
+      if(answeredQuestionSection.questionSectionReference.startsWith('/MSubjects/biology/')) biologyIndex++;
+      else if(answeredQuestionSection.questionSectionReference.startsWith('/MSubjects/chemistry/')) chemistryIndex++;
+      else if(answeredQuestionSection.questionSectionReference.startsWith('/MSubjects/physics/')) physicsIndex++;
+    });
+
+    return [biologyIndex, chemistryIndex, physicsIndex];
+  }
 }

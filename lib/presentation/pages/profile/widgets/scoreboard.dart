@@ -1,7 +1,9 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic_pro_bloc/application/services/AnsweredQuestionSectionService.dart';
 import 'package:medic_pro_bloc/presentation/pages/profile/widgets/scoreboard_wrapper.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../domain/user/answered_question_section.dart';
 
@@ -21,6 +23,11 @@ class ScoreboardWidget extends StatelessWidget {
   List<AnsweredQuestionSection> _getCorrectlyAnsweredQuestionSections(List<AnsweredQuestionSection> answeredQuestionSections){
     return AnsweredQuestionSectionService.getCorrectlyAnsweredQuestionSections(answeredQuestionSections, scoreboardType);
   }
+
+  List<int> _getAnsweredQuestionSectionsIndexes(List<AnsweredQuestionSection> answeredQuestionSections){
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,60 +79,38 @@ class ScoreboardWidget extends StatelessWidget {
                     )
                   ],
                 ),
-                if(answeredCorrectlyQuestionSections.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: kScoreboardWPadding5),
-                    child: Row(
-                      children: [
-                        const Text(
-                            ACCURACY
-                        ),
-                        const Spacer(),
-                        Text(
-                          (answeredCorrectlyQuestionSections.length / snapshot.data!.length) != 1 ?('${answeredCorrectlyQuestionSections.length / snapshot.data!.length}0').substring(2, 4) : '100',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const Text(
-                          '%',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      ],
+                SizedBox(
+                  height: 25.h,
+                  width: 25.w,
+                  child: PieChart(
+                    PieChartData(
+                        // centerSpaceRadius: kScoreboardWPieChardR,
+                        // startDegreeOffset: kScoreboardWStartDegreeOffset,
+                        sections: [
+                          PieChartSectionData(
+                            value: biologyIndex.toDouble(),
+                            color: Colors.green,
+                            title: BIOLOGY_LABEL,
+                            titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                          ),
+                          PieChartSectionData(
+                            value: chemistryIndex.toDouble(),
+                            color: Colors.orange,
+                            title: CHEMISTRY_LABEL,
+                            titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                          ),
+                          PieChartSectionData(
+                            value: physicsIndex.toDouble(),
+                            color: Colors.red,
+                            title: PHYSICS_LABEL,
+                            titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                          ),
+                        ]
                     ),
+                    swapAnimationDuration: const Duration(milliseconds: 150), // Optional
+                    swapAnimationCurve: Curves.linear, // Optional
                   ),
-                // TODO: refactor this check with enums
-                if(heading == OVERALL_LABEL)
-                  SizedBox(
-                    height: 25.h,
-                    width: 25.w,
-                    child: PieChart(
-                      PieChartData(
-                          centerSpaceRadius: kScoreboardWPieChardR,
-                          startDegreeOffset: kScoreboardWStartDegreeOffset,
-                          sections: [
-                            PieChartSectionData(
-                              value: biologyIndex.toDouble(),
-                              color: Colors.green,
-                              title: BIOLOGY_LABEL,
-                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
-                            ),
-                            PieChartSectionData(
-                              value: chemistryIndex.toDouble(),
-                              color: Colors.orange,
-                              title: CHEMISTRY_LABEL,
-                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
-                            ),
-                            PieChartSectionData(
-                              value: physicsIndex.toDouble(),
-                              color: Colors.red,
-                              title: PHYSICS_LABEL,
-                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
-                            ),
-                          ]
-                      ),
-                      swapAnimationDuration: const Duration(milliseconds: 150), // Optional
-                      swapAnimationCurve: Curves.linear, // Optional
-                    ),
-                  )
+                )
               ],
             ),
           )
