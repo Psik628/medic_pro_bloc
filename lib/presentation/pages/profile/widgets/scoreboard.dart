@@ -14,8 +14,12 @@ class ScoreboardWidget extends StatelessWidget {
 
   const ScoreboardWidget({Key? key, required this.answeredQuestionSections, required this.scoreboardType}) : super(key: key);
 
-  List<AnsweredQuestionSection> calculateQuestionSectionsToShow(List<AnsweredQuestionSection> answeredQuestionSections){
+  List<AnsweredQuestionSection> _getSpecificAnsweredQuestionSections(List<AnsweredQuestionSection> answeredQuestionSections){
     return AnsweredQuestionSectionService.getSpecificAnsweredQuestionSections(answeredQuestionSections, scoreboardType);
+  }
+
+  List<AnsweredQuestionSection> _getCorrectlyAnsweredQuestionSections(List<AnsweredQuestionSection> answeredQuestionSections){
+    return AnsweredQuestionSectionService.getCorrectlyAnsweredQuestionSections(answeredQuestionSections, scoreboardType);
   }
 
   @override
@@ -32,12 +36,98 @@ class ScoreboardWidget extends StatelessWidget {
                 child: Image.asset('assets/biology.png'),
                 // child: Image.asset('assets/${heading == BIOLOGY_LABEL ? BIOLOGY : heading == CHEMISTRY_LABEL ? CHEMISTRY : heading == PHYSICS_LABEL ? PHYSICS : OVERALL}.png'),
               ),
-              Text(
+              const Text(
                   "Biologie",
                   // style: TextStyle(
                   //     fontSize: heading == OVERALL_LABEL ? kCardOverallFontSize : kCardFontSize)
               ),
             ],
+          ),
+          SizedBox(
+            // todo make this constant
+            // height: heading == OVERALL_LABEL ? 33.h : 8.h,
+            child: Column(
+              children: [
+                Row(
+                    children: [
+                      const Text(
+                          'blabla'
+                      ),
+                      Spacer(),
+                      Text(
+                        '${_getSpecificAnsweredQuestionSections(answeredQuestionSections).length}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ]
+                ),
+                Row(
+                  children:[
+                    const Text(
+                      'fdfs',
+                    ),
+                    const Spacer(),
+                    Text(
+                      '55',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                if(answeredCorrectlyQuestionSections.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: kScoreboardWPadding5),
+                    child: Row(
+                      children: [
+                        const Text(
+                            ACCURACY
+                        ),
+                        const Spacer(),
+                        Text(
+                          (answeredCorrectlyQuestionSections.length / snapshot.data!.length) != 1 ?('${answeredCorrectlyQuestionSections.length / snapshot.data!.length}0').substring(2, 4) : '100',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          '%',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                // TODO: refactor this check with enums
+                if(heading == OVERALL_LABEL)
+                  SizedBox(
+                    height: 25.h,
+                    width: 25.w,
+                    child: PieChart(
+                      PieChartData(
+                          centerSpaceRadius: kScoreboardWPieChardR,
+                          startDegreeOffset: kScoreboardWStartDegreeOffset,
+                          sections: [
+                            PieChartSectionData(
+                              value: biologyIndex.toDouble(),
+                              color: Colors.green,
+                              title: BIOLOGY_LABEL,
+                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                            ),
+                            PieChartSectionData(
+                              value: chemistryIndex.toDouble(),
+                              color: Colors.orange,
+                              title: CHEMISTRY_LABEL,
+                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                            ),
+                            PieChartSectionData(
+                              value: physicsIndex.toDouble(),
+                              color: Colors.red,
+                              title: PHYSICS_LABEL,
+                              titleStyle: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                            ),
+                          ]
+                      ),
+                      swapAnimationDuration: const Duration(milliseconds: 150), // Optional
+                      swapAnimationCurve: Curves.linear, // Optional
+                    ),
+                  )
+              ],
+            ),
           )
         ],
       )

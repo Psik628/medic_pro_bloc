@@ -26,4 +26,11 @@ class AnsweredQuestionSectionService{
       }).toList();
     }
   }
+
+  static List<AnsweredQuestionSection> getCorrectlyAnsweredQuestionSections(List<AnsweredQuestionSection> questionSections, ScoreboardType type){
+    List<AnsweredQuestionSection> specificAnsweredQuestionSections = getSpecificAnsweredQuestionSections(questionSections, type);
+    return specificAnsweredQuestionSections.where((AnsweredQuestionSection answeredQuestionSection){
+      return answeredQuestionSection.answeredCorrectly;
+    }).toList();
+  }
 }
