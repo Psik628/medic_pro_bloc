@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:medic_pro_bloc/application/database/profile/profile_bloc.dart';
 import 'package:medic_pro_bloc/presentation/core/bottom_navigation.dart';
-import 'package:medic_pro_bloc/presentation/pages/profile/widgets/scoreboard.dart';
+import 'package:medic_pro_bloc/presentation/pages/profile/widgets/scoreboard_wrapper.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../application/navigation/navigation_bloc.dart';
@@ -33,45 +35,27 @@ class ProfilePage extends StatelessWidget {
                 create: (context) => getIt<ProfileBloc>(),
                 child: BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (context, ProfileState state){
-                    return Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Center(
-                                child: Text(
-                                  'janko',
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                          Expanded(
-                              child: Center(
-                                child: Text(
-                                  'email',
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Column(
-                                  children: [
-                                    ScoreboardWidget(),
-                                    ScoreboardWidget(),
-                                    ScoreboardWidget(),
-                                    ScoreboardWidget()
-                                  ],
-                                )
-                            )
-                          ],
-                        ),
-                      ],
+
+                    return state.map(
+                      initial: (_) => const GFLoader(type: GFLoaderType.ios),
+                      loadInProgress: (_) => const GFLoader(),
+                      loadFailure: (LoadFailure value) {
+                        return const GFLoader(type: GFLoaderType.square);
+                      },
+                      loadSuccess: (LoadSuccess state) {
+                        return StreamBuilder(
+                            stream: state.user.answeredQuestionSections,
+                            builder: (BuildContext context, AsyncSnapshot snapshot){
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const GFLoader();
+                              }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+
+                                return ScoreBoardWrapperWidget(answeredQuestionSections: snapshot.data);
+                              }
+                              return const GFLoader();
+                            }
+                        );
+                      },
                     );
                   }
                 ),

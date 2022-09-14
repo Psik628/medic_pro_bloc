@@ -32,5 +32,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         },
       );
     });
+
+    on<ProfileDataReceived>((ProfileDataReceived event, emit) async {
+      event.failureOrUser.fold(
+              (UserFailure failure) => {
+            emit(ProfileState.loadFailure(failure))
+          },
+              (User user) => {
+            emit(ProfileState.loadSuccess(user))
+          }
+      );
+    });
   }
 }

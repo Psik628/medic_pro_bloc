@@ -48,6 +48,7 @@ class HomePage extends StatelessWidget {
                 ],
                 child: BlocConsumer<SubjectBloc, SubjectState>(
                   listener: (context, state) {
+                    // todo should be state of AuthBloc instead??
                     if (state is Unauthenticated) {
                       AutoRouter.of(context).replace(const SignInPageRoute());
                     }
