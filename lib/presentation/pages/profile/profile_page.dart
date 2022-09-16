@@ -45,16 +45,16 @@ class ProfilePage extends StatelessWidget {
                       },
                       loadSuccess: (LoadSuccess state) {
                         return StreamBuilder(
-                            stream: state.user.answeredQuestionSections,
-                            builder: (BuildContext context, AsyncSnapshot snapshot){
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const GFLoader();
-                              }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
-
-                                return ScoreBoardWrapperWidget(answeredQuestionSections: snapshot.data);
-                              }
+                          stream: state.user.answeredQuestionSections,
+                          builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if (snapshot.connectionState == ConnectionState.waiting) {
                               return const GFLoader();
+                            }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+
+                              return ScoreBoardWrapperWidget(answeredQuestionSections: snapshot.data);
                             }
+                            return const GFLoader();
+                          }
                         );
                       },
                     );

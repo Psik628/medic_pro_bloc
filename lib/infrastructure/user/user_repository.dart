@@ -7,6 +7,7 @@ import '../../domain/user/answered_question_section.dart';
 import '../../domain/user/i_user_repository.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/user_failure.dart';
+import '../../logging.dart';
 
 /*
 todo rename this thing to user repo, and return user with answered question sections
@@ -15,6 +16,8 @@ todo rename this thing to user repo, and return user with answered question sect
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository{
+
+  final log = logger(UserRepository);
 
   final FirebaseFirestore _firestore;
 
@@ -29,7 +32,7 @@ class UserRepository implements IUserRepository{
         .snapshots()
         .map((UserDocumentSnapshot userDocumentSnapshot){
 
-          AnsweredQuestionSectionCollectionReference answeredQuestionSectionReferenceCollectionReference = usersRef.doc(id).answeredquestionsections;
+          AnsweredQuestionSectionCollectionReference answeredQuestionSectionReferenceCollectionReference = usersRef.doc('jan@jan.com').answeredquestionsections;
 
           Stream<List<AnsweredQuestionSection>> answeredQuestionSectionReferences = answeredQuestionSectionReferenceCollectionReference
             .snapshots()
@@ -42,7 +45,17 @@ class UserRepository implements IUserRepository{
           // todo solve null value
           User userToBeCompleted = userDocumentSnapshot.data!;
 
+          // log.i('ahojda');
+          // log.d('ahojda');
+          //
+          // print('from repo');
+          // print(userToBeCompleted.email);
+          // print(userToBeCompleted.answeredQuestionSections.length);
+
+          log.i('assigning answeredQuestionSections to user');
+
           userToBeCompleted.answeredQuestionSections = answeredQuestionSectionReferences;
+
           // return completed user
           return right<UserFailure, Entity.User>(
               userToBeCompleted
