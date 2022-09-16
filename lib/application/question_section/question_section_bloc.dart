@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 
 import '../../domain/subject/option.dart';
+import '../../logging.dart';
 
 part 'question_section_event.dart';
 part 'question_section_state.dart';
@@ -13,6 +14,9 @@ part 'question_section_bloc.freezed.dart';
 
 @injectable
 class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionState> {
+
+  final log = logger(QuestionSectionBloc);
+
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
     on<AnswerQuestion>((AnswerQuestion event, emit) {
       emit(
@@ -25,7 +29,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       // TODO: implement event handler
     });
     on<SelectOption>((SelectOption event, emit) {
-      event.question.selectedOptions.add(event.option);
+      log.i('Selecting Option');
 
       emit(
         state.copyWith(
@@ -35,6 +39,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       // TODO: implement event handler
+      log.i('UnSelecting Option');
     });
   }
 }

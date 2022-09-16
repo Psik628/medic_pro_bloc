@@ -390,147 +390,147 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
 }
 
 /// @nodoc
-abstract class _$$ShortPasswordCopyWith<T, $Res>
-    implements $ValueFailureCopyWith<T, $Res> {
-  factory _$$ShortPasswordCopyWith(
-          _$ShortPassword<T> value, $Res Function(_$ShortPassword<T>) then) =
-      __$$ShortPasswordCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
-}
+// abstract class _$$ShortPasswordCopyWith<T, $Res>
+//     implements $ValueFailureCopyWith<T, $Res> {
+//   factory _$$ShortPasswordCopyWith(
+//           _$ShortPassword<T> value, $Res Function(_$ShortPassword<T>) then) =
+//       __$$ShortPasswordCopyWithImpl<T, $Res>;
+//   @override
+//   $Res call({T failedValue});
+// }
 
 /// @nodoc
-class __$$ShortPasswordCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res>
-    implements _$$ShortPasswordCopyWith<T, $Res> {
-  __$$ShortPasswordCopyWithImpl(
-      _$ShortPassword<T> _value, $Res Function(_$ShortPassword<T>) _then)
-      : super(_value, (v) => _then(v as _$ShortPassword<T>));
-
-  @override
-  _$ShortPassword<T> get _value => super._value as _$ShortPassword<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(_$ShortPassword<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
-}
+// class __$$ShortPasswordCopyWithImpl<T, $Res>
+//     extends _$ValueFailureCopyWithImpl<T, $Res>
+//     implements _$$ShortPasswordCopyWith<T, $Res> {
+//   __$$ShortPasswordCopyWithImpl(
+//       _$ShortPassword<T> _value, $Res Function(_$ShortPassword<T>) _then)
+//       : super(_value, (v) => _then(v as _$ShortPassword<T>));
+//
+//   @override
+//   _$ShortPassword<T> get _value => super._value as _$ShortPassword<T>;
+//
+//   @override
+//   $Res call({
+//     Object? failedValue = freezed,
+//   }) {
+//     return _then(_$ShortPassword<T>(
+//       failedValue: failedValue == freezed
+//           ? _value.failedValue
+//           : failedValue // ignore: cast_nullable_to_non_nullable
+//               as T,
+//     ));
+//   }
+// }
 
 /// @nodoc
 
-class _$ShortPassword<T> implements ShortPassword<T> {
-  const _$ShortPassword({required this.failedValue});
-
-  @override
-  final T failedValue;
-
-  @override
-  String toString() {
-    return 'ValueFailure<$T>.exceedingLength(failedValue: $failedValue)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ShortPassword<T> &&
-            const DeepCollectionEquality()
-                .equals(other.failedValue, failedValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$ShortPasswordCopyWith<T, _$ShortPassword<T>> get copyWith =>
-      __$$ShortPasswordCopyWithImpl<T, _$ShortPassword<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) invalidEmail,
-    required TResult Function(T failedValue) shortPassword,
-    required TResult Function(T failedValue) exceedingLength,
-  }) {
-    return exceedingLength(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidEmail,
-    TResult Function(T failedValue)? shortPassword,
-    TResult Function(T failedValue)? exceedingLength,
-  }) {
-    return exceedingLength?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidEmail,
-    TResult Function(T failedValue)? shortPassword,
-    TResult Function(T failedValue)? exceedingLength,
-    required TResult orElse(),
-  }) {
-    if (exceedingLength != null) {
-      return exceedingLength(failedValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InvalidEmail<T> value) invalidEmail,
-    required TResult Function(ShortPassword<T> value) shortPassword,
-    required TResult Function(ShortPassword<T> value) exceedingLength,
-  }) {
-    return exceedingLength(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidEmail<T> value)? invalidEmail,
-    TResult Function(ShortPassword<T> value)? shortPassword,
-    TResult Function(ShortPassword<T> value)? exceedingLength,
-  }) {
-    return exceedingLength?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidEmail<T> value)? invalidEmail,
-    TResult Function(ShortPassword<T> value)? shortPassword,
-    TResult Function(ShortPassword<T> value)? exceedingLength,
-    required TResult orElse(),
-  }) {
-    if (exceedingLength != null) {
-      return exceedingLength(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ShortPassword<T> implements ValueFailure<T> {
-  const factory ShortPassword({required final T failedValue}) =
-      _$ShortPassword<T>;
-
-  @override
-  T get failedValue;
-  @override
-  @JsonKey(ignore: true)
-  _$$ShortPasswordCopyWith<T, _$ShortPassword<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// class _$ShortPassword<T> implements ShortPassword<T> {
+//   const _$ShortPassword({required this.failedValue});
+//
+//   @override
+//   final T failedValue;
+//
+//   @override
+//   String toString() {
+//     return 'ValueFailure<$T>.exceedingLength(failedValue: $failedValue)';
+//   }
+//
+//   @override
+//   bool operator ==(dynamic other) {
+//     return identical(this, other) ||
+//         (other.runtimeType == runtimeType &&
+//             other is _$ShortPassword<T> &&
+//             const DeepCollectionEquality()
+//                 .equals(other.failedValue, failedValue));
+//   }
+//
+//   @override
+//   int get hashCode => Object.hash(
+//       runtimeType, const DeepCollectionEquality().hash(failedValue));
+//
+//   @JsonKey(ignore: true)
+//   @override
+//   _$$ShortPasswordCopyWith<T, _$ShortPassword<T>> get copyWith =>
+//       __$$ShortPasswordCopyWithImpl<T, _$ShortPassword<T>>(this, _$identity);
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult when<TResult extends Object?>({
+//     required TResult Function(T failedValue) invalidEmail,
+//     required TResult Function(T failedValue) shortPassword,
+//     required TResult Function(T failedValue) exceedingLength,
+//   }) {
+//     return exceedingLength(failedValue);
+//   }
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult? whenOrNull<TResult extends Object?>({
+//     TResult Function(T failedValue)? invalidEmail,
+//     TResult Function(T failedValue)? shortPassword,
+//     TResult Function(T failedValue)? exceedingLength,
+//   }) {
+//     return exceedingLength?.call(failedValue);
+//   }
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult maybeWhen<TResult extends Object?>({
+//     TResult Function(T failedValue)? invalidEmail,
+//     TResult Function(T failedValue)? shortPassword,
+//     TResult Function(T failedValue)? exceedingLength,
+//     required TResult orElse(),
+//   }) {
+//     if (exceedingLength != null) {
+//       return exceedingLength(failedValue);
+//     }
+//     return orElse();
+//   }
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult map<TResult extends Object?>({
+//     required TResult Function(InvalidEmail<T> value) invalidEmail,
+//     required TResult Function(ShortPassword<T> value) shortPassword,
+//     required TResult Function(ShortPassword<T> value) exceedingLength,
+//   }) {
+//     return exceedingLength(this);
+//   }
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult? mapOrNull<TResult extends Object?>({
+//     TResult Function(InvalidEmail<T> value)? invalidEmail,
+//     TResult Function(ShortPassword<T> value)? shortPassword,
+//     TResult Function(ShortPassword<T> value)? exceedingLength,
+//   }) {
+//     return exceedingLength?.call(this);
+//   }
+//
+//   @override
+//   @optionalTypeArgs
+//   TResult maybeMap<TResult extends Object?>({
+//     TResult Function(InvalidEmail<T> value)? invalidEmail,
+//     TResult Function(ShortPassword<T> value)? shortPassword,
+//     TResult Function(ShortPassword<T> value)? exceedingLength,
+//     required TResult orElse(),
+//   }) {
+//     if (exceedingLength != null) {
+//       return exceedingLength(this);
+//     }
+//     return orElse();
+//   }
+// }
+//
+// abstract class ShortPassword<T> implements ValueFailure<T> {
+//   const factory ShortPassword({required final T failedValue}) =
+//       _$ShortPassword<T>;
+//
+//   @override
+//   T get failedValue;
+//   @override
+//   @JsonKey(ignore: true)
+//   _$$ShortPasswordCopyWith<T, _$ShortPassword<T>> get copyWith =>
+//       throw _privateConstructorUsedError;
+// }

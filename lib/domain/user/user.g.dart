@@ -547,7 +547,7 @@ class _$UserQuery extends QueryReference<User, UserQuerySnapshot>
   }) {
     return _$UserQuery(
       reference.where(
-        _$UserFieldMap["email"]!,
+        "email",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -575,7 +575,7 @@ class _$UserQuery extends QueryReference<User, UserQuerySnapshot>
   }) {
     return _$UserQuery(
       reference.where(
-        _$UserFieldMap["nickname"]!,
+        "nickname",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -644,7 +644,7 @@ class _$UserQuery extends QueryReference<User, UserQuerySnapshot>
     UserDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$UserFieldMap["email"]!, descending: descending);
+        reference.orderBy("email", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -687,7 +687,7 @@ class _$UserQuery extends QueryReference<User, UserQuerySnapshot>
     UserDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$UserFieldMap["nickname"]!, descending: descending);
+        reference.orderBy("nickname", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -1321,7 +1321,7 @@ class _$AnsweredQuestionSectionQuery extends QueryReference<
   }) {
     return _$AnsweredQuestionSectionQuery(
       reference.where(
-        _$AnsweredQuestionSectionFieldMap["answeredCorrectly"]!,
+        "answeredCorrectly",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1349,7 +1349,7 @@ class _$AnsweredQuestionSectionQuery extends QueryReference<
   }) {
     return _$AnsweredQuestionSectionQuery(
       reference.where(
-        _$AnsweredQuestionSectionFieldMap["questionSectionReference"]!,
+        "questionSectionReference",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1418,7 +1418,7 @@ class _$AnsweredQuestionSectionQuery extends QueryReference<
     AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(
-        _$AnsweredQuestionSectionFieldMap["answeredCorrectly"]!,
+        "answeredCorrectly",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -1462,7 +1462,7 @@ class _$AnsweredQuestionSectionQuery extends QueryReference<
     AnsweredQuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
     var query = reference.orderBy(
-        _$AnsweredQuestionSectionFieldMap["questionSectionReference"]!,
+        "questionSectionReference",
         descending: descending);
 
     if (startAtDocument != null) {

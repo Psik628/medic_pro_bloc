@@ -548,7 +548,7 @@ class _$SubjectQuery extends QueryReference<Subject, SubjectQuerySnapshot>
   }) {
     return _$SubjectQuery(
       reference.where(
-        _$SubjectFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -576,7 +576,7 @@ class _$SubjectQuery extends QueryReference<Subject, SubjectQuerySnapshot>
   }) {
     return _$SubjectQuery(
       reference.where(
-        _$SubjectFieldMap["titleUI"]!,
+        "titleUI",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -645,7 +645,7 @@ class _$SubjectQuery extends QueryReference<Subject, SubjectQuerySnapshot>
     SubjectDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$SubjectFieldMap["title"]!, descending: descending);
+        reference.orderBy("title", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -687,7 +687,7 @@ class _$SubjectQuery extends QueryReference<Subject, SubjectQuerySnapshot>
     SubjectDocumentSnapshot? endBeforeDocument,
     SubjectDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$SubjectFieldMap["titleUI"]!,
+    var query = reference.orderBy("titleUI",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -1315,7 +1315,7 @@ class _$CategoryQuery extends QueryReference<Category, CategoryQuerySnapshot>
   }) {
     return _$CategoryQuery(
       reference.where(
-        _$CategoryFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1343,7 +1343,7 @@ class _$CategoryQuery extends QueryReference<Category, CategoryQuerySnapshot>
   }) {
     return _$CategoryQuery(
       reference.where(
-        _$CategoryFieldMap["titleUI"]!,
+        "titleUI",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1412,7 +1412,7 @@ class _$CategoryQuery extends QueryReference<Category, CategoryQuerySnapshot>
     CategoryDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$CategoryFieldMap["title"]!, descending: descending);
+        reference.orderBy("title", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -1454,7 +1454,7 @@ class _$CategoryQuery extends QueryReference<Category, CategoryQuerySnapshot>
     CategoryDocumentSnapshot? endBeforeDocument,
     CategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$CategoryFieldMap["titleUI"]!,
+    var query = reference.orderBy("titleUI",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -2095,7 +2095,7 @@ class _$SubcategoryQuery
   }) {
     return _$SubcategoryQuery(
       reference.where(
-        _$SubcategoryFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -2123,7 +2123,7 @@ class _$SubcategoryQuery
   }) {
     return _$SubcategoryQuery(
       reference.where(
-        _$SubcategoryFieldMap["titleUI"]!,
+        "titleUI",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -2191,7 +2191,7 @@ class _$SubcategoryQuery
     SubcategoryDocumentSnapshot? endBeforeDocument,
     SubcategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$SubcategoryFieldMap["title"]!,
+    var query = reference.orderBy("title",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -2234,7 +2234,7 @@ class _$SubcategoryQuery
     SubcategoryDocumentSnapshot? endBeforeDocument,
     SubcategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$SubcategoryFieldMap["titleUI"]!,
+    var query = reference.orderBy("titleUI",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -2852,7 +2852,7 @@ class _$ArticleQuery extends QueryReference<Article, ArticleQuerySnapshot>
   }) {
     return _$ArticleQuery(
       reference.where(
-        _$ArticleFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -2880,7 +2880,7 @@ class _$ArticleQuery extends QueryReference<Article, ArticleQuerySnapshot>
   }) {
     return _$ArticleQuery(
       reference.where(
-        _$ArticleFieldMap["titleUI"]!,
+        "titleUI",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -2949,7 +2949,7 @@ class _$ArticleQuery extends QueryReference<Article, ArticleQuerySnapshot>
     ArticleDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$ArticleFieldMap["title"]!, descending: descending);
+        reference.orderBy("title", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -2991,7 +2991,7 @@ class _$ArticleQuery extends QueryReference<Article, ArticleQuerySnapshot>
     ArticleDocumentSnapshot? endBeforeDocument,
     ArticleDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$ArticleFieldMap["titleUI"]!,
+    var query = reference.orderBy("titleUI",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -3626,7 +3626,7 @@ class _$QuestionSectionQuery
   }) {
     return _$QuestionSectionQuery(
       reference.where(
-        _$QuestionSectionFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -3654,7 +3654,7 @@ class _$QuestionSectionQuery
   }) {
     return _$QuestionSectionQuery(
       reference.where(
-        _$QuestionSectionFieldMap["titleUI"]!,
+        "titleUI",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -3722,7 +3722,7 @@ class _$QuestionSectionQuery
     QuestionSectionDocumentSnapshot? endBeforeDocument,
     QuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$QuestionSectionFieldMap["title"]!,
+    var query = reference.orderBy("title",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -3765,7 +3765,7 @@ class _$QuestionSectionQuery
     QuestionSectionDocumentSnapshot? endBeforeDocument,
     QuestionSectionDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$QuestionSectionFieldMap["titleUI"]!,
+    var query = reference.orderBy("titleUI",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -4392,7 +4392,7 @@ class _$QuestionQuery extends QueryReference<Question, QuestionQuerySnapshot>
   }) {
     return _$QuestionQuery(
       reference.where(
-        _$QuestionFieldMap["title"]!,
+        "title",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -4420,7 +4420,7 @@ class _$QuestionQuery extends QueryReference<Question, QuestionQuerySnapshot>
   }) {
     return _$QuestionQuery(
       reference.where(
-        _$QuestionFieldMap["content"]!,
+        "content",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -4489,7 +4489,7 @@ class _$QuestionQuery extends QueryReference<Question, QuestionQuerySnapshot>
     QuestionDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$QuestionFieldMap["title"]!, descending: descending);
+        reference.orderBy("title", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -4531,7 +4531,7 @@ class _$QuestionQuery extends QueryReference<Question, QuestionQuerySnapshot>
     QuestionDocumentSnapshot? endBeforeDocument,
     QuestionDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$QuestionFieldMap["content"]!,
+    var query = reference.orderBy("content",
         descending: descending);
 
     if (startAtDocument != null) {
@@ -5175,7 +5175,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
   }) {
     return _$OptionQuery(
       reference.where(
-        _$OptionFieldMap["content"]!,
+        "content",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -5203,7 +5203,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
   }) {
     return _$OptionQuery(
       reference.where(
-        _$OptionFieldMap["correct"]!,
+        "correct",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -5231,7 +5231,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
   }) {
     return _$OptionQuery(
       reference.where(
-        _$OptionFieldMap["isSelected"]!,
+        "isSelected",
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -5300,7 +5300,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
     OptionDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$OptionFieldMap["content"]!, descending: descending);
+        reference.orderBy("content", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -5343,7 +5343,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
     OptionDocumentSnapshot? startAfterDocument,
   }) {
     var query =
-        reference.orderBy(_$OptionFieldMap["correct"]!, descending: descending);
+        reference.orderBy("correct", descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -5385,7 +5385,7 @@ class _$OptionQuery extends QueryReference<Option, OptionQuerySnapshot>
     OptionDocumentSnapshot? endBeforeDocument,
     OptionDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$OptionFieldMap["isSelected"]!,
+    var query = reference.orderBy("isSelected",
         descending: descending);
 
     if (startAtDocument != null) {
