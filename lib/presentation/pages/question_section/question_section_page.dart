@@ -55,9 +55,9 @@ class QuestionSectionPage extends StatelessWidget {
                                     itemBuilder: (context, questionIndex){
                                       final Question currentQuestion = snapshot.data[questionIndex];
                                       // check if currentQuestion is the question to show
-                                      if(state.questionToDisplayIndex == questionIndex){
-                                        return QuestionWidget(currentQuestion: currentQuestion);
-                                      }
+                                      // if(state.questionToDisplayIndex == questionIndex){
+                                      //   return QuestionWidget(currentQuestion: currentQuestion);
+                                      // }
                                       return Offstage();
                                     }
                                 ),
