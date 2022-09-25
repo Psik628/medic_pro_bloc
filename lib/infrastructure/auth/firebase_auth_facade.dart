@@ -6,10 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medic_pro_bloc/infrastructure/auth/firebase_user_mapper.dart';
 import '../../domain/auth/user.dart' as Entity;
+import '../../logging.dart';
 
 
 @Injectable(as: IAuthFacade)
 class FirebaseAuthFacade extends IAuthFacade{
+
+  final log = logger(FirebaseAuthFacade);
 
   late final FirebaseAuth _firebaseAuth;
   late final GoogleSignIn _googleSignIn;
@@ -56,9 +59,11 @@ class FirebaseAuthFacade extends IAuthFacade{
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<void> signOut() async {
+
+    log.w('signing user out');
+
+    await _firebaseAuth.signOut();
   }
   
 }
