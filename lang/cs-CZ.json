@@ -10,7 +10,9 @@
   "emailError": "Toto není emailová adresa",
   "passwordError": "Toto není správné heslo",
   "createAccount": "Vytvořit účet",
-
+  "home": "Domů",
+  "profile": "Profil",
+  "settings": "Nastavení",
 
   "biology": "Biologie",
     "botanics": "Botanika",

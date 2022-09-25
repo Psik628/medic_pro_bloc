@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medic_pro_bloc/application/navigation/navigation_bloc.dart';
+import 'package:medic_pro_bloc/translations_constants.dart';
 
 import '../routes/app_router.dart';
 
@@ -41,18 +43,18 @@ class BottomNavigation extends StatelessWidget {
                 break;
             }
           },
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.question_mark),
-              label: 'questions',
+              icon: const Icon(Icons.question_mark),
+              label: TranslationsConstants.home.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'profile',
+              icon: const Icon(Icons.person),
+              label: TranslationsConstants.profile.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'settings',
+              icon: const Icon(Icons.settings),
+              label: TranslationsConstants.settings.tr(),
             ),
           ],
         );

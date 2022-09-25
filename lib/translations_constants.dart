@@ -12,7 +12,10 @@ class TranslationsConstants{
   static const createAccount = 'createAccount';
   static const authenticationError = 'authenticationError';
 
-  static const questions = 'questions';
+  // bottom nav
+  static const home = 'home';
   static const profile = 'profile';
   static const settings = 'settings';
+
+  static const questions = 'questions';
 }
