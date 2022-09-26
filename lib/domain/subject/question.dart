@@ -10,14 +10,15 @@ class Question{
 
   Question(this.content, this.title);
 
-  final String title;
+  final String? title;
 
-  final String content;
+  final String? content;
 
   // added later
   @JsonKey(ignore: true)
   late final Stream<List<Option>> options;
 
+  @JsonKey(ignore: true)
   List<Option> selectedOptions = [];
 
   void addToSelectedOptions(Option justSelectedOption){

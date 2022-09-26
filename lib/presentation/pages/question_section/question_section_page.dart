@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/application/question_section/question_section_bloc.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
-import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/question_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../domain/subject/question.dart';
@@ -19,6 +18,11 @@ class QuestionSectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
+    print(currentQuestionSection.title);
+
     return Scaffold(
       appBar: Bar.returnAppBar(),
       body: SafeArea(
@@ -27,7 +31,7 @@ class QuestionSectionPage extends StatelessWidget {
           horizontal: UIConstants.safeAreaPaddingHorizontal
         ),
         child: BlocProvider<QuestionSectionBloc>(
-          create: (context) => QuestionSectionBloc(),
+          create: (another) => QuestionSectionBloc(),
           child: Column(
             children: [
               Center(
@@ -40,11 +44,10 @@ class QuestionSectionPage extends StatelessWidget {
                       return const GFLoader();
                     }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
 
-                      return BlocConsumer<QuestionSectionBloc, QuestionSectionState>(
-                        listener: (context, state) {
-                          // TODO: implement listener
-                        },
-                        builder: (context, state) {
+                      print(snapshot.data);
+
+                          print(snapshot.data.length);
+
                           return Column(
                             children: [
                               SizedBox(
@@ -55,6 +58,7 @@ class QuestionSectionPage extends StatelessWidget {
                                     itemBuilder: (context, questionIndex){
                                       final Question currentQuestion = snapshot.data[questionIndex];
                                       // check if currentQuestion is the question to show
+                                      // todo import question section bloc for the part below to work
                                       // if(state.questionToDisplayIndex == questionIndex){
                                       //   return QuestionWidget(currentQuestion: currentQuestion);
                                       // }
@@ -64,8 +68,6 @@ class QuestionSectionPage extends StatelessWidget {
                               ),
                             ],
                           );
-                        },
-                      );
                     }
                     return const GFLoader();
                   }

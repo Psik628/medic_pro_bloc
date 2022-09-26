@@ -49,12 +49,17 @@ class SubjectRepository implements ISubjectRepository{
                           .map((SubcategoryQuerySnapshot subcategoryQuerySnapshot){
                             return subcategoryQuerySnapshot.docs.map<Subcategory>((SubcategoryQueryDocumentSnapshot subcategoryQueryDocumentSnapshot){
 
+                              print('INSIDE REPOSITORY');
+
                               ArticleCollectionReference articleCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).articles;
 
                               // fill subcategory with articles
                               Stream<List<Article>> articles = articleCollectionReference
                                 .snapshots()
                                 .map((ArticleQuerySnapshot articleQuerySnapshot){
+
+                                  print('completings articles');
+
                                   return articleQuerySnapshot.docs.map<Article>((ArticleQueryDocumentSnapshot articleQueryDocumentSnapshot){
                                     return articleQueryDocumentSnapshot.data;
                                   }).toList();
@@ -66,12 +71,18 @@ class SubjectRepository implements ISubjectRepository{
                               Stream<List<QuestionSection>> questionSections = questionSectionCollectionReference
                                   .snapshots()
                                   .map((QuestionSectionQuerySnapshot questionSectionQuerySnapshot){
+
+                                    print('completing question section');
+
                                     return questionSectionQuerySnapshot.docs.map<QuestionSection>((QuestionSectionQueryDocumentSnapshot questionSectionQueryDocumentSnapshot){
                                     // fill question section with questions
                                     QuestionCollectionReference questionCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).questionsections.doc(questionSectionQueryDocumentSnapshot.id).questions;
                                     Stream<List<Question>> questions = questionCollectionReference
                                       .snapshots()
                                       .map((QuestionQuerySnapshot questionQuerySnapshot){
+
+                                        print('completing questions');
+
                                         return questionQuerySnapshot.docs.map<Question>((QuestionQueryDocumentSnapshot questionQueryDocumentSnapshot){
                                           // fill question with options
                                           OptionCollectionReference optionCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories.doc(categoryQueryDocumentSnapshot.id).subcategories.doc(subcategoryQueryDocumentSnapshot.id).questionsections.doc(questionSectionQueryDocumentSnapshot.id).questions.doc(questionQueryDocumentSnapshot.id).options;
@@ -94,7 +105,11 @@ class SubjectRepository implements ISubjectRepository{
 
                                     QuestionSection completedQuestionSection = questionSectionQueryDocumentSnapshot.data;
 
+                                    print('RETURNING COMPLETED QUESTION SECTION');
+
                                     completedQuestionSection.questions = questions;
+
+                                    print(completedQuestionSection.questions.isEmpty);
 
                                     return completedQuestionSection;
                                 }).toList();

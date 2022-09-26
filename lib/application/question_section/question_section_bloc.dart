@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 
 import '../../domain/subject/option.dart' as Option;
+import '../../domain/subject/questionsection_failure.dart';
 import '../../domain/subject/subject.dart';
 import '../../domain/subject/subject_failure.dart';
 import '../../logging.dart';
@@ -17,10 +18,9 @@ part 'question_section_bloc.freezed.dart';
 
 @injectable
 class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionState> {
-
-  StreamSubscription<Either<SubjectFailure, List<Subject>>>? _subjectStreamSubscription;
-
   final log = logger(QuestionSectionBloc);
+
+  StreamSubscription<Either<QuestionSectionFailure, List<Subject>>>? _questionSectionStreamSubscription;
 
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
 

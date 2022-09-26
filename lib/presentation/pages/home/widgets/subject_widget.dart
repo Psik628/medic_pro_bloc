@@ -32,6 +32,9 @@ class SubjectWidget extends StatelessWidget {
                 return const GFLoader();
               }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
 
+                print(snapshot.data);
+
+
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   shrinkWrap: true,
