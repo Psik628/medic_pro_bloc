@@ -28,7 +28,8 @@ class QuestionWidget extends StatelessWidget {
                       // todo extract this
                       padding: const EdgeInsets.all(20),
                       child: Center(
-                          child: Text(currentQuestion.content)
+                          // child: Text(currentQuestion.content)
+                          child: Text('otazka')
                       )
                   )
                 ),

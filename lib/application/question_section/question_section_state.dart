@@ -2,7 +2,6 @@ part of 'question_section_bloc.dart';
 
 @freezed
 class QuestionSectionState with _$QuestionSectionState{
-
   const factory QuestionSectionState({
     required int questionToDisplayIndex,
     required List<Question> questions,
@@ -10,13 +9,11 @@ class QuestionSectionState with _$QuestionSectionState{
   }) = _QuestionSectionState;
 
   factory QuestionSectionState.initial() => const QuestionSectionState(
-    questionToDisplayIndex: 0,
-    questions: <Question>[],
-    answeredQuestions: <Question>[]
+      questionToDisplayIndex: 0,
+      questions: [],
+      answeredQuestions: []
   );
 
-  const factory QuestionSectionState.loadInProgress() = LoadInProgress;
-
-  // this is required to implement equatable
-  const QuestionSectionState._();
+  // // this is required to implement equatable
+  // const QuestionSectionState._();
 }

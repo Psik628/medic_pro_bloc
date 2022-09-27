@@ -9,7 +9,6 @@ import 'package:medic_pro_bloc/domain/subject/question.dart';
 import '../../domain/subject/option.dart' as Option;
 import '../../domain/subject/questionsection_failure.dart';
 import '../../domain/subject/subject.dart';
-import '../../domain/subject/subject_failure.dart';
 import '../../logging.dart';
 
 part 'question_section_event.dart';
@@ -22,12 +21,18 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
 
   StreamSubscription<Either<QuestionSectionFailure, List<Subject>>>? _questionSectionStreamSubscription;
 
+  // define initial state structure
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
 
-    on<WatchAllStarted>((WatchAllStarted event, emit) {
-      emit(const QuestionSectionState.loadInProgress());
+    // initialize basic functionality
+    on<ManualInitialization>((ManualInitialization event, emit) {
+      emit(
+        state.copyWith(
+          questionToDisplayIndex: event.questionToDisplayIndex,
+          questions: event.questions
+        )
+      );
     });
-
 
     // on<AnswerQuestion>((AnswerQuestion event, emit) {
     //   emit(
