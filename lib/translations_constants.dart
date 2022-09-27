@@ -17,5 +17,8 @@ class TranslationsConstants{
   static const profile = 'profile';
   static const settings = 'settings';
 
+  // quiz ui
+  static const answer = 'answer';
+
   static const questions = 'questions';
 }

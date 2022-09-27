@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../application/question_section/question_section_bloc.dart';
 import '../../../../domain/subject/option.dart';
 import '../../../../logging.dart';
+import '../../../../translations_constants.dart';
 
 class QuestionWidget extends StatelessWidget {
   final log = logger(QuestionWidget);
@@ -75,14 +77,11 @@ class QuestionWidget extends StatelessWidget {
           builder: (context, QuestionSectionState state) {
             log.i("Checking whether to show Answer button");
             // get info about current question
-            print(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty);
             if(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty){
-              print('SHOULD ADD BUTTON');
               // if current question has some selected options, display answer button
               return GFButton(
                   fullWidthButton: true,
                   onPressed: (){
-
                     if(context.read<QuestionSectionBloc>().state.questionToDisplayIndex == context.read<QuestionSectionBloc>().state.questions.length -1){
                       log.i('Answering final question');
                       context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerFinalQuestion());
@@ -91,7 +90,7 @@ class QuestionWidget extends StatelessWidget {
                       context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerQuestion());
                     }
                   },
-                  child: Text('Answer')
+                  child: const Text(TranslationsConstants.answer).tr()
               );
             }else{
               return const Offstage();
