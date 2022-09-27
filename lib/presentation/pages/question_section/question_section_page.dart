@@ -7,6 +7,7 @@ import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/question_widget.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../application/database/subject/subject_bloc.dart';
 import '../../../domain/subject/question.dart';
 import '../../core/app_bar.dart';
 import '../../ui_constants.dart';
@@ -45,32 +46,38 @@ class QuestionSectionPage extends StatelessWidget {
                       return BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
                         builder: (context, QuestionSectionState state) {
 
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: 70.h,
-                                child: ListView.builder(
-                                    itemCount: state.questions.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, questionIndex) {
-                                      final Question currentQuestion = snapshot.data[questionIndex];
-                                      if (state.questionToDisplayIndex == questionIndex) {
-                                        return QuestionWidget(
-                                            currentQuestion: currentQuestion);
+                          if(!state.quizFinished){
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  height: 70.h,
+                                  child: ListView.builder(
+                                      itemCount: state.questions.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, questionIndex) {
+                                        final Question currentQuestion = snapshot.data[questionIndex];
+                                        if (state.questionToDisplayIndex == questionIndex) {
+                                          return QuestionWidget(
+                                              currentQuestion: currentQuestion);
+                                        }
+                                        return const Offstage();
                                       }
-                                      return const Offstage();
-                                    }
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
+                          }else{
+                            return SizedBox(
+                                child: Text('should display final page'),
+                            );
+                          }
                         },
                       );
                     }
                     }
                     return const GFLoader();
                   }
-              ),
+              )
             ],
           ),
         )

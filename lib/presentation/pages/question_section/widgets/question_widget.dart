@@ -82,7 +82,14 @@ class QuestionWidget extends StatelessWidget {
               return GFButton(
                   fullWidthButton: true,
                   onPressed: (){
-                    context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerQuestion());
+
+                    if(context.read<QuestionSectionBloc>().state.questionToDisplayIndex == context.read<QuestionSectionBloc>().state.questions.length -1){
+                      log.i('Answering final question');
+                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerFinalQuestion());
+                    }else{
+                      log.i('Answering non-final question');
+                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerQuestion());
+                    }
                   },
                   child: Text('Answer')
               );

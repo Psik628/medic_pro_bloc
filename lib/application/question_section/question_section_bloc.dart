@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -82,9 +81,17 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
         )
       );
     });
-    //
-    // on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
-    //   // TODO: implement event handler
-    // });
+
+    on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
+      List<Question> addedAnsweredQuestion = [...state.questions];
+      addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
+      emit(
+          state.copyWith(
+            // add current question to answered
+            answeredQuestions: addedAnsweredQuestion,
+            quizFinished: true
+          )
+      );
+    });
   }
 }
