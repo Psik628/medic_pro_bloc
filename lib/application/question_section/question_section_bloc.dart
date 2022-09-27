@@ -23,7 +23,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
 
   // define initial state structure
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
-
+    log.i('Manually setting QuestionSectionBloc initial data');
     // initialize basic functionality
     on<ManualInitialization>((ManualInitialization event, emit) {
       emit(
@@ -33,7 +33,27 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
         )
       );
     });
-
+    on<SelectOption>((SelectOption event, emit) {
+      log.i('Selecting Option');
+      List<Question> transformedQuestions = state.questions;
+      transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
+      emit(
+        state.copyWith(
+          questions: transformedQuestions
+        )
+      );
+    });
+    on<UnSelectOption>((UnSelectOption event, emit) {
+      log.i('Unselecting Option');
+      List<Question> transformedQuestions = state.questions;
+      // equatable for options needs to be implemented
+      transformedQuestions[state.questionToDisplayIndex].removeSelectedOption(event.option);
+      emit(
+          state.copyWith(
+              questions: transformedQuestions
+          )
+      );
+    });
     // on<AnswerQuestion>((AnswerQuestion event, emit) {
     //   emit(
     //     // state.copyWith(
@@ -46,36 +66,6 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     //
     // on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
     //   // TODO: implement event handler
-    // });
-
-
-
-    // on<SelectOption>((SelectOption event, emit) {
-    //   log.i('Selecting Option');
-    //
-    //   List<Question> transformedQuestions = state.questions;
-    //
-    //   transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
-    //
-    //   emit(
-    //     state.copyWith(
-    //       questions: transformedQuestions
-    //     )
-    //   );
-    // });
-    // on<UnSelectOption>((UnSelectOption event, emit) {
-    //   // TODO: implement event handler
-    //   log.i('UnSelecting Option');
-    //
-    //   List<Question> transformedQuestions = state.questions;
-    //
-    //   transformedQuestions[state.questionToDisplayIndex].removeSelectedOption(event.option);
-    //
-    //   emit(
-    //       state.copyWith(
-    //           questions: transformedQuestions
-    //       )
-    //   );
     // });
   }
 }

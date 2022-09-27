@@ -60,7 +60,7 @@ class QuestionSectionPage extends StatelessWidget {
                                           return QuestionWidget(
                                               currentQuestion: currentQuestion);
                                         }
-                                        return Offstage();
+                                        return const Offstage();
                                       }
                                   ),
                                 ),
