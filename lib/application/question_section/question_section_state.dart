@@ -1,7 +1,7 @@
 part of 'question_section_bloc.dart';
 
 @freezed
-class QuestionSectionState with _$QuestionSectionState{
+class QuestionSectionState extends Equatable with _$QuestionSectionState{
   const factory QuestionSectionState({
     required int questionToDisplayIndex,
     required List<Question> questions,
@@ -14,6 +14,9 @@ class QuestionSectionState with _$QuestionSectionState{
       answeredQuestions: []
   );
 
-  // // this is required to implement equatable
-  // const QuestionSectionState._();
+  @override
+  List<Object?> get props => [questionToDisplayIndex, questions, answeredQuestions];
+
+  // this is required to implement equatable
+  const QuestionSectionState._();
 }

@@ -31,6 +31,7 @@ part 'app_router.gr.dart';
     MaterialRoute(page: SubcategoryPage),
     MaterialRoute(page: ArticlePage),
     MaterialRoute(page: QuestionSectionPage),
+    // todo just to show fullscreenDialog capabilities
     // MaterialRoute(page: NoteFormPage, fullscreenDialog: true)
   ],
 )

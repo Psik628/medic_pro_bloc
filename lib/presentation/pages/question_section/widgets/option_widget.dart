@@ -24,26 +24,42 @@ class _OptionWidgetState extends State<OptionWidget> {
     return Row(
       children: [
         // bloc is provided in MultiBlocProvider in app_widget.dart
-        BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
-          builder: (context, state) {
-            return Expanded(
-                child: GFButton(
-                  fullWidthButton: true,
-                  onPressed: () {
-                    setState(() {
-                      isSelected = !isSelected;
-                    });
-                    if(isSelected){
-                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption)); 
-                    }else{
-                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.unSelectOption(option: widget.currentOption));
-                    }
-                  },
-                  child: Text(widget.currentOption.content),
-                )
-            );
-          },
-        ),
+        // BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
+        //   builder: (context, state) {
+        //     return Expanded(
+        //         child: GFButton(
+        //           fullWidthButton: true,
+        //           onPressed: () {
+        //             setState(() {
+        //               isSelected = !isSelected;
+        //             });
+        //             if(isSelected){
+        //               context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption));
+        //             }else{
+        //               context.read<QuestionSectionBloc>().add(QuestionSectionEvent.unSelectOption(option: widget.currentOption));
+        //             }
+        //           },
+        //           child: Text(widget.currentOption.content),
+        //         )
+        //     );
+        //   },
+        // ),
+        Expanded(
+          child: GFButton(
+          fullWidthButton: true,
+            onPressed: () {
+              setState(() {
+                isSelected = !isSelected;
+              });
+              if(isSelected){
+                context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption));
+              }else{
+                context.read<QuestionSectionBloc>().add(QuestionSectionEvent.unSelectOption(option: widget.currentOption));
+              }
+            },
+            child: Text(widget.currentOption.content),
+          )
+        )
       ],
     );
   }

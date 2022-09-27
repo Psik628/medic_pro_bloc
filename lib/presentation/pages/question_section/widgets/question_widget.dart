@@ -1,20 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/option_widget.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../application/question_section/question_section_bloc.dart';
 import '../../../../domain/subject/option.dart';
+import '../../../../logging.dart';
 
 class QuestionWidget extends StatelessWidget {
+  final log = logger(QuestionWidget);
 
   final Question currentQuestion;
 
-  const QuestionWidget({Key? key, required this.currentQuestion}) : super(key: key);
+  QuestionWidget({Key? key, required this.currentQuestion}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    print(context.watch<QuestionSectionBloc>().state.answeredQuestions.length);
+
     return Column(
       children: [
         Row(
@@ -62,6 +70,17 @@ class QuestionWidget extends StatelessWidget {
             return const GFLoader();
           }
         ),
+        BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
+          builder: (context, QuestionSectionState state) {
+            log.i("Checking whether to show Answer button");
+            // get info about current question
+            print(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty);
+            if(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty){
+              // if current question has some selected options, display answer button
+              return GFButton(onPressed: null, child: Text('Answer'));
+            }
+            return const Offstage();
+          })
       ],
     );
   }

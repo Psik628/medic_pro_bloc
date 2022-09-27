@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
@@ -19,13 +20,11 @@ part 'question_section_bloc.freezed.dart';
 class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionState> {
   final log = logger(QuestionSectionBloc);
 
-  StreamSubscription<Either<QuestionSectionFailure, List<Subject>>>? _questionSectionStreamSubscription;
-
   // define initial state structure
   QuestionSectionBloc() : super(QuestionSectionState.initial()) {
-    log.i('Manually setting QuestionSectionBloc initial data');
     // initialize basic functionality
     on<ManualInitialization>((ManualInitialization event, emit) {
+      log.i('Manually setting QuestionSectionBloc initial data');
       emit(
         state.copyWith(
           questionToDisplayIndex: event.questionToDisplayIndex,
@@ -35,7 +34,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<SelectOption>((SelectOption event, emit) {
       log.i('Selecting Option');
-      List<Question> transformedQuestions = state.questions;
+      List<Question> transformedQuestions = [...state.questions];
       transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
       emit(
         state.copyWith(
@@ -45,7 +44,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       log.i('Unselecting Option');
-      List<Question> transformedQuestions = state.questions;
+      List<Question> transformedQuestions = [...state.questions];
       // equatable for options needs to be implemented
       transformedQuestions[state.questionToDisplayIndex].removeSelectedOption(event.option);
       emit(

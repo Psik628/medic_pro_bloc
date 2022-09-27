@@ -8,7 +8,6 @@ import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/quest
 import 'package:sizer/sizer.dart';
 
 import '../../../domain/subject/question.dart';
-import '../../../injection.dart';
 import '../../core/app_bar.dart';
 import '../../ui_constants.dart';
 
@@ -20,6 +19,7 @@ class QuestionSectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: Bar.returnAppBar(),
         body: SafeArea(
@@ -27,53 +27,51 @@ class QuestionSectionPage extends StatelessWidget {
               vertical: UIConstants.safeAreaPaddingVertical,
               horizontal: UIConstants.safeAreaPaddingHorizontal
           ),
-          child: BlocProvider<QuestionSectionBloc>(
-            // state will be initial
-            create: (another) => getIt<QuestionSectionBloc>(),
-            child: Column(
-              children: [
-                Center(
-                    child: Text(currentQuestionSection.title).tr()
-                ),
-                StreamBuilder(
-                    stream: currentQuestionSection.questions,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const GFLoader();
-                      } else
-                      if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done) {
-                        // fill block state with initial data
-                        context.read<QuestionSectionBloc>().add(ManualInitialization(questionToDisplayIndex: 0, questions: snapshot.data));
-                        // building the UI with data from Bloc, that have been inserted above
-                        return BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
-                          builder: (context, QuestionSectionState state) {
-                            return Column(
-                              children: [
-                                SizedBox(
-                                  height: 70.h,
-                                  child: ListView.builder(
-                                      itemCount: state.questions.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, questionIndex) {
-                                        final Question currentQuestion = snapshot.data[questionIndex];
-                                        if (state.questionToDisplayIndex == questionIndex) {
-                                          return QuestionWidget(
-                                              currentQuestion: currentQuestion);
-                                        }
-                                        return const Offstage();
-                                      }
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+          child: Column(
+            children: [
+              Center(
+                  child: Text(currentQuestionSection.title).tr()
+              ),
+              StreamBuilder(
+                  stream: currentQuestionSection.questions,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const GFLoader();
+                    } else{
+                    if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done) {
+                      // fill block state with initial data
+                      context.read<QuestionSectionBloc>().add(ManualInitialization(questionToDisplayIndex: 0, questions: snapshot.data));
+                      // building the UI with data from Bloc, that have been inserted above
+                      return BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
+                        builder: (context, QuestionSectionState state) {
+
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 70.h,
+                                child: ListView.builder(
+                                    itemCount: state.questions.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, questionIndex) {
+                                      final Question currentQuestion = snapshot.data[questionIndex];
+                                      if (state.questionToDisplayIndex == questionIndex) {
+                                        return QuestionWidget(
+                                            currentQuestion: currentQuestion);
+                                      }
+                                      return const Offstage();
+                                    }
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }
-                ),
-              ],
-            ),
+                    }
+                    return const GFLoader();
+                  }
+              ),
+            ],
           ),
         )
     );
