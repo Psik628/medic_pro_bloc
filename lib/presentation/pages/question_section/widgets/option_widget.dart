@@ -28,7 +28,7 @@ class _OptionWidgetState extends State<OptionWidget> {
           child: GFButton(
             fullWidthButton: true,
             shape: isSelected ? GFButtonShape.pills : GFButtonShape.square,
-            color: isSelected ? GFColors.SUCCESS : GFColors.INFO,
+            color: context.watch<QuestionSectionBloc>().state.displayResults ? (widget.currentOption.correct ? GFColors.SUCCESS : GFColors.DANGER) : isSelected ? GFColors.FOCUS : GFColors.INFO,
             onPressed: () {
               setState(() {
                 isSelected = !isSelected;
