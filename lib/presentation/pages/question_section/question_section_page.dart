@@ -5,6 +5,7 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:medic_pro_bloc/application/question_section/question_section_bloc.dart';
 import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/question_widget.dart';
+import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/results_page_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../domain/subject/question.dart';
@@ -66,9 +67,7 @@ class QuestionSectionPage extends StatelessWidget {
                               ],
                             );
                           }else{
-                            return SizedBox(
-                                child: Text('should display final page'),
-                            );
+                            return ResultsPageWidget();
                           }
                         },
                       );
