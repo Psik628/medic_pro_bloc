@@ -13,18 +13,22 @@ import '../../../../domain/subject/option.dart';
 import '../../../../logging.dart';
 import '../../../../translations_constants.dart';
 
-class QuestionWidget extends StatelessWidget {
-  final log = logger(QuestionWidget);
-
+class QuestionWidget extends StatefulWidget {
   final Question currentQuestion;
 
   QuestionWidget({Key? key, required this.currentQuestion}) : super(key: key);
 
   @override
+  State<QuestionWidget> createState() => _QuestionWidgetState();
+}
+
+class _QuestionWidgetState extends State<QuestionWidget> {
+  final log = logger(QuestionWidget);
+
+  bool displayResult = false;
+
+  @override
   Widget build(BuildContext context) {
-
-    print(context.watch<QuestionSectionBloc>().state.answeredQuestions.length);
-
     return Column(
       children: [
         Row(
@@ -38,8 +42,7 @@ class QuestionWidget extends StatelessWidget {
                       // todo extract this
                       padding: const EdgeInsets.all(20),
                       child: Center(
-                          // child: Text(currentQuestion.content)
-                          child: Text('otazka')
+                          child: Text(widget.currentQuestion.content!)
                       )
                   )
                 ),
@@ -48,7 +51,7 @@ class QuestionWidget extends StatelessWidget {
           ],
         ),
         StreamBuilder(
-          stream: currentQuestion.options,
+          stream: widget.currentQuestion.options,
           builder: (BuildContext context, AsyncSnapshot snapshot){
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const GFLoader();
@@ -82,12 +85,19 @@ class QuestionWidget extends StatelessWidget {
               return GFButton(
                   fullWidthButton: true,
                   onPressed: (){
-                    if(context.read<QuestionSectionBloc>().state.questionToDisplayIndex == context.read<QuestionSectionBloc>().state.questions.length -1){
-                      log.i('Answering final question');
-                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerFinalQuestion());
-                    }else{
-                      log.i('Answering non-final question');
+                    setState(() {
+                      displayResult = !displayResult;
+                    });
+                    if(displayResult){
+                      log.i('Showing results for current question');
+                      // clicking button for the first time
+                      log.i('Answering question');
                       context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerQuestion());
+                    }
+                    // clicking button for the second time, continue to another question
+                    else {
+                      log.i('Resetting results display and continuing to next question');
+                      context.read<QuestionSectionBloc>().add(QuestionSectionEvent.resetDisplayResult());
                     }
                   },
                   child: const Text(TranslationsConstants.answer).tr()

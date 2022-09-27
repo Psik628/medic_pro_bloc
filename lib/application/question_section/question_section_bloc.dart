@@ -31,30 +31,13 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<SelectOption>((SelectOption event, emit) {
       log.i('Selecting Option');
-
-      var ini = state;
-
-      print('initial length');
-      print(state.questions[state.questionToDisplayIndex].selectedOptions.length);
-
       List<Question> transformedQuestions = [...state.questions];
       transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
-
-      print('questions');
-      print(state.questions == transformedQuestions);
-
       emit(
         state.copyWith(
           questions: [...transformedQuestions]
         )
       );
-
-      print('final length');
-      print(state.questions[state.questionToDisplayIndex].selectedOptions.length);
-
-      print('compar');
-      print(state == ini);
-
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       log.i('Unselecting Option');
@@ -68,29 +51,26 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       );
     });
     on<AnswerQuestion>((AnswerQuestion event, emit) {
-
       List<Question> addedAnsweredQuestion = [...state.questions];
       addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
-
       emit(
         state.copyWith(
           // add current question to answered
           answeredQuestions: addedAnsweredQuestion,
           // move on to next question
-          questionToDisplayIndex: state.questionToDisplayIndex + 1
+          displayResults: true,
         )
       );
     });
-
-    on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
-      List<Question> addedAnsweredQuestion = [...state.questions];
-      addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
+    on<ResetDisplayResult>((ResetDisplayResult event, emit){
+      log.i('Reseting display result, continuing to next question or to results page');
       emit(
-          state.copyWith(
-            // add current question to answered
-            answeredQuestions: addedAnsweredQuestion,
-            quizFinished: true
-          )
+        state.copyWith(
+          displayResults: false,
+          // when results have been viewed, user can continue to next question
+          questionToDisplayIndex: state.questionToDisplayIndex + 1,
+          quizFinished: state.questionToDisplayIndex == state.questions.length - 1
+        )
       );
     });
   }

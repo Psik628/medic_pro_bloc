@@ -7,7 +7,6 @@ import 'package:medic_pro_bloc/domain/subject/questionsection.dart';
 import 'package:medic_pro_bloc/presentation/pages/question_section/widgets/question_widget.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../application/database/subject/subject_bloc.dart';
 import '../../../domain/subject/question.dart';
 import '../../core/app_bar.dart';
 import '../../ui_constants.dart';
