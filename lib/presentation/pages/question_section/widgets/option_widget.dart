@@ -30,13 +30,16 @@ class _OptionWidgetState extends State<OptionWidget> {
             shape: isSelected ? GFButtonShape.pills : GFButtonShape.square,
             color: context.watch<QuestionSectionBloc>().state.displayResults ? (widget.currentOption.correct ? GFColors.SUCCESS : GFColors.DANGER) : isSelected ? GFColors.FOCUS : GFColors.INFO,
             onPressed: () {
-              setState(() {
-                isSelected = !isSelected;
-              });
-              if(isSelected){
-                context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption));
-              }else{
-                context.read<QuestionSectionBloc>().add(QuestionSectionEvent.unSelectOption(option: widget.currentOption));
+              if(!context.read<QuestionSectionBloc>().state.displayResults){
+                // options can not be change after user pressed the answer button
+                setState(() {
+                  isSelected = !isSelected;
+                });
+                if(isSelected){
+                  context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption));
+                }else{
+                  context.read<QuestionSectionBloc>().add(QuestionSectionEvent.unSelectOption(option: widget.currentOption));
+                }
               }
             },
             child: Text(widget.currentOption.content),
