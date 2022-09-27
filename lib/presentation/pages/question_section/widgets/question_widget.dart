@@ -54,7 +54,8 @@ class QuestionWidget extends StatelessWidget {
               return Column(
                 children: [
                   SizedBox(
-                    height: 50.h,
+                    // todo fix this height
+                    height: 30.h,
                     child: ListView.builder(
                         itemCount: snapshot.data.length,
                         shrinkWrap: true,
@@ -76,10 +77,18 @@ class QuestionWidget extends StatelessWidget {
             // get info about current question
             print(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty);
             if(state.questions[state.questionToDisplayIndex].selectedOptions.isNotEmpty){
+              print('SHOULD ADD BUTTON');
               // if current question has some selected options, display answer button
-              return GFButton(onPressed: null, child: Text('Answer'));
+              return GFButton(
+                  fullWidthButton: true,
+                  onPressed: (){
+                    context.read<QuestionSectionBloc>().add(QuestionSectionEvent.answerQuestion());
+                  },
+                  child: Text('Answer')
+              );
+            }else{
+              return const Offstage();
             }
-            return const Offstage();
           })
       ],
     );

@@ -8,8 +8,6 @@ import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 
 import '../../domain/subject/option.dart' as Option;
-import '../../domain/subject/questionsection_failure.dart';
-import '../../domain/subject/subject.dart';
 import '../../logging.dart';
 
 part 'question_section_event.dart';
@@ -34,13 +32,30 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<SelectOption>((SelectOption event, emit) {
       log.i('Selecting Option');
+
+      var ini = state;
+
+      print('initial length');
+      print(state.questions[state.questionToDisplayIndex].selectedOptions.length);
+
       List<Question> transformedQuestions = [...state.questions];
       transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
+
+      print('questions');
+      print(state.questions == transformedQuestions);
+
       emit(
         state.copyWith(
-          questions: transformedQuestions
+          questions: [...transformedQuestions]
         )
       );
+
+      print('final length');
+      print(state.questions[state.questionToDisplayIndex].selectedOptions.length);
+
+      print('compar');
+      print(state == ini);
+
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       log.i('Unselecting Option');
@@ -53,15 +68,20 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
           )
       );
     });
-    // on<AnswerQuestion>((AnswerQuestion event, emit) {
-    //   emit(
-    //     // state.copyWith(
-    //     //   answeredQuestions: state.answeredQuestions..add(event.question),
-    //     //   questionToDisplayIndex: state.questionToDisplayIndex + 1
-    //     // )
-    //     state.
-    //   );
-    // });
+    on<AnswerQuestion>((AnswerQuestion event, emit) {
+
+      List<Question> addedAnsweredQuestion = [...state.questions];
+      addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
+
+      emit(
+        state.copyWith(
+          // add current question to answered
+          answeredQuestions: addedAnsweredQuestion,
+          // move on to next question
+          questionToDisplayIndex: state.questionToDisplayIndex + 1
+        )
+      );
+    });
     //
     // on<AnswerFinalQuestion>((AnswerFinalQuestion event, emit) {
     //   // TODO: implement event handler

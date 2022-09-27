@@ -15,7 +15,7 @@ class QuestionSectionState extends Equatable with _$QuestionSectionState{
   );
 
   @override
-  List<Object?> get props => [questionToDisplayIndex, questions, answeredQuestions];
+  List<Object?> get props => [questionToDisplayIndex, questions, answeredQuestions, identityHashCode(this)];
 
   // this is required to implement equatable
   const QuestionSectionState._();

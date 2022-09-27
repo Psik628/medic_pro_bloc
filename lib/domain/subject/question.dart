@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/subject/option.dart';
@@ -6,7 +7,7 @@ import '../../domain/subject/option.dart';
 part 'question.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Question{
+class Question extends Equatable{
 
   Question(this.content, this.title);
 
@@ -32,4 +33,8 @@ class Question{
   factory Question.fromJson(Map<String, Object?> json) => _$QuestionFromJson(json);
 
   Map<String, Object?> toJson() => _$QuestionToJson(this);
+
+  // trying to solve issue of state not updating due to being the same
+  @override
+  List<Object?> get props => [title, content, selectedOptions.length];
 }

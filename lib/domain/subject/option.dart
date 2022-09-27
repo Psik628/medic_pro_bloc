@@ -26,5 +26,5 @@ class Option extends Equatable{
   Map<String, Object?> toJson() => _$OptionToJson(this);
 
   @override
-  List<Object?> get props => [content, correct];
+  List<Object?> get props => [content, correct, isSelected];
 }
