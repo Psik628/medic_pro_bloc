@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 
 import '../../domain/subject/option.dart';
-import '../../domain/subject/option.dart';
 import '../../logging.dart';
 
 part 'question_section_event.dart';
@@ -76,6 +75,17 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
           // when results have been viewed, user can continue to next question
           questionToDisplayIndex: state.questionToDisplayIndex + 1,
           quizFinished: state.questionToDisplayIndex == state.questions.length - 1
+        )
+      );
+    });
+    on<SetCorrectOptionsLength>((SetCorrectOptionsLength event, emit){
+      log.i('Setting correctQuestionsLength');
+      // this functionality is used in results page
+      List<Question> transformedQuestions = [...state.questions];
+      transformedQuestions[event.questionToDisplayIndex].correctQuestionsLength = event.correctOptionsLength;
+      emit(
+        state.copyWith(
+          questions: transformedQuestions
         )
       );
     });

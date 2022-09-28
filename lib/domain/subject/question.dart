@@ -15,7 +15,10 @@ class Question extends Equatable{
 
   final String? content;
 
-  bool answeredCorrectly(){
+  int correctQuestionsLength = 0;
+
+  // this method does not have length in mind
+  bool answeredCorrectly() {
     for (var option in selectedOptions) {
       // if any of the selected options is incorrect, return false
       if(!option.correct) return false;

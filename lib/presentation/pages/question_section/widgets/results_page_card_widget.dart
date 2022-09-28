@@ -9,39 +9,68 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:medic_pro_bloc/application/question_section/question_section_bloc.dart';
 
-class ResultsPageCardWidget extends StatelessWidget {
+import '../../../../domain/subject/option.dart';
+import '../../../../domain/subject/question.dart';
+
+class ResultsPageCardWidget extends StatefulWidget {
   const ResultsPageCardWidget({Key? key, required this.questionIndex}) : super(key: key);
 
   final int questionIndex;
+
+  @override
+  State<ResultsPageCardWidget> createState() => _ResultsPageCardWidgetState();
+}
+
+class _ResultsPageCardWidgetState extends State<ResultsPageCardWidget> {
+
+  late final int correctOptionsLength;
+
+  List<Question> answeredCorrectlyQuestions = [];
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
       builder: (context, state) {
         return GFCard(
-          color: state.questions[questionIndex].answeredCorrectly() ? GFColors.SUCCESS : GFColors.DANGER,
-          content: Text(state.questions[questionIndex].content!),
+          // color: state.questions[widget.questionIndex].answeredCorrectly() == true && state.questions[widget.questionIndex].correctQuestionsLength == state.questions[widget.questionIndex].selectedOptions.length ? GFColors.SUCCESS : GFColors.DANGER,
+          content: Text(state.questions[widget.questionIndex].content!),
           buttonBar: GFButtonBar(
             children: [
               StreamBuilder(
-                  stream: state.questions[questionIndex].options,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  stream: state.questions[widget.questionIndex].options,
+                  builder: (BuildContext context, AsyncSnapshot<List<Option>> snapshot) {
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const GFLoader(type: GFLoaderType.square);
                     }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done) {
+                      // // notify
+                      // context.read<QuestionSectionBloc>().add(QuestionSectionEvent.setCorrectOptionsLength(questionToDisplayIndex: widget.questionIndex,correctOptionsLength: snapshot.data!.length));
+
+                      // print(state.questions[widget.questionIndex].content);
+                      //
+                      // int correctOptionsLength = snapshot.data!.where((option) => option.correct).length;
+
+                      // // all options that were chosen are correct and all correct options were chosen
+                      // if(state.questions[widget.questionIndex].answeredCorrectly() && state.questions[widget.questionIndex].selectedOptions.length == correctOptionsLength){
+                      //   setState(() {
+                      //     answeredCorrectlyQuestions: [...answeredCorrectlyQuestions.add(state.questions[widget.questionIndex])];
+                      //   });
+                      //   print('Correctly answered questions length');
+                      //   print(answeredCorrectlyQuestions.length);
+                      // }
+
                       return ListView.builder(
-                          itemCount: snapshot.data.length,
+                          itemCount: snapshot.data!.length,
                           shrinkWrap: true,
                           // making the options list view not scrollable
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, optionIndex) {
                             return GFButton(
                               onPressed: () {},
-                              color: snapshot.data[optionIndex].correct ? GFColors.SUCCESS : GFColors.DANGER,
+                              color: snapshot.data![optionIndex].correct ? GFColors.SUCCESS : GFColors.DANGER,
                               // checking if the current option is in QuestionSectionState selectedOptions field
-                              shape: state.questions[questionIndex].selectedOptions.contains(snapshot.data[optionIndex]) ? GFButtonShape.pills : GFButtonShape.square,
-                              text: snapshot.data[optionIndex].content,
+                              shape: state.questions[widget.questionIndex].selectedOptions.contains(snapshot.data![optionIndex]) ? GFButtonShape.pills : GFButtonShape.square,
+                              text: snapshot.data![optionIndex].content,
                             );
                           }
                       );
