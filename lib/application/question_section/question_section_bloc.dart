@@ -6,7 +6,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:medic_pro_bloc/domain/subject/question.dart';
 
-import '../../domain/subject/option.dart' as Option;
+import '../../domain/subject/option.dart';
+import '../../domain/subject/option.dart';
 import '../../logging.dart';
 
 part 'question_section_event.dart';
@@ -31,6 +32,9 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<SelectOption>((SelectOption event, emit) {
       log.i('Selecting Option');
+      // Option transformedOption = event.option;
+      // transformedOption.setSelection(true); // used in results page to indicate which options have been selected
+      // log.d('chekcing whether option is selected ' + transformedOption.isSelected.toString());
       List<Question> transformedQuestions = [...state.questions];
       transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
       emit(
@@ -41,6 +45,8 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       log.i('Unselecting Option');
+      // Option transformedOption = event.option;
+      // transformedOption.setSelection(false); // used in results page to indicate which options have been selected
       List<Question> transformedQuestions = [...state.questions];
       // equatable for options needs to be implemented
       transformedQuestions[state.questionToDisplayIndex].removeSelectedOption(event.option);

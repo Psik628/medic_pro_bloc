@@ -35,6 +35,7 @@ class _OptionWidgetState extends State<OptionWidget> {
                 setState(() {
                   isSelected = !isSelected;
                 });
+
                 if(isSelected){
                   context.read<QuestionSectionBloc>().add(QuestionSectionEvent.selectOption(option: widget.currentOption));
                 }else{

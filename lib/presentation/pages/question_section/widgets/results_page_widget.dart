@@ -36,20 +36,25 @@ class ResultsPageWidget extends StatelessWidget {
                                  if (snapshot.connectionState == ConnectionState.waiting) {
                                    return const GFLoader(type: GFLoaderType.square);
                                  }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done) {
-                                   return Flexible(
-                                     child: ListView.builder(
-                                         itemCount: snapshot.data.length,
-                                         shrinkWrap: true,
-                                         itemBuilder: (context, optionIndex) {
-                                           return SizedBox(
-                                             height: 30,
-                                             child: GFButton(
-                                               onPressed: () {},
-                                               text: snapshot.data[optionIndex].content,
-                                             ),
-                                           );
-                                         }
-                                     ),
+                                   return ListView.builder(
+                                       itemCount: snapshot.data.length,
+                                       shrinkWrap: true,
+                                       // making the options list view not scrollable
+                                       physics: const NeverScrollableScrollPhysics(),
+                                       itemBuilder: (context, optionIndex) {
+
+
+                                         // print(snapshot.data[optionIndex].correct);
+                                         // print(snapshot.data[optionIndex].isSelected);
+                                         print(state.questions[questionIndex].selectedOptions);
+
+                                         return GFButton(
+                                           onPressed: () {},
+                                           color: snapshot.data[optionIndex].correct ? GFColors.SUCCESS : GFColors.DANGER,
+                                           shape: state.questions[questionIndex].selectedOptions.contains(snapshot.data[optionIndex]) ? GFButtonShape.pills : GFButtonShape.square,
+                                           text: snapshot.data[optionIndex].content,
+                                         );
+                                       }
                                    );
                                  } else{
                                    return const GFLoader(type: GFLoaderType.ios,);
