@@ -27,6 +27,37 @@ class ResultsPageWidget extends StatelessWidget {
                      itemBuilder: (context, questionIndex){
                        return GFCard(
                          content: Text(state.questions[questionIndex].content!),
+                         buttonBar: GFButtonBar(
+                           children: [
+                             StreamBuilder(
+                               stream: state.questions[questionIndex].options,
+                               builder: (BuildContext context, AsyncSnapshot snapshot) {
+
+                                 if (snapshot.connectionState == ConnectionState.waiting) {
+                                   return const GFLoader(type: GFLoaderType.square);
+                                 }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done) {
+                                   return Flexible(
+                                     child: ListView.builder(
+                                         itemCount: snapshot.data.length,
+                                         shrinkWrap: true,
+                                         itemBuilder: (context, optionIndex) {
+                                           return SizedBox(
+                                             height: 30,
+                                             child: GFButton(
+                                               onPressed: () {},
+                                               text: snapshot.data[optionIndex].content,
+                                             ),
+                                           );
+                                         }
+                                     ),
+                                   );
+                                 } else{
+                                   return const GFLoader(type: GFLoaderType.ios,);
+                                 }
+                               }
+                             ),
+                           ],
+                         ),
                        );
                      }
                    );
