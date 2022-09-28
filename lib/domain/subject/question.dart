@@ -15,6 +15,14 @@ class Question extends Equatable{
 
   final String? content;
 
+  bool answeredCorrectly(){
+    for (var option in selectedOptions) {
+      // if any of the selected options is incorrect, return false
+      if(!option.correct) return false;
+    }
+    return true;
+  }
+
   // added later
   @JsonKey(ignore: true)
   late final Stream<List<Option>> options;
