@@ -31,9 +31,6 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<SelectOption>((SelectOption event, emit) {
       log.i('Selecting Option');
-      // Option transformedOption = event.option;
-      // transformedOption.setSelection(true); // used in results page to indicate which options have been selected
-      // log.d('chekcing whether option is selected ' + transformedOption.isSelected.toString());
       List<Question> transformedQuestions = [...state.questions];
       transformedQuestions[state.questionToDisplayIndex].addToSelectedOptions(event.option);
       emit(
@@ -44,8 +41,6 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
     });
     on<UnSelectOption>((UnSelectOption event, emit) {
       log.i('Unselecting Option');
-      // Option transformedOption = event.option;
-      // transformedOption.setSelection(false); // used in results page to indicate which options have been selected
       List<Question> transformedQuestions = [...state.questions];
       // equatable for options needs to be implemented
       transformedQuestions[state.questionToDisplayIndex].removeSelectedOption(event.option);
@@ -56,6 +51,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       );
     });
     on<AnswerQuestion>((AnswerQuestion event, emit) {
+      log.i('Answering question');
       List<Question> addedAnsweredQuestion = [...state.questions];
       addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
       emit(
@@ -82,7 +78,7 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       log.i('Setting correctQuestionsLength');
       // this functionality is used in results page
       List<Question> transformedQuestions = [...state.questions];
-      transformedQuestions[event.questionToDisplayIndex].correctQuestionsLength = event.correctOptionsLength;
+      transformedQuestions[event.questionToDisplayIndex].correctOptionsLength = event.correctOptionsLength;
       emit(
         state.copyWith(
           questions: transformedQuestions

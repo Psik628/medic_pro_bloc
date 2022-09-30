@@ -15,7 +15,7 @@ class Question extends Equatable{
 
   final String? content;
 
-  int correctQuestionsLength = 0;
+  int correctOptionsLength = 0;
 
   // this method does not have length in mind
   bool answeredCorrectly() {
