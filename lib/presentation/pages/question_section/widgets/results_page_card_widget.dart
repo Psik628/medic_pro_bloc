@@ -59,7 +59,7 @@ class _ResultsPageCardWidgetState extends State<ResultsPageCardWidget> {
               // }
 
               return GFCard(
-                    // color: state.questions[widget.questionIndex].answeredCorrectly() == true && state.questions[widget.questionIndex].correctQuestionsLength == state.questions[widget.questionIndex].selectedOptions.length ? GFColors.SUCCESS : GFColors.DANGER,
+                    color: state.questions[widget.questionIndex].answeredCorrectly() == true && state.questions[widget.questionIndex].correctOptionsLength == state.questions[widget.questionIndex].selectedOptions.length ? GFColors.SUCCESS : GFColors.DANGER,
                     content: Text(state.questions[widget.questionIndex].content!),
                     buttonBar: GFButtonBar(
                       children: [

@@ -31,6 +31,7 @@ class ResultsPageWidget extends StatelessWidget {
               content: BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
                 builder: (context, state) {
 
+                  // defining
                   int correctlyAnsweredQuestionsLength = state.questions.where((Question question) {
                     return question.correctOptionsLength == question.selectedOptions.length && question.answeredCorrectly();
                   }).length;
@@ -38,6 +39,10 @@ class ResultsPageWidget extends StatelessWidget {
                   int incorrectlyAnsweredQuestionsLength = state.questions.where((Question question) {
                     return question.correctOptionsLength != question.selectedOptions.length || !question.answeredCorrectly();
                   }).length;
+
+                  double successRate = (correctlyAnsweredQuestionsLength/state.questions.length)*100;
+
+                  String successRateString = successRate.toString().substring(0, 2) + "%";
 
                   return Column(
                     children: [
@@ -58,7 +63,7 @@ class ResultsPageWidget extends StatelessWidget {
                           )
                         ],
                       ),
-                      Text("Success rate 70%")
+                      Text(successRateString)
                     ],
                   );
                 },

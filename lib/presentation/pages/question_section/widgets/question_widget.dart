@@ -15,8 +15,9 @@ import '../../../../translations_constants.dart';
 
 class QuestionWidget extends StatefulWidget {
   final Question currentQuestion;
+  final int index;
 
-  QuestionWidget({Key? key, required this.currentQuestion}) : super(key: key);
+  QuestionWidget({Key? key, required this.currentQuestion, required this.index}) : super(key: key);
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
@@ -52,20 +53,31 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ),
         StreamBuilder(
           stream: widget.currentQuestion.options,
-          builder: (BuildContext context, AsyncSnapshot snapshot){
+          builder: (BuildContext context, AsyncSnapshot<List<Option>> snapshot){
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const GFLoader();
             }else if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.done){
+              // setup correct options length
+              int correctOptionsLength = snapshot.data!.where((Option option){
+                return option.correct;
+              }).length;
+
+              // todo fix this seriously
+              // adding data here, not correct but works
+              context.read<QuestionSectionBloc>().add(SetCorrectOptionsLength(questionToDisplayIndex: widget.index, correctOptionsLength: correctOptionsLength));
+
               return Column(
                 children: [
                   SizedBox(
                     // todo fix this height
                     height: 30.h,
                     child: ListView.builder(
-                        itemCount: snapshot.data.length,
+                        // todo solve null
+                        itemCount: snapshot.data!.length,
                         shrinkWrap: true,
                         itemBuilder: (context, optionIndex){
-                          final Option currentOption = snapshot.data[optionIndex];
+                          // todo solve null
+                          final Option currentOption = snapshot.data![optionIndex];
                           return OptionWidget(currentOption: currentOption);
                         }
                     ),

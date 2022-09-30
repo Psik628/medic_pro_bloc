@@ -75,9 +75,11 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       );
     });
     on<SetCorrectOptionsLength>((SetCorrectOptionsLength event, emit){
-      log.i('Setting correctQuestionsLength');
+      log.i('Setting correctOptionsLength');
       // this functionality is used in results page
       List<Question> transformedQuestions = [...state.questions];
+      // log.d(event.questionToDisplayIndex);
+      // log.d(event.correctOptionsLength);
       transformedQuestions[event.questionToDisplayIndex].correctOptionsLength = event.correctOptionsLength;
       emit(
         state.copyWith(

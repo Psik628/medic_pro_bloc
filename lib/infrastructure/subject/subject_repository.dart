@@ -96,6 +96,11 @@ class SubjectRepository implements ISubjectRepository{
 
                                           Question completedQuestion = questionQueryDocumentSnapshot.data;
 
+                                          // some try to push correct options length into question
+                                          // int correctOptionsLength = questionQueryDocumentSnapshot.data.options.where((Option.Option option) {
+                                          //   return option.correct;
+                                          // }).length;
+
                                           completedQuestion.options = options;
 
                                           return completedQuestion;
