@@ -30,7 +30,7 @@ class SubjectRepository implements ISubjectRepository{
         //list
         .map((snapshot){
           // to domain
-          return right<SubjectFailure, List<Subject.Subject>>(
+            return right<SubjectFailure, List<Subject.Subject>>(
               snapshot.docs.map<Subject.Subject>((SubjectQueryDocumentSnapshot subjectQueryDocumentSnapshot){
                 CategoryCollectionReference categoryCollectionReference = subjectsRef.doc(subjectQueryDocumentSnapshot.data.title).categories;
 

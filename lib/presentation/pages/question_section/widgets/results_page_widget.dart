@@ -31,18 +31,18 @@ class ResultsPageWidget extends StatelessWidget {
               content: BlocBuilder<QuestionSectionBloc, QuestionSectionState>(
                 builder: (context, state) {
 
-                  // defining
-                  int correctlyAnsweredQuestionsLength = state.questions.where((Question question) {
-                    return question.correctOptionsLength == question.selectedOptions.length && question.answeredCorrectly();
-                  }).length;
+                  // // defining
+                  // int correctlyAnsweredQuestionsLength = state.questions.where((Question question) {
+                  //   return question.correctOptionsLength == question.selectedOptions.length && question.answeredCorrectly();
+                  // }).length;
+                  //
+                  // int incorrectlyAnsweredQuestionsLength = state.questions.where((Question question) {
+                  //   return question.correctOptionsLength != question.selectedOptions.length || !question.answeredCorrectly();
+                  // }).length;
 
-                  int incorrectlyAnsweredQuestionsLength = state.questions.where((Question question) {
-                    return question.correctOptionsLength != question.selectedOptions.length || !question.answeredCorrectly();
-                  }).length;
-
-                  double successRate = (correctlyAnsweredQuestionsLength/state.questions.length)*100;
-
-                  String successRateString = successRate.toString().substring(0, 2) + "%";
+                  // double successRate = (correctlyAnsweredQuestionsLength/state.questions.length)*100;
+                  //
+                  // String successRateString = successRate.toString().substring(0, 2) + "%";
 
                   return Column(
                     children: [
@@ -52,18 +52,18 @@ class ResultsPageWidget extends StatelessWidget {
                           Column(
                             children: [
                               Text("Correct"),
-                              Text(correctlyAnsweredQuestionsLength.toString())
+                              Text(state.successfullyAnsweredQuestions.length.toString())
                             ],
                           ),
                           Column(
                             children: [
                               Text("Incorrect"),
-                              Text(incorrectlyAnsweredQuestionsLength.toString())
+                              Text((state.answeredQuestions.length - state.successfullyAnsweredQuestions.length).toString())
                             ],
                           )
                         ],
                       ),
-                      Text(successRateString)
+                      Text(state.successRate.toString())
                     ],
                   );
                 },
@@ -76,8 +76,7 @@ class ResultsPageWidget extends StatelessWidget {
                   return ListView.builder(
                       itemCount: state.questions.length,
                       itemBuilder: (context, questionIndex) {
-                        return ResultsPageCardWidget(
-                            questionIndex: questionIndex);
+                        return ResultsPageCardWidget(questionIndex: questionIndex);
                       }
                   );
                 },

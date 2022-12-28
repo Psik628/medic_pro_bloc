@@ -15,6 +15,7 @@ class Question extends Equatable{
 
   final String? content;
 
+  @JsonKey(ignore: true)
   int correctOptionsLength = 0;
 
   // this method does not have length in mind

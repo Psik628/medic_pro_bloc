@@ -54,12 +54,25 @@ class QuestionSectionBloc extends Bloc<QuestionSectionEvent, QuestionSectionStat
       log.i('Answering question');
       List<Question> addedAnsweredQuestion = [...state.questions];
       addedAnsweredQuestion.add(state.questions[state.questionToDisplayIndex]);
+
+      // check whether answered question is correct or not
+      bool questionAnsweredCorrectly = (state.questions[state.questionToDisplayIndex].correctOptionsLength == state.questions[state.questionToDisplayIndex].selectedOptions.length) && state.questions[state.questionToDisplayIndex].answeredCorrectly();
+
+      List<Question> addedAnsweredCorrectlyQuestion = [...state.successfullyAnsweredQuestions];
+      if(questionAnsweredCorrectly){
+        addedAnsweredCorrectlyQuestion.add(state.questions[state.questionToDisplayIndex]);
+      }
+
       emit(
         state.copyWith(
           // add current question to answered
           answeredQuestions: addedAnsweredQuestion,
+          successfullyAnsweredQuestions: addedAnsweredCorrectlyQuestion,
           // move on to next question
           displayResults: true,
+          questionSectionAnsweredCorrectly: questionAnsweredCorrectly,
+          // calculation of success rate every time some question is answered
+          successRate: addedAnsweredCorrectlyQuestion.length/state.questions.length
         )
       );
     });
